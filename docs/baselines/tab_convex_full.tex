@@ -1,0 +1,29 @@
+% tab_convex: scripts/cr/analysis/make_tables.py, commit 548eaa68bf12, mode cr, variant default, cell filter completed, levels taskmean
+% Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+\begin{table}[t]
+\centering
+\caption{\textbf{Surrogate-free samplers inside the latent cloud versus uniform sampling on the shell.} The samplers are convex combinations of $k$ encoded ZINC latents (Dirichlet(1) weights) and a Gaussian fitted to them. $\overline{\|z\|}$ is the mean candidate norm. For $k\ge2$ it is estimated by Monte Carlo with $\|z\|^2$ as a control variate, a fixed seed and 2{,}000{,}000--40{,}000{,}000 draws per sampler. The standard error is at most $4.9\times10^{-5}$, and a digit is printed only if it is established. For $k=1$ it is the exact mean norm of the 3,000 cached latents, and the Gaussian fit is exact up to quadrature error. The matched set has $n=440$ completed cells (as in Table~\ref{tab:main}). Means are mean of per-task means; bold marks the highest. $\Delta$ = row minus reference on the same cells. $p_{\mathrm{BH}}$ is corrected over the 8 rows. Tasks = tasks on which the row has the higher mean.}
+\label{tab:convex}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrrrr}
+\toprule
+Variant & Mean & $\overline{\|z\|}$ & $\Delta$ & $d$ & $p_{\mathrm{BH}}$ & \begin{tabular}[b]{@{}c@{}}Tasks\\row\\higher\end{tabular} & $p_{\mathrm{task}}$ \\
+\midrule
+convex, $k=1$ & $0.3838$ & $7.98$ & $-0.0280$ & $-0.31$ & $<0.001$ & 3/11 & $0.12$ \\
+convex, $k=2$ & $0.3888$ & $6.62$ & $-0.0230$ & $-0.27$ & $<0.001$ & 4/11 & $0.24$ \\
+convex, $k=3$ & $0.3909$ & $5.83$ & $-0.0209$ & $-0.24$ & $<0.001$ & 3/11 & $0.32$ \\
+convex, $k=4$ & $0.3829$ & $5.32$ & $-0.0289$ & $-0.31$ & $<0.001$ & 3/11 & $0.17$ \\
+convex, $k=8$ & $0.3893$ & $4.24$ & $-0.0225$ & $-0.23$ & $<0.001$ & 4/11 & $0.37$ \\
+convex, $k=16$ & $0.3855$ & $3.46$ & $-0.0263$ & $-0.26$ & $<0.001$ & 3/11 & $0.32$ \\
+convex, $k=64$ & $0.3823$ & $2.62$ & $-0.0295$ & $-0.27$ & $<0.001$ & 3/11 & $0.32$ \\
+Gaussian fit $N(\hat\mu,\hat\Sigma)$ & $0.3840$ & $7.99$ & $-0.0278$ & $-0.33$ & $<0.001$ & 3/11 & $0.12$ \\
+\midrule
+uniform on the shell (random search) (reference) & $\mathbf{0.4118}$ & $\bar r$ & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\end{table}

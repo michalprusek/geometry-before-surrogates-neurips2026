@@ -1,0 +1,34 @@
+{
+ "generated_by": "scripts/cr/analysis/make_tables.py",
+ "generator_commit": "548eaa68bf12",
+ "inputs_sha256": {
+  "scripts/cr/analysis/appendixH_facts.csv": "cf38fd52d659a9e349ecbece957b2b8b84425b390ee3b9b11bf74ee30563437a",
+  "scripts/cr/analysis/appendixH_overview.csv": "aabd4eb24b75f3c2a269bb7a22e64b3ddf977b08308ca19b638715d3f52fddf9",
+  "scripts/cr/analysis/appendixH_printed.csv": "fa112213bd9f5bee0c14b2bbc96798c4f7de4577b236c6306056a8b0fddb0ef7"
+ },
+ "mode": "cr",
+ "outputs_sha256": {
+  "BASELINE_CARDS.md": "8ce2577c7cf3b9670458d6d8f4bcc3eb1387e9e4afff2c2a8a27822867acecb3",
+  "RUN_STATUS.md": "73f7ef3aae79598425e185e872dc3ee8092255d57a00c1cfae8336474eebe105",
+  "TABLE1_FULL.md": "f3d0e275bd925e6e23fd7f5281999ed8604a78c720feb90d6c223bcd0d9b06ec",
+  "tab_boxsphere_full.tex": "bb977b479da13086f128fb53e8098a546488a247a4ee7da4a0fcf4468f1477bf",
+  "tab_convex_full.tex": "49d4d0f6e5174158f35fd2df5e4e5cb2892dcb9ac3de571cd13023b5e32e6d65",
+  "tab_crossdomain_full.tex": "de1eac8e1246d198164dfb95c95e026c010b509a6ca61d7a8833365f90eaa171",
+  "tab_lassobench_full.tex": "3cae81fa2238be85e4f5c2ab0f7197de34c04cd67dfd8d8d2138f89dfe3f963b",
+  "tab_main_full.tex": "2b8c7d980b8d36991f4f9771ad40f57d6cbe19f39a786ac3ea276fc7d8e5ce95",
+  "tab_main_full_notes.tex": "050938afc049330b3a4f1f1c82e0e0792a903e0b652aa9e40a5e176736850192"
+ },
+ "result_files_of_the_cards": {
+  "count": 28484,
+  "sha256_of_sorted_sha256s": "30adf820e4dd8c192c46b02ff0d15732aa346f661e2c03d9857473608cdec3ca"
+ },
+ "sources_config": "sources_cr.json",
+ "sources_config_sha256": "23fe4af9de8b9dcf0c7ef6316032a97f25cbe887fac8243b1acee2c73e6ecfe6",
+ "tables": {
+  "tab_arm_status": "records/tab_arm_status.tex",
+  "tab_baselines": "records/tab_baselines.tex",
+  "tab_compute": "records/tab_compute.tex",
+  "tab_radius_pertask": "records/tab_radius_pertask.tex"
+ },
+ "variant": "default"
+}

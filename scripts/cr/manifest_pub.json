@@ -1,0 +1,170 @@
+{
+  "_comment": [
+    "Published-recipe block, camera-ready NeurIPS 2026 submission 24168 (camera-ready-published).",
+    "Each arm runs one published GP-BO recipe unchanged (src/spherevo/published_recipes.py) under the R-1",
+    "protocol (5 cold-start ZINC molecules, 25 steps, deterministic decoding); src/spherevo/published_arms.py.",
+    "This manifest is separate from scripts/cr/manifest.json so that the running campaigns' manifest stays",
+    "byte-identical. Driver: scripts/cr/cr_queue_pub.py (scripts/cr/cr_queue.py with wave 'p' admitted and",
+    "this manifest as default); output root results/guacamol/cr2026pub (own root, refused otherwise).",
+    "Every arm runs the 11 paper tasks x seeds 42-81 = 440 cells; 9 arms = 3,960 cells (round 2: + hvarfner_published_allobs, + 2 learned-noise Papenmeier arms); GPU host class.",
+    "timeout_s only catches hangs (classes as in manifest.json: 14400 s GP-continuous, 21600 s MSR-type)."
+  ],
+  "gpu_hosts": [
+    "panda.utia.cas.cz"
+  ],
+  "cpu_hosts": [
+    "kajman.utia.cas.cz"
+  ],
+  "tasks": [
+    "adip",
+    "dhop",
+    "fexo",
+    "med1",
+    "med2",
+    "osmb",
+    "pdop",
+    "rano",
+    "shop",
+    "siga",
+    "zale"
+  ],
+  "task_poli_ids": {
+    "adip": "amlodipine_mpo",
+    "dhop": "deco_hop",
+    "fexo": "fexofenadine_mpo",
+    "med1": "median_1",
+    "med2": "median_2",
+    "osmb": "osimetrinib_mpo",
+    "pdop": "perindopril_mpo",
+    "rano": "ranolazine_mpo",
+    "shop": "scaffold_hop",
+    "siga": "sitagliptin_mpo",
+    "zale": "zaleplon_mpo"
+  },
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81
+  ],
+  "output_root": "results/guacamol/cr2026pub",
+  "arms": [
+    {
+      "arm": "hvarfner_published",
+      "solver": "hvarfner_published",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 14400,
+      "note": "Vanilla BO (Hvarfner et al. ICML 2024), published default model + Ax acquisition settings (qLogNEI, 4 x (512 Sobol + 512 around best), sigma 0.1, maxiter 300), on the [p01, p99] box"
+    },
+    {
+      "arm": "papenmeier_msr_reference",
+      "solver": "papenmeier_msr_reference",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 21600,
+      "note": "MSR (Papenmeier et al. ICML 2025): reference GP (Gamma(2,0.15) outputscale, noise frozen at 1e-4, Positive lengthscale init sqrt(D)/10), cholesky_max_tries(9) fit with Adam fallback, published acquisition call, on the [p01, p99] box"
+    },
+    {
+      "arm": "papenmeier_mle_scaled_reference",
+      "solver": "papenmeier_mle_scaled_reference",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 21600,
+      "note": "MLE (scaled) (Papenmeier et al. ICML 2025): the MSR reference without RAASP, on the [p01, p99] box"
+    },
+    {
+      "arm": "xu_published",
+      "solver": "xu_published",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 14400,
+      "note": "SBO-Matern (RI) (Xu et al. ICLR 2025): GP_ARD_setls, UCB beta 1.5, optimize_acqf 10 x 1000, on the [p01, p99] box"
+    },
+    {
+      "arm": "linear_bo_box8",
+      "solver": "linear_bo_box8",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 14400,
+      "note": "spherical linear kernel (Doumont et al.) in the authors' molecular box [-8, 8]^256 with their fit and optimize_acqf call"
+    },
+    {
+      "arm": "turbo_published",
+      "solver": "turbo_published",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 14400,
+      "note": "TuRBO-1 (Eriksson et al. NeurIPS 2019) as released (turbo_1.py + gp.py port): paper GP and Adam fit, failure tolerance ceil(max(4, D)), min(100 D, 5000) numpy-seeded Sobol perturbations, TS of the predictive, q = 1, on the [p01, p99] box; every proposal counted"
+    },
+    {
+      "arm": "hvarfner_published_allobs",
+      "solver": "hvarfner_published_allobs",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 14400,
+      "note": "hvarfner_published with every observation (out-of-box cold starts included) in the qLogNEI baseline (pre-C2 behaviour; round 2, R2-5); both Hvarfner arms run, the one printed under the Hvarfner name is the higher mean over the 11 tasks of the per-task mean best score after 30 evaluations (RUN_RULES)"
+    },
+    {
+      "arm": "papenmeier_msr_reference_learned",
+      "solver": "papenmeier_msr_reference_learned",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 21600,
+      "note": "MSR as papenmeier_msr_reference with the Gaussian noise LEARNED (understanding-hdbo --no-noiseless; round 2, R2-6); all four Papenmeier variants run, the one printed follows the verification decision (exactly one noise variant passes -> that one; both pass -> learned)"
+    },
+    {
+      "arm": "papenmeier_mle_scaled_reference_learned",
+      "solver": "papenmeier_mle_scaled_reference_learned",
+      "run_overrides": {},
+      "wave": "p",
+      "host_class": "gpu",
+      "timeout_s": 21600,
+      "note": "MLE (scaled) as papenmeier_mle_scaled_reference with the Gaussian noise LEARNED (understanding-hdbo --no-noiseless; round 2, R2-6); all four Papenmeier variants run, the one printed follows the verification decision (exactly one noise variant passes -> that one; both pass -> learned)"
+    }
+  ]
+}

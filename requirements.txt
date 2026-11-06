@@ -1,0 +1,43 @@
+# Lower bounds of the main dependencies (pip install -r requirements.txt), for readers who
+# do not use the frozen environment. They are not the environment of the runs: the runs used
+# Python 3.12.14 and the exact packages of environment/requirements-frozen.txt (README.md,
+# "Installation"). Nothing from this repository itself has to be installed: every command
+# runs from the repository root.
+
+# -- Numerical core --
+numpy>=1.24
+scipy>=1.11
+pandas>=2.0
+
+# -- BO / GP --
+torch>=2.0
+botorch>=0.11
+gpytorch>=1.11
+cma>=3.3
+scikit-learn>=1.3
+
+# -- Molecular --
+selfies>=2.1
+rdkit
+
+# -- Optimization benchmarks (external) --
+# poli / poli-baselines must be installed from GitHub:
+#   pip install "poli-core @ git+https://github.com/MachineLearningLifeScience/poli.git"
+#   pip install "poli-baselines @ git+https://github.com/MachineLearningLifeScience/poli-baselines.git"
+# LassoBench (optional, for cross-domain validation):
+#   pip install "LassoBench @ git+https://github.com/ksehic/LassoBench.git" --no-deps
+#   pip install celer sparse-ho numba
+guacamol
+
+# -- Stats (reviewer response) --
+scikit-posthocs>=0.7
+statsmodels>=0.14
+
+# -- Plotting --
+matplotlib>=3.7
+seaborn>=0.13
+tqdm
+
+# -- Dev (optional) --
+pytest>=7.0
+ruff

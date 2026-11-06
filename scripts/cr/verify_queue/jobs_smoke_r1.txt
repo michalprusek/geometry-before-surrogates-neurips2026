@@ -1,0 +1,15 @@
+# smoke at the final commit on kajman (RUNROOT=$V/smoke_final), seeds 900+, a few evaluations past each design
+msr lasso_dna 900 42 1 40 -
+mle_scaled lasso_dna 900 42 1 40 -
+msr_noise_learned lasso_dna 900 42 1 40 -
+mle_scaled_noise_learned lasso_dna 900 42 1 40 -
+hvarfner lasso_dna 900 32 1 30 -
+hvarfner lasso_dna 900 43 1 41 -
+doumont lasso_dna 900 32 1 30 -
+xu lasso_dna 900 22 1 20 -
+baxus lasso_synt_hard 900 13 1 10 1000
+baxus lasso_synt_high 900 13 1 10 1000
+turbo_published lasso_synt_simple 900 26 10 6 -
+turbo_published lasso_synt_medium 900 30 10 10 -
+cmaes lasso_synt_simple 900 5 1 - -
+cmaes lasso_dna 900 5 1 - -

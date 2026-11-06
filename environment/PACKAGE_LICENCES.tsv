@@ -1,0 +1,115 @@
+package	version	licence (as declared in the package metadata)	url
+absl-py	2.4.0	Apache-2.0	https://github.com/abseil/abseil-py
+astunparse	1.6.3	BSD	https://github.com/simonpercivall/astunparse
+botorch	0.17.2	MIT	https://botorch.org
+celer	0.7.4	BSD (3-clause)	https://github.com/mathurinm/celer.git
+certifi	2026.2.25	MPL-2.0	https://github.com/certifi/python-certifi
+charset-normalizer	3.4.7	MIT	https://pypi.org/project/charset-normalizer/
+cloudpickle	3.1.2	BSD-3-Clause	https://github.com/cloudpipe/cloudpickle
+cma	4.4.4	BSD-3-Clause	https://github.com/CMA-ES/pycma
+contourpy	1.3.3	BSD 3-Clause License	https://github.com/contourpy/contourpy
+cuda-bindings	13.2.0	LicenseRef-NVIDIA-SOFTWARE-LICENSE	https://github.com/NVIDIA/cuda-python
+cuda-pathfinder	1.5.3	Apache-2.0	https://github.com/NVIDIA/cuda-python
+cuda-toolkit	13.0.2	not stated in the package metadata	https://developer.nvidia.com/cuda-toolkit
+cycler	0.12.1	Copyright (c) 2015, matplotlib project	https://matplotlib.org/cycler/
+download	0.3.5	BSD (3-clause)	https://github.com/choldgraf/download
+FCD	1.1	LGPLv3	https://github.com/bioinf-jku/FCD
+filelock	3.28.0	MIT	https://github.com/tox-dev/py-filelock
+flatbuffers	25.12.19	Apache 2.0	https://github.com/google/flatbuffers
+fonttools	4.62.1	MIT	http://github.com/fonttools/fonttools
+fsspec	2026.3.0	BSD-3-Clause	https://github.com/fsspec/filesystem_spec
+future	1.0.0	MIT	https://github.com/PythonCharmers/python-future
+gast	0.7.0	BSD 3-Clause	https://github.com/serge-sans-paille/gast/
+google-pasta	0.2.0	Apache 2.0	https://github.com/google/pasta
+gpytorch	1.15.2	MIT	https://github.com/cornellius-gp/gpytorch/
+grpcio	1.80.0	Apache-2.0	https://grpc.io
+guacamol	0.5.2	MIT	https://github.com/BenevolentAI/guacamol
+h5py	3.14.0	BSD-3-Clause	https://www.h5py.org/
+hyperopt	0.2.7	BSD	https://hyperopt.github.io/hyperopt
+idna	3.11	BSD-3-Clause	https://github.com/kjd/idna
+iniconfig	2.3.0	MIT	https://github.com/pytest-dev/iniconfig
+intel-cmplr-lib-ur	2025.3.3	Intel End User License Agreement for Developer Tools	https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html
+intel-openmp	2025.3.3	Intel End User License Agreement for Developer Tools	https://www.intel.com/content/www/us/en/developer/tools/oneapi/dpc-compiler.html
+Jinja2	3.1.6	BSD License	https://github.com/pallets/jinja/
+joblib	1.5.3	BSD-3-Clause	https://joblib.readthedocs.io
+keras	3.14.0	Apache License 2.0	https://keras.io/
+kiwisolver	1.5.0	=========================	https://github.com/nucleic/kiwi
+LassoBench	0.0.0	not stated in the package metadata	https://pypi.org/project/LassoBench/
+libclang	18.1.1	Apache License 2.0	https://github.com/sighingnow/libclang
+libsvmdata	0.5	BSD (3-clause)	https://pypi.org/project/libsvmdata/
+linear_operator	0.6.1	MIT	https://github.com/cornellius-gp/linear_operator/
+llvmlite	0.47.0	BSD-2-Clause AND Apache-2.0 WITH LLVM-exception	https://github.com/numba/llvmlite
+markdown-it-py	4.0.0	MIT License	https://github.com/executablebooks/markdown-it-py
+MarkupSafe	3.0.3	BSD-3-Clause	https://github.com/pallets/markupsafe/
+matplotlib	3.10.8	License agreement for matplotlib versions 1.3.0 and later	https://matplotlib.org
+mdurl	0.1.2	MIT License	https://github.com/executablebooks/mdurl
+mkl	2025.3.1	Intel Simplified Software License	https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+ml_dtypes	0.5.4	Apache-2.0	https://github.com/jax-ml/ml_dtypes
+mpmath	1.3.0	BSD	https://github.com/fredrik-johansson/mpmath
+multipledispatch	1.0.0	BSD	http://github.com/mrocklin/multipledispatch/
+mypy_extensions	1.1.0	MIT	https://github.com/python/mypy_extensions
+namex	0.1.0	not stated in the package metadata	https://pypi.org/project/namex/
+networkx	3.6.1	BSD-3-Clause	https://networkx.org/
+numba	0.65.0	BSD	https://numba.pydata.org
+numpy	2.4.4	BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0	https://numpy.org
+nvidia-cublas	13.1.0.3	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cuda-cupti	13.0.85	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cuda-nvrtc	13.0.88	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cuda-runtime	13.0.96	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cudnn-cu13	9.19.0.56	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cufft	12.0.0.61	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cufile	1.15.1.6	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-curand	10.4.0.35	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cusolver	12.0.4.66	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cusparse	12.6.3.3	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-cusparselt-cu13	0.8.0	NVIDIA Proprietary Software	https://developer.nvidia.com/cusparselt
+nvidia-nccl-cu13	2.28.9	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-nvjitlink	13.0.88	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-nvshmem-cu13	3.4.5	LicenseRef-NVIDIA-Proprietary	https://developer.nvidia.com/cuda-zone
+nvidia-nvtx	13.0.85	Apache 2.0	https://developer.nvidia.com/cuda-zone
+onemkl-license	2025.3.1	Intel Simplified Software License	https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html
+opt_einsum	3.4.0	MIT	https://pypi.org/project/opt_einsum/
+optree	0.19.0	Apache-2.0	https://github.com/metaopt/optree
+packaging	26.1	Apache-2.0 OR BSD-2-Clause	https://github.com/pypa/packaging
+pandas	3.0.2	BSD 3-Clause License	https://pandas.pydata.org
+patsy	1.0.2	2-clause BSD	https://github.com/pydata/patsy
+pillow	12.2.0	MIT-CMU	https://python-pillow.github.io
+pluggy	1.6.0	MIT	https://pypi.org/project/pluggy/
+protobuf	7.34.1	3-Clause BSD License	https://developers.google.com/protocol-buffers/
+py4j	0.10.9.9	BSD License	https://www.py4j.org/
+Pygments	2.20.0	BSD-2-Clause	https://pygments.org
+pymanopt	0.2.5	BSD	https://pymanopt.org
+pyparsing	3.3.2	MIT	https://github.com/pyparsing/pyparsing/
+pyre-extensions	0.0.32	MIT License	https://pyre-check.org
+pyro-api	0.1.2	Apache License 2.0	https://github.com/pyro-ppl/pyro-api
+pyro-ppl	1.9.1	Apache 2.0	https://github.com/pyro-ppl/pyro
+pytest	9.0.3	MIT	https://docs.pytest.org/en/latest/
+python-dateutil	2.9.0.post0	Dual License	https://github.com/dateutil/dateutil
+rdkit	2026.3.1	BSD-3-Clause	https://github.com/kuelumbus/rdkit-pypi
+requests	2.33.1	Apache-2.0	https://github.com/psf/requests
+rich	15.0.0	MIT	https://github.com/Textualize/rich
+scikit-learn	1.8.0	BSD-3-Clause	https://scikit-learn.org
+scikit-posthocs	0.12.0	Copyright (c) 2026 Maksim Terpilovskii	https://github.com/maximtrp/scikit-posthocs
+scipy	1.17.1	BSD License	https://scipy.org/
+seaborn	0.13.2	BSD License	https://github.com/mwaskom/seaborn
+selfies	2.2.0	Apache Software License	https://github.com/aspuru-guzik-group/selfies
+setuptools	81.0.0	MIT	https://github.com/pypa/setuptools
+six	1.17.0	MIT	https://github.com/benjaminp/six
+sparse_ho	0.1.dev0	BSD	https://github.com/QB3/sparse-ho
+statsmodels	0.14.6	BSD License	https://github.com/statsmodels/statsmodels
+sympy	1.14.0	BSD	https://github.com/sympy/sympy
+tbb	2022.3.1	Intel Simplified Software License	https://github.com/oneapi-src/oneTBB
+tcmlib	1.4.1	Intel Simplified Software License	https://oneapi-src.github.io/oneTBB/GSG/next_steps.html
+tensorflow	2.21.0	Apache 2.0	https://www.tensorflow.org/
+termcolor	3.3.0	MIT	https://github.com/termcolor/termcolor
+threadpoolctl	3.6.0	BSD-3-Clause	https://github.com/joblib/threadpoolctl
+torch	2.11.0	BSD-3-Clause	https://pytorch.org
+tqdm	4.67.3	MPL-2.0 AND MIT	https://tqdm.github.io
+triton	3.6.0	MIT License	https://github.com/triton-lang/triton/
+typing_extensions	4.15.0	PSF-2.0	https://github.com/python/typing_extensions
+typing-inspect	0.9.0	MIT	https://github.com/ilevkivskyi/typing_inspect
+umf	1.0.3	Apache-2.0 with LLVM exceptions	https://github.com/oneapi-src/unified-memory-framework
+urllib3	2.6.3	MIT	https://pypi.org/project/urllib3/
+wheel	0.46.3	MIT	https://github.com/pypa/wheel
+wrapt	2.1.2	BSD-2-Clause	https://github.com/GrahamDumpleton/wrapt
+xarray	2026.4.0	Apache-2.0	https://xarray.dev/

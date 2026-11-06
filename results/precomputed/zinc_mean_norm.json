@@ -1,0 +1,21 @@
+{
+  "dataset": "/data2/prusek/NeurIPS/data/zinc_250k.txt",
+  "n_smiles_total": 249456,
+  "n_encoded": 249456,
+  "n_failed": 0,
+  "latent_dim": 256,
+  "norm_mean": 7.983377285446726,
+  "norm_std": 0.7085805128812264,
+  "norm_median": 7.9857496160306685,
+  "norm_p05": 6.813360940156562,
+  "norm_p25": 7.507740416901295,
+  "norm_p75": 8.462533908434386,
+  "norm_p95": 9.13972212444899,
+  "norm_min": 5.047526656242773,
+  "norm_max": 11.285500009726313,
+  "per_coord_std_mean": 0.293672064913875,
+  "per_coord_std_min": 1.6242926343975327e-06,
+  "per_coord_std_max": 1.1012270669320032,
+  "per_coord_mean_abs_mean": 0.06788016022716196,
+  "elapsed_seconds": 60.65529274940491
+}

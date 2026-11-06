@@ -1,0 +1,1128 @@
+{
+ "schema": "cr-effective-support-v1",
+ "source_csv": "appendixH_facts.csv",
+ "source_csv_sha256": "cf38fd52d659a9e349ecbece957b2b8b84425b390ee3b9b11bf74ee30563437a",
+ "built": "2026-10-12",
+ "arms": [
+  {
+   "arm": "geowalk",
+   "group": "This paper (surrogate-free, on the shell)",
+   "label": "\\geowalk{}",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "none: 16 uniform shell draws, then 9 greedy geodesic steps from the incumbent (angle $0.60\\to0.15$ rad)",
+   "source": "appendixH_facts.csv row 'geowalk'",
+   "facts": {
+    "acquisition function and best_f": "none: steps 0-15 uniform on the shell; steps 16-24 greedy geodesic step from the incumbent, random tangent direction, angle 0.60 -> 0.15 rad linearly",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "cma_es_subspace",
+   "group": "This paper (surrogate-free, on the shell)",
+   "label": "\\geocma{}",
+   "support": "shell at $r$, CMA-ES in a 16-D subspace",
+   "support_key": null,
+   "maximiser": "CMA-ES in $\\mathbb{R}^{16}$, popsize 5, $\\sigma_0=0.5$, one evaluation per step",
+   "source": "appendixH_facts.csv row 'cma_es_subspace'",
+   "facts": {
+    "acquisition function and best_f": "CMA-ES (pycma) in R^16, popsize 5, sigma0 0.5, mean = projection of best cold-start latent; deferred tell (1 evaluation per step); cold start told as first generation",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "random_search",
+   "group": "This paper (surrogate-free, on the shell)",
+   "label": "Random search",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'random_search'",
+   "facts": {
+    "acquisition function and best_f": "none: z ~ N(0, I), normalised to r",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r4",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=4$",
+   "support": "sphere of fixed radius 4",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 4,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r6",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=6$",
+   "support": "sphere of fixed radius 6",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 6,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r8",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=8$",
+   "support": "sphere of fixed radius 8",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 8,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r10",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=10$",
+   "support": "sphere of fixed radius 10",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 10,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r12",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=12$",
+   "support": "sphere of fixed radius 12",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 12,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_r16",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=16$",
+   "support": "sphere of fixed radius 16",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 16,
+   "source": "appendixH_facts.csv row 'geowalk_r{4,6,8,10,12,16}'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "sphere of fixed absolute radius 4, 6, 8, 10, 12, 16",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_shell10",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, shell $\\pm10\\,\\%$",
+   "support": "radius $\\bar r\\,U[0.9,1.1]$",
+   "support_key": "shell",
+   "maximiser": "as \\geowalk{}",
+   "source": "appendixH_facts.csv row 'geowalk_shell10 / shell20 / shellpct'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk; each candidate radius ~ U(r(1-eps), r(1+eps)) or U(6.81, 9.14)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "annulus around r (+-10 %, +-20 %) or the population 5-95 % band",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_shell20",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, shell $\\pm20\\,\\%$",
+   "support": "radius $\\bar r\\,U[0.8,1.2]$",
+   "support_key": "shell",
+   "maximiser": "as \\geowalk{}",
+   "source": "appendixH_facts.csv row 'geowalk_shell10 / shell20 / shellpct'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk; each candidate radius ~ U(r(1-eps), r(1+eps)) or U(6.81, 9.14)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "annulus around r (+-10 %, +-20 %) or the population 5-95 % band",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_shellpct",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, shell $[p_{05},p_{95}]$",
+   "support": "radius $U[6.81, 9.14]$",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "source": "appendixH_facts.csv row 'geowalk_shell10 / shell20 / shellpct'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk; each candidate radius ~ U(r(1-eps), r(1+eps)) or U(6.81, 9.14)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "annulus around r (+-10 %, +-20 %) or the population 5-95 % band",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_rmedian",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, median radius",
+   "support": "shell at the median cold-start norm",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "source": "appendixH_facts.csv row 'geowalk_rmedian / geowalk_rpop'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "r = median cold-start norm | fixed population mean 7.98 (EMPIRICAL_SHELL_MEAN_NORM, config.py:218)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_rpop",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, $r=7.98$",
+   "support": "sphere of fixed radius 7.98",
+   "support_key": null,
+   "maximiser": "as \\geowalk{}",
+   "fixed_radius": 7.98,
+   "source": "appendixH_facts.csv row 'geowalk_rmedian / geowalk_rpop'",
+   "facts": {
+    "acquisition function and best_f": "as geowalk",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "r = median cold-start norm | fixed population mean 7.98 (EMPIRICAL_SHELL_MEAN_NORM, config.py:218)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_const060",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, angle 0.60",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "as \\geowalk{}, constant angle 0.60 rad",
+   "source": "appendixH_facts.csv row 'geowalk_const{060,035,015} / geowalk_explore{8,24}'",
+   "facts": {
+    "acquisition function and best_f": "none: GeoWalk (uniform shell exploration, then greedy geodesic steps from the incumbent with a random tangent direction). const060 / const035 / const015: 16 exploration steps, then a constant angle of 0.60 / 0.35 / 0.15 rad; explore8: 8 exploration and 17 refinement steps, angle 0.60 -> 0.15 rad linearly; explore24: 24 exploration steps and one refinement step at 0.60 rad (scripts/run_benchmark.py:838-843; src/spherevo/solver.py:1760-1767)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_const035",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, angle 0.35",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "as \\geowalk{}, constant angle 0.35 rad",
+   "source": "appendixH_facts.csv row 'geowalk_const{060,035,015} / geowalk_explore{8,24}'",
+   "facts": {
+    "acquisition function and best_f": "none: GeoWalk (uniform shell exploration, then greedy geodesic steps from the incumbent with a random tangent direction). const060 / const035 / const015: 16 exploration steps, then a constant angle of 0.60 / 0.35 / 0.15 rad; explore8: 8 exploration and 17 refinement steps, angle 0.60 -> 0.15 rad linearly; explore24: 24 exploration steps and one refinement step at 0.60 rad (scripts/run_benchmark.py:838-843; src/spherevo/solver.py:1760-1767)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_const015",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, angle 0.15",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "as \\geowalk{}, constant angle 0.15 rad",
+   "source": "appendixH_facts.csv row 'geowalk_const{060,035,015} / geowalk_explore{8,24}'",
+   "facts": {
+    "acquisition function and best_f": "none: GeoWalk (uniform shell exploration, then greedy geodesic steps from the incumbent with a random tangent direction). const060 / const035 / const015: 16 exploration steps, then a constant angle of 0.60 / 0.35 / 0.15 rad; explore8: 8 exploration and 17 refinement steps, angle 0.60 -> 0.15 rad linearly; explore24: 24 exploration steps and one refinement step at 0.60 rad (scripts/run_benchmark.py:838-843; src/spherevo/solver.py:1760-1767)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_explore8",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, 8 exploration steps",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "8 uniform shell draws, then 17 geodesic steps",
+   "source": "appendixH_facts.csv row 'geowalk_const{060,035,015} / geowalk_explore{8,24}'",
+   "facts": {
+    "acquisition function and best_f": "none: GeoWalk (uniform shell exploration, then greedy geodesic steps from the incumbent with a random tangent direction). const060 / const035 / const015: 16 exploration steps, then a constant angle of 0.60 / 0.35 / 0.15 rad; explore8: 8 exploration and 17 refinement steps, angle 0.60 -> 0.15 rad linearly; explore24: 24 exploration steps and one refinement step at 0.60 rad (scripts/run_benchmark.py:838-843; src/spherevo/solver.py:1760-1767)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_explore24",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, 24 exploration steps",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "24 uniform shell draws, then 1 geodesic step",
+   "source": "appendixH_facts.csv row 'geowalk_const{060,035,015} / geowalk_explore{8,24}'",
+   "facts": {
+    "acquisition function and best_f": "none: GeoWalk (uniform shell exploration, then greedy geodesic steps from the incumbent with a random tangent direction). const060 / const035 / const015: 16 exploration steps, then a constant angle of 0.60 / 0.35 / 0.15 rad; explore8: 8 exploration and 17 refinement steps, angle 0.60 -> 0.15 rad linearly; explore24: 24 exploration steps and one refinement step at 0.60 rad (scripts/run_benchmark.py:838-843; src/spherevo/solver.py:1760-1767)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "geowalk_one_fifth",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geowalk{}, success rule",
+   "support": "shell at $r$ (per run)",
+   "support_key": "shell",
+   "maximiser": "geodesic steps with angle $\\times1.2$ after a success, $\\times0.85$ otherwise (start 0.30, clamp $[0.05,0.50]$)",
+   "source": "appendixH_facts.csv row 'geowalk_one_fifth'",
+   "facts": {
+    "acquisition function and best_f": "none: steps 0-15 uniform on the shell (GeoWalk's exploration, int(0.64 * 25) = 16 steps); steps 16-24 greedy geodesic step from the incumbent, random tangent direction, with a success-based angle: first refinement angle 0.30 rad, multiplied by 1.2 after a refinement step that improved the incumbent (score > best finite score before it + 1e-10) and by 0.85 otherwise, clamped to [0.05, 0.50] rad; a NaN score is a failure (src/spherevo/solver.py:1903-1908, :1931-1946; choices O1-O6 in the class docstring)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (src/spherevo/solver.py:78-80), as geowalk",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "cma_es_subspace_sd8",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geocma{}, $\\tilde D=8$",
+   "support": "shell at $r$, CMA-ES in an 8-D subspace",
+   "support_key": null,
+   "maximiser": "CMA-ES in $\\mathbb{R}^{8}$, popsize 5, one evaluation per step",
+   "source": "appendixH_facts.csv row 'cma_es_subspace_sd{8,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: as cma_es_subspace (see that row), with the CMA-ES search space R^8 or R^64 instead of R^16",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "as cma_es_subspace: a random linear subspace of dimension 8 or 64 mapped to the shell at the run's cold-start radius (see the cma_es_subspace row for the mapping)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "cma_es_subspace_sd64",
+   "group": "\\geowalk{} and \\geocma{} variants",
+   "label": "\\geocma{}, $\\tilde D=64$",
+   "support": "shell at $r$, CMA-ES in a 64-D subspace",
+   "support_key": null,
+   "maximiser": "CMA-ES in $\\mathbb{R}^{64}$, popsize 5, one evaluation per step",
+   "source": "appendixH_facts.csv row 'cma_es_subspace_sd{8,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: as cma_es_subspace (see that row), with the CMA-ES search space R^8 or R^64 instead of R^16",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "as cma_es_subspace: a random linear subspace of dimension 8 or 64 mapped to the shell at the run's cold-start radius (see the cma_es_subspace row for the mapping)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "random_box_faithful",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Random search, box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'random_box_faithful'",
+   "facts": {
+    "acquisition function and best_f": "none: one uniform draw per step, z = p01 + u * max(p99 - p01, 1e-6) with u ~ U[0,1)^D (np.random.rand(1, D)): the box GP arms' fallback formula taken on every step (src/spherevo/solver.py:1649-1651)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "uniform in the [p01, p99] box of results/precomputed/zinc_per_coord_bounds.json (per-coordinate 1st/99th percentiles of 50,000 encoded ZINC-250k molecules), width floor 1e-6 (src/spherevo/solver.py:1642-1647): the same bounds file and loader semantics as _BoxFaithfulMixin; codec dispatch as the *_box_faithful arms (scripts/run_benchmark.py:722-735)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, shell",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 fresh uniform shell points per step (no gradient step)",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_box_argmax",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, box, argmax",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_box_argmax'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 fresh uniform points in [0,1]^256 per step",
+    "candidate support / box definition and source": "[p01, p99] box: results/precomputed/zinc_per_coord_bounds.json (np.percentile 1/99 over 50,000 encoded ZINC-250k molecules; file untracked by git, 2026-05-01, sha256 aa74e9ea...)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_sphere_continuous",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, shell, continuous",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI, projected Adam on the shell: 10 starts from 512 raw, 200 steps (lr 0.05)",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_sphere_continuous'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "x = r*v/||v||; 512 Gaussian raw v, top-10 by acquisition as starts, 200 Adam steps (lr 0.05) on v, best finite end point (never worse than best start)",
+    "candidate support / box definition and source": "the shell (same r as hvarfner_scaled_gp)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_sphere_lbfgs",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, shell, continuous",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI, L-BFGS-B on the shell over a free direction $v$ mapped to $r v/\\|v\\|$: 10 starts from 512 Gaussian raw samples (BoTorch optimize_acqf, as in the box arm)",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_sphere_lbfgs'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "x = r*v/||v||, v in R^D unbounded; the box arm's call optimize_acqf(q=1, num_restarts=10, raw_samples=512) applied to qLogEI composed with the map to the shell: 512 i.i.d. standard Gaussian raw v (uniform directions) through BoTorch's gen_batch_initial_conditions, 10 starts by initialize_q_batch (Boltzmann, eta 1), batched L-BFGS-B (gen_candidates_scipy, maxiter 2000) with BoTorch's retry after an optimisation warning, best of the 10 by acquisition value, mapped to r*v/||v||",
+    "candidate support / box definition and source": "the shell (same r as hvarfner_scaled_gp)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_box_faithful",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_box_faithful'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(q=1, num_restarts=10, raw_samples=512), BoTorch defaults otherwise (no sample_around_best), bounds [0,1]^256",
+    "candidate support / box definition and source": "[p01, p99] box (same file as box_argmax)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_norm_box_argmax",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, box $[\\min,\\max]$, argmax",
+   "support": "box $[\\min,\\max]$",
+   "support_key": "box_minmax",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_norm_box_argmax'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:1918)",
+    "acquisition maximiser": "argmax over 2048 fresh uniform points in [0,1]^256 per step (src/spherevo/gp_competitors.py:1915-1922)",
+    "candidate support / box definition and source": "[min, max] box: per-coordinate min and max of results/precomputed/zinc_per_coord_bounds.json (min / max of 50,000 encoded ZINC-250k molecules); always the SELFIES bounds (no codec dispatch)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_norm_box",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, box $[\\min,\\max]$",
+   "support": "box $[\\min,\\max]$",
+   "support_key": "box_minmax",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_norm_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(q=1, num_restarts=10, raw_samples=512) on [0,1]^256 (_propose_qlogei_on_normalized_box)",
+    "candidate support / box definition and source": "[min, max] box from the same 50k-molecule bounds file",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_box",
+   "group": "Support $\\times$ selection decomposition (Vanilla BO GP)",
+   "label": "Vanilla BO, cube $\\pm3\\bar\\sigma$",
+   "support": "isotropic cube $[-0.881,0.881]^D$",
+   "support_key": "box_3sigma",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(q=1, num_restarts=10, raw_samples=512) on [-0.881, +0.881]^256",
+    "candidate support / box definition and source": "isotropic box half-width 3*0.2937 = 0.881 (BOX_HALF_WIDTH, src/analysis/config.py:194-203; 0.2937 = mean per-coordinate sd of 249,456 ZINC encodings)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_prior",
+   "group": "Support controls",
+   "label": "Vanilla BO, prior candidates",
+   "support": "$N(0,I_D)$",
+   "support_key": "prior",
+   "maximiser": "qLogEI argmax over 2,048 draws from $N(0,I_D)$",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_prior'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 draws z ~ N(0, I_256) per step",
+    "candidate support / box definition and source": "N(0, I) (norms near sqrt(256)=16)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_angular_box",
+   "group": "Support controls",
+   "label": "Vanilla BO, box directions",
+   "support": "cube directions renormalised to $r$",
+   "support_key": "angular_box",
+   "maximiser": "qLogEI argmax over 2,048 cube points renormalised to $r$",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_angular_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 points u ~ U[-0.881, 0.881]^256 renormalised to r",
+    "candidate support / box definition and source": "shell radius r with box-corner-biased directions",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_sphere05",
+   "group": "Support controls",
+   "label": "Vanilla BO, shell $0.5\\,r$",
+   "support": "sphere at $0.5\\,r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "radius_multiple": 0.5,
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_sphere{05,15,20}'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:308)",
+    "acquisition maximiser": "argmax over 2048 fresh uniform points on the scaled sphere per step, no gradient step (src/spherevo/gp_competitors.py:288-312, :1732-1734)",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to radius = multiplier x mean_norm, with mean_norm the mean L2 norm of the run's 5 cold-start latents and multiplier 0.5 / 1.5 / 2.0 (src/spherevo/gp_competitors.py:1709, :1732-1734; src/spherevo/solver.py:78-80); the multiplier is the class attribute encoded in the solver name, not a field of the result file",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_sphere15",
+   "group": "Support controls",
+   "label": "Vanilla BO, shell $1.5\\,r$",
+   "support": "sphere at $1.5\\,r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "radius_multiple": 1.5,
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_sphere{05,15,20}'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:308)",
+    "acquisition maximiser": "argmax over 2048 fresh uniform points on the scaled sphere per step, no gradient step (src/spherevo/gp_competitors.py:288-312, :1732-1734)",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to radius = multiplier x mean_norm, with mean_norm the mean L2 norm of the run's 5 cold-start latents and multiplier 0.5 / 1.5 / 2.0 (src/spherevo/gp_competitors.py:1709, :1732-1734; src/spherevo/solver.py:78-80); the multiplier is the class attribute encoded in the solver name, not a field of the result file",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_sphere20",
+   "group": "Support controls",
+   "label": "Vanilla BO, shell $2\\,r$",
+   "support": "sphere at $2\\,r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "radius_multiple": 2.0,
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_sphere{05,15,20}'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:308)",
+    "acquisition maximiser": "argmax over 2048 fresh uniform points on the scaled sphere per step, no gradient step (src/spherevo/gp_competitors.py:288-312, :1732-1734)",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to radius = multiplier x mean_norm, with mean_norm the mean L2 norm of the run's 5 cold-start latents and multiplier 0.5 / 1.5 / 2.0 (src/spherevo/gp_competitors.py:1709, :1732-1734; src/spherevo/solver.py:78-80); the multiplier is the class attribute encoded in the solver name, not a field of the result file",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "random_search_prior",
+   "group": "Support controls",
+   "label": "Random search, prior",
+   "support": "$N(0,I_D)$",
+   "support_key": "prior",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'random_search_prior'",
+   "facts": {
+    "acquisition function and best_f": "none: one draw z ~ N(0, I_D) per step, np.random.randn(1, D), not normalised (src/spherevo/solver.py:1541-1542)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "the VAE prior N(0, I_256): norms concentrate near sqrt(D), not at the shell radius",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "pca_sphere_k64",
+   "group": "Support controls",
+   "label": "Random search, PCA-64",
+   "support": "top-64 PCA sphere at $r$",
+   "support_key": "pca64",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'pca_sphere_k64'",
+   "facts": {
+    "acquisition function and best_f": "none: uniform direction in the 64-D principal subspace scaled to r",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "shell radius r restricted to the top-64 PCA subspace",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "ellipsoid_rs",
+   "group": "Support controls",
+   "label": "Random search, Gaussian fit",
+   "support": "$N(\\hat\\mu,\\hat\\Sigma)$ of 3,000 latents",
+   "support_key": "gaussian_fit",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'ellipsoid_rs'",
+   "facts": {
+    "acquisition function and best_f": "none: z ~ N(mean, Cov) of the cached latent sample",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "Gaussian ellipsoid",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k1",
+   "group": "Support controls",
+   "label": "Convex, $k=1$",
+   "support": "convex hull of 1 cached latent(s)",
+   "support_key": "convex_k1",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k2",
+   "group": "Support controls",
+   "label": "Convex, $k=2$",
+   "support": "convex hull of 2 cached latent(s)",
+   "support_key": "convex_k2",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_rs",
+   "group": "Support controls",
+   "label": "Convex, $k=3$",
+   "support": "convex hull of 3 cached latent(s)",
+   "support_key": "convex_k3",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k4",
+   "group": "Support controls",
+   "label": "Convex, $k=4$",
+   "support": "convex hull of 4 cached latent(s)",
+   "support_key": "convex_k4",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k8",
+   "group": "Support controls",
+   "label": "Convex, $k=8$",
+   "support": "convex hull of 8 cached latent(s)",
+   "support_key": "convex_k8",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k16",
+   "group": "Support controls",
+   "label": "Convex, $k=16$",
+   "support": "convex hull of 16 cached latent(s)",
+   "support_key": "convex_k16",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "convex_hull_k64",
+   "group": "Support controls",
+   "label": "Convex, $k=64$",
+   "support": "convex hull of 64 cached latent(s)",
+   "support_key": "convex_k64",
+   "maximiser": "none: one Dirichlet(1) combination per step",
+   "source": "appendixH_facts.csv row 'convex_hull_k{1,2,3,4,8,16,64}'",
+   "facts": {
+    "acquisition function and best_f": "none: x = sum_i w_i z_i over k random cached ZINC latents, w ~ Dirichlet(1)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "convex hull of the cached latent sample (results/precomputed/zinc_latents_sample.npz)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_box_argmax_raw",
+   "group": "Control block (C1, C2)",
+   "label": "Vanilla BO, box, argmax, GP on raw latents (C1)",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step, GP fitted on raw latents",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_box_argmax_raw'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:1488)",
+    "acquisition maximiser": "argmax over 2048 fresh candidates per step: u = torch.rand(2048, D) mapped to raw coordinates p01 + u * width before qLogEI scores them (src/spherevo/gp_competitors.py:1484-1492): the same points of the latent space the parent arm scores in unit-cube coordinates",
+    "candidate support / box definition and source": "uniform in the [p01, p99] box of results/precomputed/zinc_per_coord_bounds.json (per-coordinate 1st/99th percentiles of 50,000 encoded ZINC-250k molecules), width floor 1e-6; class default bounds, no codec dispatch (src/spherevo/gp_competitors.py:1242-1273; scripts/run_benchmark.py:1200-1207)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hvarfner_scaled_gp_boxdir_argmax",
+   "group": "Control block (C1, C2)",
+   "label": "Vanilla BO, box directions at $r$ (C2a)",
+   "support": "$[p_{01},p_{99}]$-box draws renormalised to $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 box draws renormalised to $r$, GP fitted on raw latents",
+   "source": "appendixH_facts.csv row 'hvarfner_scaled_gp_boxdir_argmax'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations (src/spherevo/gp_competitors.py:1488)",
+    "acquisition maximiser": "argmax over 2048 fresh candidates per step: the C1 draw p01 + u * width, each row renormalised to the shell radius (src/spherevo/gp_competitors.py:1484-1492, :1527-1530)",
+    "candidate support / box definition and source": "[p01, p99]-box directions at the run's shell radius: x = p01 + u * width, then x / ||x|| * mean_norm, with mean_norm the mean L2 norm of the run's 5 cold-start latents (src/spherevo/gp_competitors.py:1527-1530; src/spherevo/solver.py:78-80), i.e. the norm of the shell arm and the direction of a box draw (anisotropic; not the isotropic cube of hvarfner_scaled_gp_angular_box)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "random_boxdir",
+   "group": "Control block (C1, C2)",
+   "label": "Random search, box directions at $r$ (C2b)",
+   "support": "$[p_{01},p_{99}]$-box draws renormalised to $r$",
+   "support_key": "shell",
+   "maximiser": "none: one uniform draw per step",
+   "source": "appendixH_facts.csv row 'random_boxdir'",
+   "facts": {
+    "acquisition function and best_f": "none: one draw per step, z = p01 + u * max(p99 - p01, 1e-6) with u ~ U[0,1)^D (np.random.rand(1, D)), renormalised to z / ||z|| * mean_norm (src/spherevo/solver.py:1649-1651, :1677-1679)",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "[p01, p99]-box directions at the run's shell radius (the candidate distribution of hvarfner_scaled_gp_boxdir_argmax, one draw per step); bounds results/precomputed/zinc_per_coord_bounds.json (per-coordinate 1st/99th percentiles of 50,000 encoded ZINC-250k molecules), codec dispatch as random_box_faithful (scripts/run_benchmark.py:746-759)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "papenmeier_msr",
+   "group": "GP recipes",
+   "label": "Papenmeier MLE (scaled), shell",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'papenmeier_msr'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 uniform shell points",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none (docstring: 'RAASP is NOT implemented here')"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_box_faithful",
+   "group": "GP recipes",
+   "label": "Papenmeier MLE (scaled), box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw, no RAASP",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_box_faithful'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw), no sample_around_best",
+    "candidate support / box definition and source": "[p01, p99] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_published",
+   "group": "GP recipes",
+   "label": "Papenmeier MSR (published), box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "published MSR call: analytic LogEI, RAASP starts, 5 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_published'",
+   "facts": {
+    "acquisition function and best_f": "analytic LogExpectedImprovement, best_f = max of standardised observations, evaluated under gpytorch.settings.cholesky_max_tries(9) (src/spherevo/gp_competitors.py:3299-3300, :3371)",
+    "acquisition maximiser": "optimize_acqf(q=1, num_restarts=5, raw_samples=512, options={batch_limit: 1, sample_around_best: True, sample_around_best_sigma: 1e-3, maxiter: 2000}) on [0,1]^256 (src/spherevo/gp_competitors.py:3303-3310, :3240-3254): 512 scrambled Sobol points + 512 RAASP points, 5 starts by Boltzmann sampling on LogEI, L-BFGS-B from each (F_msr_published section 1)",
+    "candidate support / box definition and source": "[p01, p99] box: results/precomputed/zinc_per_coord_bounds.json (per-coordinate 1st/99th percentiles of 50,000 encoded ZINC-250k molecules), the box of papenmeier_msr_box_faithful (src/spherevo/gp_competitors.py:1242-1273; codec dispatch scripts/run_benchmark.py:1126-1139)",
+    "trust region / RAASP": "no trust region; RAASP = BoTorch sample_around_best, sigma 1e-3: 256 points perturb every dimension, 256 perturb each dimension with probability min(1, 20/D); centres = the observations projected (clamped) onto the box, acqf.X_baseline = X_unit.clamp(0, 1) (src/spherevo/gp_competitors.py:3301), ranked by the GP posterior mean at the projected points; 'top 5 %' = max(1, round(0.05 n)) = 1 centre for every step of this protocol (n <= 29) (F_msr_published D4-D6)"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_norm_box",
+   "group": "GP recipes",
+   "label": "Papenmeier MLE (scaled), box $[\\min,\\max]$",
+   "support": "box $[\\min,\\max]$",
+   "support_key": "box_minmax",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_norm_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw)",
+    "candidate support / box definition and source": "[min, max] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_published_norm_box",
+   "group": "GP recipes",
+   "label": "Papenmeier MSR (published), box $[\\min,\\max]$",
+   "support": "box $[\\min,\\max]$",
+   "support_key": "box_minmax",
+   "maximiser": "published MSR call: analytic LogEI, RAASP starts, 5 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_published_norm_box'",
+   "facts": {
+    "acquisition function and best_f": "analytic LogExpectedImprovement, best_f = max of standardised observations, under gpytorch.settings.cholesky_max_tries(9) (src/spherevo/gp_competitors.py:3299-3300, :3438-3439)",
+    "acquisition maximiser": "the published MSR call of papenmeier_msr_published: optimize_acqf(q=1, num_restarts=5, raw_samples=512, options={batch_limit: 1, sample_around_best: True, sample_around_best_sigma: 1e-3, maxiter: 2000}) on [0,1]^256 (src/spherevo/gp_competitors.py:3303-3310)",
+    "candidate support / box definition and source": "[min, max] box of papenmeier_msr_norm_box: per-coordinate min and max of 50,000 encoded ZINC-250k molecules (results/precomputed/zinc_per_coord_bounds.json), always the SELFIES bounds (src/spherevo/gp_competitors.py:3404)",
+    "trust region / RAASP": "as papenmeier_msr_published (no trust region; RAASP = sample_around_best, sigma 1e-3, centres projected onto the box); on this box the projection is nearly the identity: 2 of 200 cold-start points lie outside, by at most 6.2e-7 in unit coordinates (F_msr_published, result in brief)"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_raasp",
+   "group": "GP recipes",
+   "label": "Papenmeier RAASP trust-region variant",
+   "support": "trust region in the $[\\min,\\max]$ box",
+   "support_key": null,
+   "maximiser": "qLogEI argmax over 5,000 RAASP candidates in a TuRBO-style trust region",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_raasp'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 5000 RAASP candidates (finite set)",
+    "candidate support / box definition and source": "[min, max] box, trust region inside it",
+    "trust region / RAASP": "TuRBO-style TR on [0,1]^256: L0 0.8, Lmin 0.5^7, Lmax 1.6, x2 after 3 successes, /2 after max(4, ceil(D)) = 256 failures (cannot shrink within 25 steps), side lengths weighted by ls/mean(ls)/geo-mean; candidates = incumbent with each coordinate replaced by U(TR) w.p. min(1, 20/D) = 0.078 (at least one)"
+   }
+  },
+  {
+   "arm": "papenmeier_msr_box",
+   "group": "GP recipes",
+   "label": "Papenmeier MLE (scaled), cube $\\pm3\\bar\\sigma$",
+   "support": "isotropic cube $[-0.881,0.881]^D$",
+   "support_key": "box_3sigma",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'papenmeier_msr_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw) on [-0.881, 0.881]^256",
+    "candidate support / box definition and source": "[-3 sigma, +3 sigma] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "xu_standard_gp",
+   "group": "GP recipes",
+   "label": "Xu Standard GP, shell",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'xu_standard_gp'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 uniform shell points",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "xu_standard_gp_box_faithful",
+   "group": "GP recipes",
+   "label": "Xu Standard GP, box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'xu_standard_gp_box_faithful'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw)",
+    "candidate support / box definition and source": "[p01, p99] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "xu_standard_gp_norm_box",
+   "group": "GP recipes",
+   "label": "Xu Standard GP, box $[\\min,\\max]$",
+   "support": "box $[\\min,\\max]$",
+   "support_key": "box_minmax",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'xu_standard_gp_norm_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw)",
+    "candidate support / box definition and source": "[min, max] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "xu_standard_gp_box",
+   "group": "GP recipes",
+   "label": "Xu Standard GP, cube $\\pm3\\bar\\sigma$",
+   "support": "isotropic cube $[-0.881,0.881]^D$",
+   "support_key": "box_3sigma",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 10 restarts, 512 raw",
+   "source": "appendixH_facts.csv row 'xu_standard_gp_box'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "optimize_acqf(10 restarts, 512 raw) on [-0.881, 0.881]^256",
+    "candidate support / box definition and source": "[-3 sigma, +3 sigma] box",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "linear_bo",
+   "group": "GP recipes",
+   "label": "Linear BO, box",
+   "support": "box $[p_{01},p_{99}]$",
+   "support_key": "box_p01p99",
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf} L-BFGS-B, 4 restarts, 512 raw, \\texttt{sample\\_around\\_best}",
+   "source": "appendixH_facts.csv row 'linear_bo'",
+   "facts": {
+    "acquisition function and best_f": "analytic LogExpectedImprovement, best_f = max standardised y",
+    "acquisition maximiser": "optimize_acqf(q=1, num_restarts=4, raw_samples=512, options sample_around_best=True, sigma 0.1, maxiter 300, batch_limit 64)",
+    "candidate support / box definition and source": "[p01, p99] box",
+    "trust region / RAASP": "none (sample_around_best seeding only)"
+   }
+  },
+  {
+   "arm": "linear_bo_sphere_calib",
+   "group": "GP recipes",
+   "label": "Linear BO, shell (calibrated)",
+   "support": "shell at $r$",
+   "support_key": "shell",
+   "maximiser": "qLogEI argmax over 2,048 fresh candidates per step",
+   "source": "appendixH_facts.csv row 'linear_bo_sphere_calib'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement (MC; BoTorch default sampler), best_f = max of standardised observations",
+    "acquisition maximiser": "argmax over 2048 uniform shell points",
+    "candidate support / box definition and source": "uniform directions on S^255 scaled to r = mean L2 norm of THIS run's 5 cold-start latents (solver.py:78-80), not the population value 7.98",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "turbo_box_faithful",
+   "group": "Other baselines",
+   "label": "TuRBO-1, fixed box",
+   "support": "trust region in the $[p_{01},p_{99}]$ box",
+   "support_key": null,
+   "maximiser": "Thompson sampling over 5,000 perturbation candidates (TuRBO-1)",
+   "source": "appendixH_facts.csv row 'turbo_box_faithful'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling: MaxPosteriorSampling(replacement=False), one posterior sample per step (src/spherevo/turbo_box_faithful.py:396-403)",
+    "acquisition maximiser": "argmax of the posterior sample over min(100 D, 5000) = 5000 candidates (src/spherevo/turbo_box_faithful.py:199-205, :365-394)",
+    "candidate support / box definition and source": "trust region inside the fixed [p01, p99] box of results/precomputed/zinc_per_coord_bounds.json (per-coordinate 1st/99th percentiles of 50,000 encoded ZINC-250k molecules) (the unit cube of _BoxFaithfulMixin): each candidate is the clamped incumbent with every coordinate replaced, with probability min(1, 20/D) and at least one coordinate, by a scrambled-Sobol value inside the lengthscale-weighted trust region clamped to [0,1] (src/spherevo/turbo_box_faithful.py:345-394)",
+    "trust region / RAASP": "TuRBO-1: length 0.8, length_min 0.5^7, length_max 1.6, success tolerance 3, failure tolerance ceil(max(4/b, D/b)) = 256 with b = 1 (src/spherevo/turbo_box_faithful.py:178-185, :208-214); doubling after 3 consecutive improvements, halving after 256 consecutive failures, restart below length_min, so the failure and restart branches are unreachable in 25 steps (choice C7); centre = incumbent clamped into the box (choice C1); perturbation probability min(1, 20/D) = 0.078; no RAASP in the MSR sense"
+   }
+  },
+  {
+   "arm": "rembo",
+   "group": "Other baselines",
+   "label": "REMBO",
+   "support": "16-D embedding, lifted and renormalised to $r$",
+   "support_key": null,
+   "maximiser": "Thompson sampling, argmax over 100 points in $[-4,4]^{16}$",
+   "source": "appendixH_facts.csv row 'rembo'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling (one posterior sample)",
+    "acquisition maximiser": "argmax over 100 uniform points in [-4, 4]^16 (bounds_factor 1 * sqrt(16))",
+    "candidate support / box definition and source": "low-d box lifted by A^T and renormalised to r (shell)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "hesbo",
+   "group": "Other baselines",
+   "label": "HeSBO",
+   "support": "16-D hashing embedding, renormalised to $r$",
+   "support_key": null,
+   "maximiser": "Thompson sampling, argmax over 100 points in the low-$d$ box",
+   "source": "appendixH_facts.csv row 'hesbo'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling",
+    "acquisition maximiser": "argmax over 100 uniform points in the low-d box",
+    "candidate support / box definition and source": "low-d box lifted by S and renormalised to r",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "gabo",
+   "group": "Other baselines",
+   "label": "GaBO",
+   "support": "unit sphere, proposal scaled to $r$",
+   "support_key": "shell",
+   "maximiser": "analytic EI, Riemannian trust-region optimiser (pymanopt, 5 restarts, 100 raw)",
+   "source": "appendixH_facts.csv row 'gabo'",
+   "facts": {
+    "acquisition function and best_f": "analytic ExpectedImprovement, best_f = max standardised y",
+    "acquisition maximiser": "joint_optimize_manifold with pymanopt TrustRegions (maxiter 200), num_restarts 5, raw_samples 100",
+    "candidate support / box definition and source": "unit sphere, proposal scaled to r",
+    "trust region / RAASP": "Riemannian trust-region optimiser for the acquisition (not a BO trust region)"
+   }
+  },
+  {
+   "arm": "matern_gabo",
+   "group": "Other baselines",
+   "label": "Riemannian Mat\\'ern GP",
+   "support": "unit sphere, proposal scaled to $r$",
+   "support_key": "shell",
+   "maximiser": "analytic EI, Riemannian trust-region optimiser (5 restarts, 100 raw)",
+   "source": "appendixH_facts.csv row 'matern_gabo'",
+   "facts": {
+    "acquisition function and best_f": "analytic ExpectedImprovement",
+    "acquisition maximiser": "pymanopt robust TrustRegions (maxiter 200), 5 restarts, 100 raw",
+    "candidate support / box definition and source": "unit sphere -> r",
+    "trust region / RAASP": "Riemannian TR optimiser only"
+   }
+  },
+  {
+   "arm": "turbo",
+   "group": "Stored baselines (not rerun)",
+   "label": "TuRBO (submitted)",
+   "support": "trust region inside the box of the 5 cold-start latents",
+   "support_key": null,
+   "maximiser": "Thompson sampling over 5,000 candidates",
+   "source": "appendixH_facts.csv row 'turbo'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling, MaxPosteriorSampling(replacement=False), 1 sample",
+    "acquisition maximiser": "argmax of one posterior sample over 5000 candidates",
+    "candidate support / box definition and source": "trust region inside the bounding box of the evaluated latents; candidates clamped to [0,1] in that frame, so no proposal can leave the axis-aligned box of the 5 cold-start encodings and the box never grows",
+    "trust region / RAASP": "TR L0 0.8, Lmin 0.5^7, Lmax 1.6, success tol 3, failure tol ceil(max(4, D)) = 256 (no shrink possible in 25 steps); lengthscale-weighted sides; Sobol(5000, seed=seed+len(history)) perturbation with prob min(20/D, 1) = 0.078"
+   }
+  },
+  {
+   "arm": "baxus",
+   "group": "Stored baselines (not rerun)",
+   "label": "BAxUS",
+   "support": "nested-subspace trust region in the cold-start box",
+   "support_key": null,
+   "maximiser": "Thompson sampling over 5,000 candidates (\\texttt{eval\\_budget} 500)",
+   "source": "appendixH_facts.csv row 'baxus'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling (MaxPosteriorSampling) over 5000 candidates",
+    "acquisition maximiser": "argmax of one posterior sample",
+    "candidate support / box definition and source": "TR in the target space (d_init = 1 for D = 256, new_bins 3, max_target_dim 64), mapped back through S^T into the cold-start bounding box",
+    "trust region / RAASP": "BAxUS TR: L0 0.8, success tol 3, failure tol from split budget with eval_budget = 500 (configured) although only 25 steps run"
+   }
+  },
+  {
+   "arm": "lolbo",
+   "group": "Stored baselines (not rerun)",
+   "label": "LOL-BO",
+   "support": "latent trust region around the incumbent",
+   "support_key": null,
+   "maximiser": "Thompson sampling (reference code)",
+   "source": "appendixH_facts.csv row 'lolbo'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling (acq_func='ts')",
+    "acquisition maximiser": "reference code (TuRBO-style TR candidates)",
+    "candidate support / box definition and source": "TR in the latent space around the incumbent (reference code)",
+    "trust region / RAASP": "TuRBO-style TR in the reference code"
+   }
+  },
+  {
+   "arm": "invbo",
+   "group": "Stored baselines (not rerun)",
+   "label": "InvBO",
+   "support": "latent trust region with inversion",
+   "support_key": null,
+   "maximiser": "Thompson sampling (reference code)",
+   "source": "appendixH_facts.csv row 'invbo'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling (potential-aware TR anchor)",
+    "acquisition maximiser": "reference code",
+    "candidate support / box definition and source": "TR in latent space",
+    "trust region / RAASP": "reference code; inversion of z-codes on stall (e2e_freq 10)"
+   }
+  },
+  {
+   "arm": "cmaes_full",
+   "group": "Stored baselines (not rerun)",
+   "label": "CMA-ES (full-$D$)",
+   "support": "unbounded $\\mathbb{R}^D$",
+   "support_key": null,
+   "maximiser": "CMA-ES in $\\mathbb{R}^{256}$, $\\sigma_0=0.5$, popsize 20",
+   "source": "appendixH_facts.csv row 'cma_es (full-dimensional)'",
+   "facts": {
+    "acquisition function and best_f": "pycma CMA-ES in R^256, sigma0 0.5, popsize default 4+3 ln 256 = 20, start at best cold-start latent, unbounded",
+    "acquisition maximiser": "n/a",
+    "candidate support / box definition and source": "R^256 (no bounds, no sphere)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "saasbo",
+   "group": "Stored baselines (not rerun)",
+   "label": "SAASBO",
+   "support": "box $[-5,5]^D$",
+   "support_key": null,
+   "maximiser": "qLogEI, \\texttt{optimize\\_acqf}, 10 restarts, 1,024 raw",
+   "source": "appendixH_facts.csv row 'saasbo'",
+   "facts": {
+    "acquisition function and best_f": "qLogExpectedImprovement, best_f = max raw y",
+    "acquisition maximiser": "optimize_acqf(num_restarts=10, raw_samples=1024) on [0,1]^256",
+    "candidate support / box definition and source": "[-5, 5]^256 box (uniform norm ~46, about 6x r)",
+    "trust region / RAASP": "none"
+   }
+  },
+  {
+   "arm": "cowboys",
+   "group": "Stored baselines (not rerun)",
+   "label": "COWBOYS (as run)",
+   "support": "Gaussian around the cold-start centroid ($\\|z\\|\\approx64$)",
+   "support_key": null,
+   "maximiser": "Thompson sampling over 20 decoded draws",
+   "source": "appendixH_facts.csv row 'cowboys'",
+   "facts": {
+    "acquisition function and best_f": "Thompson sampling (one posterior draw)",
+    "acquisition maximiser": "argmax over the valid decoded candidates of 20 draws",
+    "candidate support / box definition and source": "z = centroid of the 5 cold-start latents + N(0, (0.5 r)^2 I): norm about 0.5*r*16 = 64, i.e. ~8x r",
+    "trust region / RAASP": "none"
+   }
+  }
+ ]
+}

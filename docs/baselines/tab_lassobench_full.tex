@@ -1,0 +1,77 @@
+% tab_lassobench: scripts/cr/analysis/make_tables.py, commit 548eaa68bf12, mode cr, variant default, cell filter completed, levels taskmean
+% Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+\begin{table}[t]
+\centering
+\caption{\textbf{LassoBench: final loss divided by the task's random-search mean loss, per dimension.} The runs are the rerun for this version in one environment, with one CPU thread and at most one hour per run. In parentheses: the number of seeds that produced a finite loss ($n/40$ where fewer than the 40 seeds 42--81 have one). Lower is better. In the LassoBench row of Table~\ref{tab:crossdomain}, \geowalk{} has a mean normalized loss of 0.796 and \geocma{} of 0.495. Over the $n=240$ paired (task, seed) cells, $\Delta=0.300$, $d=0.37$ and the Wilcoxon $p=3.6\times10^{-23}$. \geocma{} is lower on 5 of the 6 tasks (exact task-level $p=0.094$). The synthetic tasks use LassoBench's default seed for every run (one fixed problem per task). At $D=7129$ (leukemia), Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B (rerun) did not complete (n.c.; pilot exceeded the time limit of 60 min). At $D=7129$ (leukemia), spherical linear-kernel GP, LogEI, L-BFGS-B (rerun) did not complete (n.c.; pilot exceeded the time limit of 120 min). Coverage: 2{,}320 of 2{,}322 expected runs have a result file, 32 of them with a non-finite loss because a model fit failed. 2 timed out, 0 failed and 0 were not run yet. spherical linear-kernel GP, LogEI, L-BFGS-B (rerun) has fewer finite losses than expected at $D=7129$ (0/1). Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, L-BFGS-B (rerun) has fewer finite losses than expected at $D=7129$ (36/40) and $D=300$ (38/40). Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B (rerun) has fewer finite losses than expected at $D=180$ (39/40), $D=7129$ (0/1), $D=1000$ (38/40) and $D=300$ (25/40). The rerun's trust-region, full-dimensional CMA-ES and fixed-subspace rows are not printed: the published methods below supersede them.  Published methods follow the authors' released code in every tabulated setting. They have the same budget and limits (30 evaluations, one CPU thread, at most one hour per run) and are normalized by the rerun's random-search mean. The nested-subspace method evaluates its own 5-point Sobol design in its first subspace. CMA-ES evaluates $x_0=0$ first and then 29 points of its own. Neither of the two uses the shared cold starts. Every other method starts from the 5 shared cold starts and takes 25 steps. In this table, a method carries the authors' name only if it reproduced a published result (Table~\ref{tab:verification}). Otherwise it is named by kernel, acquisition and maximizer and marked as not verified. For MSR and MLE (scaled) the printed variant learns the noise, because that variant passed the verification. At $D=7129$, MSR (Papenmeier et al.), MLE (scaled) (Papenmeier et al.) and Linear BO (Doumont et al.) did not complete (n.c.; pilot exceeded the time limit of 60 min). Standard GP (Xu et al.) was not run at $D=1000$ and $D=7129$ (n.a.). In the authors' released configuration the lengthscale constraint is $(10^{-10}, 30)$, so the initialization at $\sqrt{D}$ lies outside it for $D>900$ and the code stops with an error. Xu et al.\ report a run at $D=1003$. Seeds without a finite loss are excluded, and the mean is over the completed seeds ($n/40$). MLE (scaled) (Papenmeier et al.), $D=1000$: 29/40 (11 over the time limit). MSR (Papenmeier et al.), $D=1000$: 17/40 (23 over the time limit). }
+\label{tab:lassobench}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrrr}
+\toprule
+Method & $D=60$ & $D=100$ & $D=180$ & $D=300$ & $D=1000$ & $D=7129$ \\
+\midrule
+\geocma{} & $0.805$\,(40) & $0.351$\,(40) & $0.891$\,(40) & $0.126$\,(40) & $0.127$\,(40) & $0.672$\,(40) \\
+\geowalk{} & $0.566$\,(40) & $0.687$\,(40) & $0.974$\,(40) & $0.748$\,(40) & $0.868$\,(40) & $0.931$\,(40) \\
+Random search & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) \\
+RBF GP (DSP prior), qLogNEI, L-BFGS-B (rerun) & $2.160$\,(40) & $1.246$\,(40) & $0.968$\,(40) & $0.687$\,(40) & $0.676$\,(40) & $0.869$\,(40) \\
+Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, L-BFGS-B (rerun) & $1.141$\,(40) & $0.793$\,(40) & $0.994$\,(40) & $0.890$\,(38/40) & $0.865$\,(40) & $0.916$\,(36/40) \\
+Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B (rerun) & $0.758$\,(40) & $0.492$\,(40) & $1.004$\,(39/40) & $0.730$\,(25/40) & $0.711$\,(38/40) & n.c. \\
+spherical linear-kernel GP, LogEI, L-BFGS-B (rerun) & $0.879$\,(40) & $0.243$\,(40) & $0.896$\,(40) & $0.138$\,(40) & $0.133$\,(40) & n.c. \\
+\multicolumn{7}{@{}l}{\textit{Published methods (released-code settings; named only if verified)}} \\
+Vanilla BO (Hvarfner et al.) & $1.710$\,(40) & $0.856$\,(40) & $0.954$\,(40) & $0.754$\,(40) & $0.685$\,(40) & $0.899$\,(40) \\
+MSR (Papenmeier et al.) & $0.692$\,(40) & $1.011$\,(40) & $0.994$\,(40) & $0.819$\,(40) & $0.717$\,(17/40) & n.c. \\
+MLE (scaled) (Papenmeier et al.) & $0.616$\,(40) & $0.519$\,(40) & $0.998$\,(40) & $0.834$\,(40) & $0.946$\,(29/40) & n.c. \\
+Standard GP (Xu et al.) & $0.400$\,(40) & $0.356$\,(40) & $1.016$\,(40) & $0.806$\,(40) & n.a. & n.a. \\
+Linear BO (Doumont et al.) & $0.759$\,(40) & $0.271$\,(40) & $0.898$\,(40) & $0.125$\,(40) & $0.131$\,(40) & n.c. \\
+Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region (not verified) & $1.298$\,(40) & $0.789$\,(40) & $0.962$\,(40) & $0.759$\,(40) & $0.963$\,(40) & $1.148$\,(40) \\
+GP in nested count-sketch subspaces, Thompson sampling in a trust region (not verified) & $0.997$\,(40) & $0.399$\,(40) & $0.873$\,(40) & $0.115$\,(40) & $0.124$\,(40) & $0.709$\,(40) \\
+CMA-ES, popsize 20, $\sigma_0=0.1$, $x_0=0$ (not verified) & $0.478$\,(40) & $0.287$\,(40) & $0.874$\,(40) & $0.109$\,(40) & $0.125$\,(40) & $0.692$\,(40) \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\end{table}
+\begin{table}[t]
+\centering
+\caption{\textbf{LassoBench, continued from Table~\ref{tab:lassobench}: paired comparisons.} Same runs and normalization as Table~\ref{tab:lassobench}. Top: each method minus \geocma{}. Bottom: \geowalk{} against each published method, the baseline family of LassoBench.}
+\label{tab:lassobench_family}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+{\footnotesize\textit{Each method minus \textup{\geocma{}} (normalized loss, paired by seed): $d$ and, below it, the Wilcoxon $p$ per dimension; last column pooled over the dimensions with runs ($d$, $p$, $n$); positive $d$ = \textup{\geocma{}} lower loss}}\par\smallskip
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrrrr}
+\toprule
+Method & $D=60$ & $D=100$ & $D=180$ & $D=300$ & $D=1000$ & $D=7129$ & pooled \\
+\midrule
+\geowalk{} & \begin{tabular}[b]{@{}r@{}}$-0.14$\\$(0.65)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.46$\\$(0.066)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+3.67$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.19$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+7.57$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+1.52$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.37$\\$(3.6\times10^{-23})$\\$n=240$\end{tabular} \\
+Random search & \begin{tabular}[b]{@{}r@{}}$+0.09$\\$(0.31)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.79$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+4.56$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+3.91$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+9.57$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+1.93$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.53$\\$(4.4\times10^{-30})$\\$n=240$\end{tabular} \\
+RBF GP (DSP prior), qLogNEI, L-BFGS-B (rerun) & \begin{tabular}[b]{@{}r@{}}$+0.50$\\$(0.008)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.94$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.51$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.24$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+5.05$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+1.02$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.48$\\$(1.4\times10^{-30})$\\$n=240$\end{tabular} \\
+Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, L-BFGS-B (rerun) & \begin{tabular}[b]{@{}r@{}}$+0.11$\\$(0.98)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.47$\\$(0.15)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.99$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.61$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+5.26$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.93$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.32$\\$(7.0\times10^{-21})$\\$n=234$\end{tabular} \\
+Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B (rerun) & \begin{tabular}[b]{@{}r@{}}$-0.03$\\$(0.42)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.21$\\$(0.71)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.83$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+2.05$\\$(<0.001)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+3.15$\\$(<0.001)$\end{tabular} & -- & \begin{tabular}[b]{@{}r@{}}$+0.32$\\$(6.8\times10^{-12})$\\$n=182$\end{tabular} \\
+spherical linear-kernel GP, LogEI, L-BFGS-B (rerun) & \begin{tabular}[b]{@{}r@{}}$+0.05$\\$(0.52)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$-0.42$\\$(0.021)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.24$\\$(0.18)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.13$\\$(0.31)$\end{tabular} & \begin{tabular}[b]{@{}r@{}}$+0.43$\\$(0.009)$\end{tabular} & -- & \begin{tabular}[b]{@{}r@{}}$0.00$\\$(0.69)$\\$n=200$\end{tabular} \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\par\medskip
+{\footnotesize\textit{\textup{\geowalk{}} against each published method (per-task means of the normalized-loss differences on the seeds both completed, $n$ = matched (task, seed) pairs; exact task-level Wilcoxon, Benjamini--Hochberg within the 8; bold: $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$; Tasks = tasks, of those where both have runs, on which \textup{\geowalk{}} has the lower mean loss)}}\par\smallskip
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrr}
+\toprule
+Method & \begin{tabular}[b]{@{}c@{}}$\Delta$\\(\geowalk{} $-$ method)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Tasks\\\geowalk{} lower\end{tabular} & $n$ & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
+\midrule
+Vanilla BO (Hvarfner et al.) & $-0.181$ & 3/6 & 240 & $1.00$ & $1.00$ \\
+MSR (Papenmeier et al.) & $-0.077$ & 4/5 & 177 & $0.44$ & $0.70$ \\
+MLE (scaled) (Papenmeier et al.) & $-0.012$ & 4/5 & 189 & $0.62$ & $0.71$ \\
+Standard GP (Xu et al.) & $+0.099$ & 2/4 & 160 & $0.62$ & $0.71$ \\
+Linear BO (Doumont et al.) & $+0.332$ & 1/5 & 200 & $0.19$ & $0.44$ \\
+Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region (not verified) & $-0.191$ & 5/6 & 240 & $0.094$ & $0.38$ \\
+GP in nested count-sketch subspaces, Thompson sampling in a trust region (not verified) & $+0.259$ & 1/6 & 240 & $0.22$ & $0.44$ \\
+CMA-ES, popsize 20, $\sigma_0=0.1$, $x_0=0$ (not verified) & $+0.368$ & 0/6 & 240 & $0.031$ & $0.25$ \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\end{table}

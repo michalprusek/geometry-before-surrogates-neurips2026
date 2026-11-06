@@ -1,0 +1,22 @@
+% tab_crossdomain: scripts/cr/analysis/make_tables.py, commit 548eaa68bf12, mode cr, variant default, cell filter completed, levels taskmean
+% Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+\begin{table}[t]
+\centering
+\caption{\textbf{\geowalk{} and \geocma{} across domains at $N=30$.} GuacaMol: runs for this version, mean of per-task means on the matched cells. NAS-Bench-101: runs of the submitted version (not rerun), seeds 42--51, best validation accuracy (higher is better). LassoBench: loss divided by the random-search mean loss of the task (lower is better). The LassoBench runs are the rerun for this version in one environment, with one CPU thread and at most one hour per run. Both $|\Delta|$ and $|d|$ are paired. The cell-level $p$ is the two-sided Wilcoxon test over the paired (task, seed) cells. Tasks = tasks on which the better method of the row has the better per-task mean. The task-level $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences, over 11 tasks on GuacaMol and 6 on LassoBench. It is the primary test of the paper and is not corrected across the rows. NAS-Bench-101 has a single task, so it has no task-level test.}
+\label{tab:crossdomain}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrlrrrrrr>{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+Benchmark & \geowalk{} & \geocma{} & Better & $|\Delta|$ & $|d|$ & \begin{tabular}[b]{@{}c@{}}$p$\\(cells)\end{tabular} & $n$ & \begin{tabular}[b]{@{}c@{}}Tasks\\better\end{tabular} & \begin{tabular}[b]{@{}c@{}}$p_{\mathrm{task}}$\\(tasks)\end{tabular} & Best other method \\
+\midrule
+GuacaMol (256-D SELFIES VAE) & $0.423$ & $0.416$ & \geowalk{} & $0.007$ & $0.11$ & $0.008$ & 440 & 9/11 & $0.054$ & GP on the shell, $0.423$ \\
+NAS-Bench-101 (16-D arch2vec) & $0.937$ & $0.942$ & \geocma{} & $0.004$ & $0.94$ & $0.020$ & 10 & -- & -- & random search, $0.941$ \\
+LassoBench ($D=60$--$7129$, normalized loss) & $0.796$ & $0.495$ & \geocma{} & $0.300$ & $0.37$ & $3.6\times10^{-23}$ & 240 & 5/6 & $0.094$ & CMA-ES, $0.428$ \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\end{table}

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spherevo"
+version = "1.0.0"
+description = "Code for the NeurIPS 2026 paper 'Match the Geometry Before the Surrogate: Extreme Low-Budget Optimization in High Dimensions'"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Michal Průšek", email = "prusek@utia.cas.cz"},
+    {name = "Adam Novozámský"},
+    {name = "Filip Šroubek"},
+]
+
+dependencies = [
+    "torch>=2.0",
+    "botorch>=0.11",
+    "gpytorch>=1.11",
+    "cma>=3.3",
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "pandas>=2.0",
+    "selfies>=2.1",
+    "rdkit",
+    "poli",
+    "poli-baselines",
+    "guacamol",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+lassobench = ["lassobench"]
+synthetic = ["pyro-ppl>=1.8"]  # SAASBO fully-Bayesian GP via NUTS
+nasbench = ["torch-geometric>=2.0"]
+dev = ["pytest>=7.0", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

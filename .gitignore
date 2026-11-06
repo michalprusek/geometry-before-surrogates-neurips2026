@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local settings
+.env
+.env.*
+
+# Inputs fetched by scripts/download_weights.sh and scripts/download_zinc250k.sh.
+# data/ is ignored by its contents, so that the tracked cold-start pool can be
+# re-included (git cannot re-include a file whose parent directory is ignored).
+weights/
+data/*
+!data/zinc_10k.txt
+
+# Run outputs.  Everything a run writes below results/ is ignored, so the working tree
+# stays clean (the queue records `git_dirty` in every result).  results/ is ignored by
+# its contents, so that the three precomputed run inputs that ship with the repository
+# are re-included one by one; any other file copied into results/precomputed/ stays ignored.
+results/*
+!results/precomputed/
+results/precomputed/*
+!results/precomputed/zinc_per_coord_bounds.json
+!results/precomputed/zinc_latents_sample.npz
+!results/precomputed/zinc_mean_norm.json
+logs/

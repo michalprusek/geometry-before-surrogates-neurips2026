@@ -1,0 +1,51 @@
+% tab_boxsphere: scripts/cr/analysis/make_tables.py, commit 548eaa68bf12, mode cr, variant default, cell filter completed, levels taskmean
+% Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+\begin{table}[t]
+\centering
+\caption{\textbf{Box versus empirical shell within each GP recipe, and the support $\times$ acquisition-maximization factorial.} Both versions of a recipe use the same GP constructor. Box inputs are rescaled per coordinate, shell inputs are raw. Top: the shell version of each GP (qLogEI, candidate-set argmax on the shell) against its box version ($[p_{01},p_{99}]$, rescaled to $[0,1]^D$). The rows use one matched set of $n=440$ cells. The two versions differ in support \emph{and} in the acquisition maximizer. For $\ell_0=0.1\sqrt{D}$, the box version uses analytic LogEI with sample-around-best, the acquisition call of MSR. This row therefore also differs in the acquisition. $p_{\mathrm{BH}}$ (cells) is the cell-level Wilcoxon test and $p_{\mathrm{task}}^{\mathrm{BH}}$ the exact task-level Wilcoxon test. Both are corrected by Benjamini--Hochberg over these 3 rows. Tasks = tasks, of the 11, on which the shell version has the higher mean. Bottom: the 2$\times$2 factorial (runs for this version). Continuous maximization is L-BFGS-B on both supports (on the shell over a direction mapped to the shell). The matched set of the four cells has $n=440$. Each of the five factorial contrasts is tested by the exact two-sided Wilcoxon test on the 11 per-task mean differences. The tests are corrected by Benjamini--Hochberg within the five factorial contrasts. Tasks = tasks with a positive contrast. The 95\,\% interval is a percentile bootstrap over tasks. The cell-level $p$ and $d$ are secondary. Means are means of per-task means over completed cells, as in Table~\ref{tab:main}. $\Delta$ of the factorial contrasts is the mean of per-task means. Bold, in both blocks: $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$ within the block's family.}
+\label{tab:boxsphere}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.3cm}rrrrrrrr}
+\toprule
+GP & Box version & Shell & Box & $\Delta$ & $d$ & \begin{tabular}[b]{@{}c@{}}$p_{\mathrm{BH}}$\\(cells)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Tasks\\shell\\higher\end{tabular} & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
+\midrule
+Mat\'ern-5/2 GP (DSP prior) & $[p_{01},p_{99}]$, qLogEI, L-BFGS-B & $0.4228$ & $0.3989$ & $+0.0239$ & $0.30$ & $<0.001$ & 9/11 & $0.054$ & $0.081$ \\
+Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$) & $[p_{01},p_{99}]$, LogEI, L-BFGS-B with sample-around-best & $0.4176$ & $0.3845$ & $+0.0331$ & $0.41$ & $<0.001$ & 9/11 & $0.032$ & $0.081$ \\
+Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$) & $[p_{01},p_{99}]$, qLogEI, L-BFGS-B & $0.4149$ & $0.3957$ & $+0.0192$ & $0.27$ & $<0.001$ & 9/11 & $0.083$ & $0.083$ \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\par\medskip
+{\footnotesize\textit{Support $\times$ acquisition maximization, runs for this version, $n=440$ matched cells}}\par\smallskip
+\begin{lrbox}{\crtabbox}
+\begin{tabular}{lrr}
+\toprule
+Support & Candidate-set argmax & Continuous (L-BFGS-B) \\
+\midrule
+Empirical shell & $0.4228$ & $0.3999$ \\
+Box $[p_{01},p_{99}]$ & $0.3925$ & $0.3989$ \\
+\bottomrule
+\end{tabular}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\par\medskip
+{\footnotesize\textit{The five factorial contrasts (primary: exact task-level Wilcoxon, Benjamini--Hochberg within the five)}}\par\smallskip
+\begin{lrbox}{\crtabbox}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrrrr}
+\toprule
+Contrast & $\Delta$ & \begin{tabular}[b]{@{}c@{}}95\,\% CI\\(tasks)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Tasks\\$\Delta>0$\end{tabular} & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ & \begin{tabular}[b]{@{}c@{}}$p$\\(cells)\end{tabular} & $d$ \\
+\midrule
+support under candidate-set argmax (shell $-$ box) & $+0.0303$ & $[+0.012, +0.052]$ & 9/11 & $0.014$ & $\mathbf{0.017}$ & $<0.001$ & $0.41$ \\
+support under continuous maximization (shell $-$ box) & $+0.0010$ & $[-0.010, +0.015]$ & 6/11 & $0.90$ & $0.90$ & $0.16$ & $0.01$ \\
+maximizer on the shell (argmax $-$ L-BFGS-B) & $+0.0229$ & $[+0.009, +0.036]$ & 9/11 & $0.014$ & $\mathbf{0.017}$ & $<0.001$ & $0.27$ \\
+maximizer in the box (argmax $-$ L-BFGS-B) & $-0.0064$ & $[-0.009, -0.004]$ & 1/11 & $0.0049$ & $\mathbf{0.012}$ & $0.003$ & $-0.08$ \\
+support $\times$ maximizer interaction $(SA-BA)-(SC-BC)$ & $+0.0294$ & $[+0.016, +0.043]$ & 9/11 & $0.0049$ & $\mathbf{0.012}$ & $<0.001$ & $0.26$ \\
+\bottomrule
+\end{tabularx}
+\end{lrbox}
+\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+\end{table}

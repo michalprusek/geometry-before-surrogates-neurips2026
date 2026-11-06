@@ -1,0 +1,1829 @@
+{
+ "schema": "cr-sources-v1",
+ "tasks": [
+  "adip",
+  "dhop",
+  "fexo",
+  "med1",
+  "med2",
+  "osmb",
+  "pdop",
+  "rano",
+  "shop",
+  "siga",
+  "zale"
+ ],
+ "seeds": "42-81",
+ "name": "camera-ready",
+ "description": "Camera-ready sources: every manifest arm (73 arm ids: the 60 of 20ad7d5, the three GP radius arms of the 2026-10-12 amendment, and the nine control-block arms of tag cr-controls-2026-10-12, which read ${CRCTL}/<arm id>/ = results/guacamol/cr2026ctl of the control clone and must carry that tag's commit; the six '<arm>__s82' replication arms hold base-solver files on seeds 82-121 and are grouped by provenance.cr_arm, never pooled with '<arm>') reads ONLY its directory ${CR}/<arm id>/ (results/guacamol/cr2026 of the production clone, written by scripts/cr/run_cell.py through cr_queue.py at the tagged commit); file names are run_cell.cell_filename (ours_<solver>_<poli task>_s<seed>_128d.json, _sd8/_sd64 for the GeoCMA D~ arms); provenance required: git_commit = the --expected-commit of the arm's root, git_dirty False, provenance.cr_arm = the arm id and provenance.run_overrides = the manifest's. Queue sidecars (crash/interrupted/running/collision/tmp, attempts/) are recognised by the loader. GaBO and Riemannian Matern GP run on kajman's CPU and are read from ${CRCPU} (a copy of kajman's production files; override with --root CRCPU=...). Wave 4 (papenmeier_msr_published_norm_box) is optional. Non-rerunnable arms (RUN_RULES 3) read their stored directories with anchored file names. The posted (rebuttal-era) generation is loaded from sources_legacy.json under the namespace 'posted:' for the correspondence tables only; that include is optional (an absent old arm is reported and its correspondence rows show n/a, a missing cell inside a present old arm still fails). GEN v5: the published-recipe arms of wave p (RUN_RULES 2026-10-12, 2026-10-13 revision 1 (f), 2026-10-19) read ${CRPUB}/<arm id>/ = results/guacamol/cr2026pub of the published-recipe clone and must carry the commit of tag cr-verify-2026-10-13 (--expected-commit CRPUB=963ef04...). Only the printed variants are listed: the frozen-noise Papenmeier arms (papenmeier_msr_reference, papenmeier_mle_scaled_reference) are not printed, because the learned-noise variants passed the verification, and are never read. In camera-ready mode the arms of crlib/scope.py NOT_LOADED_ARMS are removed before loading (RUN_RULES 2026-10-14) and the posted include is not loaded. Rerun of 2026-11-02: the arms cmaes_full_rd, cmaes_full_rd_pop5 and baxus_cr read ${CRRD}/<arm id>/ = results/guacamol/cr2026rd of the clone at commit 1ea2f7d (--expected-commit CRRD=1ea2f7d8...); their surrogate_fallback_count also counts invalid molecules, so their fallback steps are counted from the per-step fallback fields of published_recipe (fallback_rule recipe_step_fallback, crlib/loader.py). Control C4 (tag cr-controls-lbfgs-2026-10-14 = 2a899ad, wave c3) is the arm hvarfner_scaled_gp_sphere_lbfgs; its files are in the control block's directory and carry that tag's commit, so it reads root ${CRC4} (the same directory as ${CRCTL}) with its own expected commit (--expected-commit CRC4=...). Since 2026-11-06 it is the shell x continuous cell of the printed factorial (RUN_RULES 2026-11-06 16:30).",
+ "roots": {
+  "CR": "/data/prusek/NeurIPS-cr/results/guacamol/cr2026",
+  "CRCPU": "/data/prusek/cr_inputs/cr2026_kajman",
+  "CRCTL": "/data/prusek/NeurIPS-cr-ctl/results/guacamol/cr2026ctl",
+  "CRC4": "/data/prusek/NeurIPS-cr-ctl/results/guacamol/cr2026ctl",
+  "CRPUB": "/data/prusek/NeurIPS-cr-pub/results/guacamol/cr2026pub",
+  "CRRD": "/data/prusek/cr_work/rerun_2026-11-02/cmaes_baxus/repo/results/guacamol/cr2026rd",
+  "G": "/home/prusek/NeurIPS/results/guacamol",
+  "INPUTS": "/data/prusek/cr_inputs"
+ },
+ "cell_filter": "completed",
+ "include": [
+  {
+   "namespace": "posted",
+   "file": "sources_legacy.json",
+   "optional": true
+  }
+ ],
+ "arms": {
+  "geowalk": {
+   "label": "GeoWalk",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk",
+   "pattern": "ours_geowalk_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "cma_es_subspace": {
+   "label": "GeoCMA",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/cma_es_subspace",
+   "pattern": "ours_cma_es_subspace_{task}_s{seed}_128d.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "cma_es_subspace",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "random_search": {
+   "label": "Random search (sphere)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/random_search",
+   "pattern": "ours_random_search_{task}_s{seed}_128d.json",
+   "solver_field": "random_search",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_search",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "hvarfner_scaled_gp": {
+   "label": "Vanilla BO (sphere)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp",
+   "pattern": "ours_hvarfner_scaled_gp_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "papenmeier_msr": {
+   "label": "Papenmeier MLE (scaled), sphere",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr",
+   "pattern": "ours_papenmeier_msr_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "xu_standard_gp": {
+   "label": "Xu Standard GP (sphere)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/xu_standard_gp",
+   "pattern": "ours_xu_standard_gp_{task}_s{seed}_128d.json",
+   "solver_field": "xu_standard_gp",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "xu_standard_gp",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "linear_bo_sphere_calib": {
+   "label": "Linear BO (sphere)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/linear_bo_sphere_calib",
+   "pattern": "ours_linear_bo_sphere_calib_{task}_s{seed}_128d.json",
+   "solver_field": "linear_bo_sphere_calib",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "linear_bo_sphere_calib",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "hvarfner_scaled_gp_box_argmax": {
+   "label": "Vanilla BO, box, candidate-set argmax",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_box_argmax",
+   "pattern": "ours_hvarfner_scaled_gp_box_argmax_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_argmax",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box_argmax",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "hvarfner_scaled_gp_prior": {
+   "label": "Vanilla BO, prior N(0,I) candidates",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_prior",
+   "pattern": "ours_hvarfner_scaled_gp_prior_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_prior",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_prior",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "hvarfner_scaled_gp_angular_box": {
+   "label": "Vanilla BO, box directions at r",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_angular_box",
+   "pattern": "ours_hvarfner_scaled_gp_angular_box_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_angular_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_angular_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "pca_sphere_k64": {
+   "label": "RS on top-64 PCA sphere",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/pca_sphere_k64",
+   "pattern": "ours_pca_sphere_k64_{task}_s{seed}_128d.json",
+   "solver_field": "pca_sphere_k64",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "pca_sphere_k64",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r4": {
+   "label": "GeoWalk r=4",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r4",
+   "pattern": "ours_geowalk_r4_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r4",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r4",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r6": {
+   "label": "GeoWalk r=6",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r6",
+   "pattern": "ours_geowalk_r6_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r6",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r6",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r8": {
+   "label": "GeoWalk r=8",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r8",
+   "pattern": "ours_geowalk_r8_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r8",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r8",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r10": {
+   "label": "GeoWalk r=10",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r10",
+   "pattern": "ours_geowalk_r10_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r10",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r10",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r12": {
+   "label": "GeoWalk r=12",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r12",
+   "pattern": "ours_geowalk_r12_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r12",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r12",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_r16": {
+   "label": "GeoWalk r=16",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_r16",
+   "pattern": "ours_geowalk_r16_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_r16",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_r16",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_shell10": {
+   "label": "GeoWalk shell +-10%",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_shell10",
+   "pattern": "ours_geowalk_shell10_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_shell10",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_shell10",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_shell20": {
+   "label": "GeoWalk shell +-20%",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_shell20",
+   "pattern": "ours_geowalk_shell20_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_shell20",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_shell20",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_shellpct": {
+   "label": "GeoWalk shell U[p05,p95]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_shellpct",
+   "pattern": "ours_geowalk_shellpct_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_shellpct",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_shellpct",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_rmedian": {
+   "label": "GeoWalk median radius",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_rmedian",
+   "pattern": "ours_geowalk_rmedian_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_rmedian",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_rmedian",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "geowalk_rpop": {
+   "label": "GeoWalk fixed radius 7.98",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_rpop",
+   "pattern": "ours_geowalk_rpop_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_rpop",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_rpop",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k1": {
+   "label": "Convex k=1",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k1",
+   "pattern": "ours_convex_hull_k1_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k1",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k1",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k2": {
+   "label": "Convex k=2",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k2",
+   "pattern": "ours_convex_hull_k2_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k2",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k2",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_rs": {
+   "label": "Convex k=3",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_rs",
+   "pattern": "ours_convex_hull_rs_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_rs",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_rs",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k4": {
+   "label": "Convex k=4",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k4",
+   "pattern": "ours_convex_hull_k4_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k4",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k4",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k8": {
+   "label": "Convex k=8",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k8",
+   "pattern": "ours_convex_hull_k8_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k8",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k8",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k16": {
+   "label": "Convex k=16",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k16",
+   "pattern": "ours_convex_hull_k16_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k16",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k16",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "convex_hull_k64": {
+   "label": "Convex k=64",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/convex_hull_k64",
+   "pattern": "ours_convex_hull_k64_{task}_s{seed}_128d.json",
+   "solver_field": "convex_hull_k64",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "convex_hull_k64",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "ellipsoid_rs": {
+   "label": "Ellipsoid",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/ellipsoid_rs",
+   "pattern": "ours_ellipsoid_rs_{task}_s{seed}_128d.json",
+   "solver_field": "ellipsoid_rs",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "ellipsoid_rs",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1"
+  },
+  "hvarfner_scaled_gp_sphere05": {
+   "label": "Vanilla BO, shell at 0.5 r",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_sphere05",
+   "pattern": "ours_hvarfner_scaled_gp_sphere05_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere05",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere05",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-12 (GP radius dose-response)"
+  },
+  "hvarfner_scaled_gp_sphere15": {
+   "label": "Vanilla BO, shell at 1.5 r",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_sphere15",
+   "pattern": "ours_hvarfner_scaled_gp_sphere15_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere15",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere15",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-12 (GP radius dose-response)"
+  },
+  "hvarfner_scaled_gp_sphere20": {
+   "label": "Vanilla BO, shell at 2 r",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_sphere20",
+   "pattern": "ours_hvarfner_scaled_gp_sphere20_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere20",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere20",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-12 (GP radius dose-response)"
+  },
+  "hvarfner_scaled_gp_box_faithful": {
+   "label": "Vanilla BO (box [p01,p99])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_box_faithful",
+   "pattern": "ours_hvarfner_scaled_gp_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box_faithful",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "hvarfner_scaled_gp_sphere_continuous": {
+   "label": "Vanilla BO, shell, continuous (Adam)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_sphere_continuous",
+   "pattern": "ours_hvarfner_scaled_gp_sphere_continuous_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere_continuous",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere_continuous",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "hvarfner_scaled_gp_norm_box": {
+   "label": "Vanilla BO (box [min,max])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_norm_box",
+   "pattern": "ours_hvarfner_scaled_gp_norm_box_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_norm_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_norm_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "papenmeier_msr_box_faithful": {
+   "label": "Papenmeier MLE (scaled), box [p01,p99]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_box_faithful",
+   "pattern": "ours_papenmeier_msr_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_box_faithful",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "papenmeier_msr_published": {
+   "label": "Papenmeier MSR (published), box [p01,p99]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_published",
+   "pattern": "ours_papenmeier_msr_published_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_published",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_published",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "papenmeier_msr_norm_box": {
+   "label": "Papenmeier MLE (scaled), box [min,max]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_norm_box",
+   "pattern": "ours_papenmeier_msr_norm_box_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_norm_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_norm_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "xu_standard_gp_box_faithful": {
+   "label": "Xu Standard GP (box [p01,p99])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/xu_standard_gp_box_faithful",
+   "pattern": "ours_xu_standard_gp_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "xu_standard_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "xu_standard_gp_box_faithful",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "xu_standard_gp_norm_box": {
+   "label": "Xu Standard GP (box [min,max])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/xu_standard_gp_norm_box",
+   "pattern": "ours_xu_standard_gp_norm_box_{task}_s{seed}_128d.json",
+   "solver_field": "xu_standard_gp_norm_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "xu_standard_gp_norm_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "linear_bo": {
+   "label": "Linear BO (box [p01,p99])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/linear_bo",
+   "pattern": "ours_linear_bo_{task}_s{seed}_128d.json",
+   "solver_field": "linear_bo",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "linear_bo",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 2,
+   "note": "manifest wave 2"
+  },
+  "turbo_box_faithful": {
+   "label": "TuRBO-1 (fixed [p01,p99] box)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/turbo_box_faithful",
+   "pattern": "ours_turbo_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "turbo_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "turbo_box_faithful",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 3,
+   "note": "manifest wave 3"
+  },
+  "rembo": {
+   "label": "REMBO",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/rembo",
+   "pattern": "ours_rembo_{task}_s{seed}_128d.json",
+   "solver_field": "rembo",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "rembo",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 3,
+   "note": "manifest wave 3"
+  },
+  "hesbo": {
+   "label": "HeSBO",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hesbo",
+   "pattern": "ours_hesbo_{task}_s{seed}_128d.json",
+   "solver_field": "hesbo",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hesbo",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 3,
+   "note": "manifest wave 3"
+  },
+  "gabo": {
+   "label": "GaBO",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCPU}/gabo",
+   "pattern": "ours_gabo_{task}_s{seed}_128d.json",
+   "solver_field": "gabo",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "gabo",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 3,
+   "note": "manifest wave 3"
+  },
+  "matern_gabo": {
+   "label": "Riemannian Matern GP",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCPU}/matern_gabo",
+   "pattern": "ours_matern_gabo_{task}_s{seed}_128d.json",
+   "solver_field": "matern_gabo",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "matern_gabo",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 3,
+   "note": "manifest wave 3"
+  },
+  "hvarfner_scaled_gp_box": {
+   "label": "Vanilla BO (box +-3 sigma)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_box",
+   "pattern": "ours_hvarfner_scaled_gp_box_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "3b",
+   "note": "manifest wave 3b"
+  },
+  "papenmeier_msr_box": {
+   "label": "Papenmeier MLE (scaled), box +-3 sigma",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_box",
+   "pattern": "ours_papenmeier_msr_box_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "3b",
+   "note": "manifest wave 3b"
+  },
+  "xu_standard_gp_box": {
+   "label": "Xu Standard GP (box +-3 sigma)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/xu_standard_gp_box",
+   "pattern": "ours_xu_standard_gp_box_{task}_s{seed}_128d.json",
+   "solver_field": "xu_standard_gp_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "xu_standard_gp_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "3b",
+   "note": "manifest wave 3b"
+  },
+  "geowalk_const060": {
+   "label": "GeoWalk const 0.60",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_const060",
+   "pattern": "ours_geowalk_const060_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_const060",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_const060",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "geowalk_const035": {
+   "label": "GeoWalk const 0.35",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_const035",
+   "pattern": "ours_geowalk_const035_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_const035",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_const035",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "geowalk_const015": {
+   "label": "GeoWalk const 0.15",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_const015",
+   "pattern": "ours_geowalk_const015_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_const015",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_const015",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "geowalk_explore8": {
+   "label": "GeoWalk explore 8",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_explore8",
+   "pattern": "ours_geowalk_explore8_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_explore8",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_explore8",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "geowalk_explore24": {
+   "label": "GeoWalk explore 24",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_explore24",
+   "pattern": "ours_geowalk_explore24_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_explore24",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_explore24",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "geowalk_one_fifth": {
+   "label": "GeoWalk success-based angle rule (start 0.30, x1.2 / x0.85, clamp [0.05, 0.50])",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/geowalk_one_fifth",
+   "pattern": "ours_geowalk_one_fifth_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk_one_fifth",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "geowalk_one_fifth",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "random_search_prior": {
+   "label": "RS from the prior N(0,I)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/random_search_prior",
+   "pattern": "ours_random_search_prior_{task}_s{seed}_128d.json",
+   "solver_field": "random_search_prior",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_search_prior",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "random_box_faithful": {
+   "label": "RS in the [p01,p99] box",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/random_box_faithful",
+   "pattern": "ours_random_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "random_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_box_faithful",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "papenmeier_msr_raasp": {
+   "label": "Papenmeier RAASP trust-region variant, [min,max]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_raasp",
+   "pattern": "ours_papenmeier_msr_raasp_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_raasp",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_raasp",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11"
+  },
+  "hvarfner_scaled_gp_norm_box_argmax": {
+   "label": "Vanilla BO, box [min,max], candidate-set argmax",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/hvarfner_scaled_gp_norm_box_argmax",
+   "pattern": "ours_hvarfner_scaled_gp_norm_box_argmax_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_norm_box_argmax",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_norm_box_argmax",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "3b",
+   "note": "manifest wave 3b; RUN_RULES amendment 2026-10-11"
+  },
+  "papenmeier_msr_published_norm_box": {
+   "label": "Papenmeier MSR (published), box [min,max]",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/papenmeier_msr_published_norm_box",
+   "pattern": "ours_papenmeier_msr_published_norm_box_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_published_norm_box",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": false,
+   "cr_arm": "papenmeier_msr_published_norm_box",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": 4,
+   "note": "manifest wave 4 (run only if capacity remains: optional); RUN_RULES amendment 2026-10-11"
+  },
+  "cma_es_subspace_sd8": {
+   "label": "GeoCMA D~=8",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/cma_es_subspace_sd8",
+   "pattern": "ours_cma_es_subspace_{task}_s{seed}_128d_sd8.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "cma_es_subspace_sd8",
+   "expect": {
+    "provenance.run_overrides": {
+     "subspace_dim": 8
+    },
+    "subspace_dim": 8
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11 (R-1 exception): run_cell --run-overrides subspace_dim=8 writes the _sd8 suffix (run_cell.cell_filename)"
+  },
+  "cma_es_subspace_sd64": {
+   "label": "GeoCMA D~=64",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CR}/cma_es_subspace_sd64",
+   "pattern": "ours_cma_es_subspace_{task}_s{seed}_128d_sd64.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "cma_es_subspace_sd64",
+   "expect": {
+    "provenance.run_overrides": {
+     "subspace_dim": 64
+    },
+    "subspace_dim": 64
+   },
+   "wave": 1,
+   "note": "manifest wave 1; RUN_RULES amendment 2026-10-11 (R-1 exception): run_cell --run-overrides subspace_dim=64 writes the _sd64 suffix (run_cell.cell_filename)"
+  },
+  "hvarfner_published": {
+   "label": "Vanilla BO recipe (Hvarfner et al.), in-box qLogNEI baseline",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/hvarfner_published",
+   "pattern": "ours_hvarfner_published_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_published",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_published",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "hvarfner_published_allobs": {
+   "label": "Vanilla BO recipe (Hvarfner et al.), all observations as qLogNEI baseline",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/hvarfner_published_allobs",
+   "pattern": "ours_hvarfner_published_allobs_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_published_allobs",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_published_allobs",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "papenmeier_msr_reference_learned": {
+   "label": "MSR recipe (Papenmeier et al.), learned noise",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/papenmeier_msr_reference_learned",
+   "pattern": "ours_papenmeier_msr_reference_learned_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_msr_reference_learned",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_msr_reference_learned",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "papenmeier_mle_scaled_reference_learned": {
+   "label": "MLE (scaled) recipe (Papenmeier et al.), learned noise",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/papenmeier_mle_scaled_reference_learned",
+   "pattern": "ours_papenmeier_mle_scaled_reference_learned_{task}_s{seed}_128d.json",
+   "solver_field": "papenmeier_mle_scaled_reference_learned",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "papenmeier_mle_scaled_reference_learned",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "xu_published": {
+   "label": "Standard GP recipe (Xu et al.)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/xu_published",
+   "pattern": "ours_xu_published_{task}_s{seed}_128d.json",
+   "solver_field": "xu_published",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "xu_published",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "linear_bo_box8": {
+   "label": "Linear BO recipe (Doumont et al.), box [-8, 8]^D",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/linear_bo_box8",
+   "pattern": "ours_linear_bo_box8_{task}_s{seed}_128d.json",
+   "solver_field": "linear_bo_box8",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "linear_bo_box8",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "turbo_published": {
+   "label": "TuRBO-1 released settings, q = 1 (not verified)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRPUB}/turbo_published",
+   "pattern": "ours_turbo_published_{task}_s{seed}_128d.json",
+   "solver_field": "turbo_published",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "turbo_published",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "p",
+   "commit_root": "CRPUB",
+   "note": "wave p (published-recipe block), tag cr-verify-2026-10-13"
+  },
+  "cmaes_full_rd": {
+   "label": "CMA-ES in R^D, sigma0 = 0.5, population 20 (pycma default)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRRD}/cmaes_full_rd",
+   "pattern": "ours_cmaes_full_rd_{task}_s{seed}_128d.json",
+   "solver_field": "cmaes_full_rd",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "cmaes_full_rd",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "fallback_rule": "recipe_step_fallback",
+   "wave": "rd",
+   "commit_root": "CRRD",
+   "note": "rerun of 2026-11-02 (root CRRD = results/guacamol/cr2026rd, commit 1ea2f7d): current-code port of the full-dimensional CMA-ES of the submitted version (src/spherevo/cmaes_full_rd.py)"
+  },
+  "cmaes_full_rd_pop5": {
+   "label": "CMA-ES in R^D, sigma0 = 0.5, population 5",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRRD}/cmaes_full_rd_pop5",
+   "pattern": "ours_cmaes_full_rd_pop5_{task}_s{seed}_128d.json",
+   "solver_field": "cmaes_full_rd_pop5",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "cmaes_full_rd_pop5",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "fallback_rule": "recipe_step_fallback",
+   "wave": "rd",
+   "commit_root": "CRRD",
+   "note": "rerun of 2026-11-02 (root CRRD, commit 1ea2f7d): cmaes_full_rd with population 5, the population of GeoCMA"
+  },
+  "baxus_cr": {
+   "label": "BAxUS tutorial port on the [p01, p99] box mapped to [-1, 1]^D (not verified)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRRD}/baxus_cr",
+   "pattern": "ours_baxus_cr_{task}_s{seed}_128d.json",
+   "solver_field": "baxus_cr",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "baxus_cr",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "fallback_rule": "recipe_step_fallback",
+   "wave": "rd",
+   "commit_root": "CRRD",
+   "note": "rerun of 2026-11-02 (root CRRD, commit 1ea2f7d): the BAxUS port of the published-recipe block (published_external.BaxusPublished) on the [p01, p99] box; zaleplon_mpo seed 54 is a terminal solver crash (result file with status crashed and its crash record), counted, never eligible"
+  },
+  "hvarfner_scaled_gp_box_argmax_raw": {
+   "label": "C1: Vanilla BO, box [p01,p99], candidate-set argmax, GP fitted on raw latents (input-transform control)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp_box_argmax_raw",
+   "pattern": "ours_hvarfner_scaled_gp_box_argmax_raw_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_argmax_raw",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box_argmax_raw",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c1",
+   "note": "control block, manifest wave c1 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL); RUN_RULES amendment 2026-10-12; seeds 42-81"
+  },
+  "hvarfner_scaled_gp_boxdir_argmax": {
+   "label": "C2a: Vanilla BO, box draws renormalised to the shell radius, candidate-set argmax, GP on raw latents",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp_boxdir_argmax",
+   "pattern": "ours_hvarfner_scaled_gp_boxdir_argmax_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_boxdir_argmax",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_boxdir_argmax",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c1",
+   "note": "control block, manifest wave c1 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL); RUN_RULES amendment 2026-10-12; seeds 42-81"
+  },
+  "random_boxdir": {
+   "label": "C2b: uniform box draws renormalised to the shell radius, no surrogate",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/random_boxdir",
+   "pattern": "ours_random_boxdir_{task}_s{seed}_128d.json",
+   "solver_field": "random_boxdir",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_boxdir",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c1",
+   "note": "control block, manifest wave c1 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL); RUN_RULES amendment 2026-10-12; seeds 42-81"
+  },
+  "random_search__s82": {
+   "label": "C3 replication on seeds 82-121: random_search",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/random_search__s82",
+   "pattern": "ours_random_search_{task}_s{seed}_128d.json",
+   "solver_field": "random_search",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_search__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of random_search on seeds 82-121 (new cold starts); directory and provenance.cr_arm = random_search__s82; never pooled with random_search (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "random_box_faithful__s82": {
+   "label": "C3 replication on seeds 82-121: random_box_faithful",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/random_box_faithful__s82",
+   "pattern": "ours_random_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "random_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "random_box_faithful__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of random_box_faithful on seeds 82-121 (new cold starts); directory and provenance.cr_arm = random_box_faithful__s82; never pooled with random_box_faithful (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "hvarfner_scaled_gp__s82": {
+   "label": "C3 replication on seeds 82-121: hvarfner_scaled_gp",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp__s82",
+   "pattern": "ours_hvarfner_scaled_gp_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of hvarfner_scaled_gp on seeds 82-121 (new cold starts); directory and provenance.cr_arm = hvarfner_scaled_gp__s82; never pooled with hvarfner_scaled_gp (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "hvarfner_scaled_gp_box_argmax__s82": {
+   "label": "C3 replication on seeds 82-121: hvarfner_scaled_gp_box_argmax",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp_box_argmax__s82",
+   "pattern": "ours_hvarfner_scaled_gp_box_argmax_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_argmax",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box_argmax__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of hvarfner_scaled_gp_box_argmax on seeds 82-121 (new cold starts); directory and provenance.cr_arm = hvarfner_scaled_gp_box_argmax__s82; never pooled with hvarfner_scaled_gp_box_argmax (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "hvarfner_scaled_gp_sphere_continuous__s82": {
+   "label": "C3 replication on seeds 82-121: hvarfner_scaled_gp_sphere_continuous",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp_sphere_continuous__s82",
+   "pattern": "ours_hvarfner_scaled_gp_sphere_continuous_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere_continuous",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere_continuous__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of hvarfner_scaled_gp_sphere_continuous on seeds 82-121 (new cold starts); directory and provenance.cr_arm = hvarfner_scaled_gp_sphere_continuous__s82; never pooled with hvarfner_scaled_gp_sphere_continuous (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "hvarfner_scaled_gp_box_faithful__s82": {
+   "label": "C3 replication on seeds 82-121: hvarfner_scaled_gp_box_faithful",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRCTL}/hvarfner_scaled_gp_box_faithful__s82",
+   "pattern": "ours_hvarfner_scaled_gp_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_box_faithful__s82",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c2",
+   "note": "control block, manifest wave c2 (tag cr-controls-2026-10-12 = fd8a03c, root CRCTL): the solver of hvarfner_scaled_gp_box_faithful on seeds 82-121 (new cold starts); directory and provenance.cr_arm = hvarfner_scaled_gp_box_faithful__s82; never pooled with hvarfner_scaled_gp_box_faithful (seeds 42-81)",
+   "seeds": "82-121"
+  },
+  "hvarfner_scaled_gp_sphere_lbfgs": {
+   "label": "Factorial cell shell x continuous: L-BFGS-B on the shell (control C4; the printed cell since 2026-11-06)",
+   "kind": "cr",
+   "format": "ours",
+   "dir": "${CRC4}/hvarfner_scaled_gp_sphere_lbfgs",
+   "pattern": "ours_hvarfner_scaled_gp_sphere_lbfgs_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere_lbfgs",
+   "status_rule": "require_field",
+   "provenance": "require",
+   "required": true,
+   "cr_arm": "hvarfner_scaled_gp_sphere_lbfgs",
+   "expect": {
+    "provenance.run_overrides": {}
+   },
+   "wave": "c3",
+   "note": "control C4, manifest wave c3 (tag cr-controls-lbfgs-2026-10-14 = 2a899ad, run into the control block's directory cr2026ctl; root CRC4 names that directory with this tag's commit as the expected commit); RUN_RULES amendment 2026-10-14; seeds 42-81, paired with the main campaign's cold starts. Since RUN_RULES 2026-11-06 16:30 the shell x continuous cell of the printed factorial, in place of hvarfner_scaled_gp_sphere_continuous"
+  },
+  "turbo": {
+   "kind": "stored",
+   "format": "external",
+   "dir": "${G}/turbo",
+   "pattern": "turbo_{task}_seed{seed}.json",
+   "task_key": "short",
+   "solver_field": "turbo",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "coldstart_from": "geowalk",
+   "note": "external harness (src/benchmark/runner.py, deleted in 68ed3dc); not rerunnable (RUN_RULES 3)",
+   "label": "TuRBO (submitted harness)"
+  },
+  "baxus": {
+   "kind": "stored",
+   "format": "external",
+   "dir": "${G}/baxus",
+   "pattern": "baxus_{task}_seed{seed}.json",
+   "task_key": "short",
+   "solver_field": "baxus",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "coldstart_from": "geowalk",
+   "note": "external harness (src/benchmark/runner.py, deleted in 68ed3dc); not rerunnable (RUN_RULES 3)",
+   "label": "BAxUS"
+  },
+  "lolbo": {
+   "kind": "stored",
+   "format": "external",
+   "dir": "${G}/lolbo",
+   "pattern": "lolbo_{task}_seed{seed}.json",
+   "task_key": "short",
+   "solver_field": "lolbo",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "coldstart_from": "geowalk",
+   "note": "external harness (src/benchmark/runner.py, deleted in 68ed3dc); not rerunnable (RUN_RULES 3)",
+   "label": "LOL-BO"
+  },
+  "invbo": {
+   "kind": "stored",
+   "format": "external",
+   "dir": "${G}/invbo",
+   "pattern": "invbo_{task}_seed{seed}.json",
+   "task_key": "short",
+   "solver_field": "invbo",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "coldstart_from": "geowalk",
+   "note": "external harness (src/benchmark/runner.py, deleted in 68ed3dc); not rerunnable (RUN_RULES 3)",
+   "label": "InvBO"
+  },
+  "cmaes_full": {
+   "kind": "stored",
+   "format": "external",
+   "dir": "${G}/cmaes_full",
+   "pattern": "cmaes_{task}_seed{seed}.json",
+   "task_key": "short",
+   "solver_field": "cmaes",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "coldstart_from": "geowalk",
+   "note": "external harness (src/benchmark/runner.py, deleted in 68ed3dc); not rerunnable (RUN_RULES 3)",
+   "label": "CMA-ES (full-D)"
+  },
+  "saasbo": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_saasbo_{task}_s{seed}_128d.json",
+   "solver_field": "saasbo",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "seeds": "42-51",
+   "label": "SAASBO",
+   "known_missing": [
+    "dhop:46",
+    "osmb:47",
+    "shop:48",
+    "shop:50",
+    "shop:51",
+    "siga:42"
+   ],
+   "note": "April 2026, 10 seeds; 6 cells were never written; not rerun (RUN_RULES 3)"
+  },
+  "cowboys": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_cowboys_{task}_s{seed}_128d.json",
+   "solver_field": "cowboys",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "seeds": "42-51",
+   "label": "COWBOYS",
+   "note": "March 2026, 10 seeds, stochastic decoding; not rerun, recommended drop (RUN_RULES 3)"
+  },
+  "linear_bo_sphere": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_linear_bo_sphere_{task}_s{seed}_128d.json",
+   "solver_field": "linear_bo_sphere",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "label": "Linear BO (shell, uncalibrated; stored)",
+   "note": "July 2026, Linear BO on the shell before the kernel bound was calibrated (audit CLAIM 1); stored, not rerun: printed only as a disclosure row next to the calibrated arm linear_bo_sphere_calib"
+  },
+  "e1_hvarfner_scaled_gp": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/em1_premise",
+   "pattern": "ours_hvarfner_scaled_gp_{task}_s{seed}_256d.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "label": "E-1 hvarfner_scaled_gp",
+   "note": "E-1 (em1_premise, abbd61e clean, batch runner), kept by R-7"
+  },
+  "e1_hvarfner_scaled_gp_sphere_continuous": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/em1_premise",
+   "pattern": "ours_hvarfner_scaled_gp_sphere_continuous_{task}_s{seed}_256d.json",
+   "solver_field": "hvarfner_scaled_gp_sphere_continuous",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "label": "E-1 hvarfner_scaled_gp_sphere_continuous",
+   "note": "E-1 (em1_premise, abbd61e clean, batch runner), kept by R-7"
+  },
+  "e1_hvarfner_scaled_gp_box_argmax": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/em1_premise",
+   "pattern": "ours_hvarfner_scaled_gp_box_argmax_{task}_s{seed}_256d.json",
+   "solver_field": "hvarfner_scaled_gp_box_argmax",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "label": "E-1 hvarfner_scaled_gp_box_argmax",
+   "note": "E-1 (em1_premise, abbd61e clean, batch runner), kept by R-7"
+  },
+  "e1_hvarfner_scaled_gp_box_faithful": {
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/em1_premise",
+   "pattern": "ours_hvarfner_scaled_gp_box_faithful_{task}_s{seed}_256d.json",
+   "solver_field": "hvarfner_scaled_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "label": "E-1 hvarfner_scaled_gp_box_faithful",
+   "note": "E-1 (em1_premise, abbd61e clean, batch runner), kept by R-7"
+  },
+  "b1000_geowalk": {
+   "label": "N=1000 geowalk",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/geowalk",
+   "pattern": "ours_geowalk_{task}_s{seed}_128d_b1000.json",
+   "solver_field": "geowalk",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "b1000_hvarfner_scaled_gp": {
+   "label": "N=1000 hvarfner_scaled_gp",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_hvarfner_scaled_gp_{task}_s{seed}_128d_b1000.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "b1000_cma_es_subspace": {
+   "label": "N=1000 cma_es_subspace",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_cma_es_subspace_{task}_s{seed}_128d_b1000.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "b1000_random_search": {
+   "label": "N=1000 random_search",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_random_search_{task}_s{seed}_128d_b1000.json",
+   "solver_field": "random_search",
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "b1000_vanilla_bo_hvarfner": {
+   "label": "N=1000 vanilla_bo_hvarfner",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_vanilla_bo_hvarfner_{task}_s{seed}_256d_b1000.json",
+   "solver_field": null,
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "b1000_baxus": {
+   "label": "N=1000 baxus",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${G}/spherevo",
+   "pattern": "ours_baxus_{task}_s{seed}_256d_b1000.json",
+   "solver_field": null,
+   "status_rule": "absent_is_completed",
+   "provenance": "record",
+   "seeds": "42-51",
+   "trace_len": 1000,
+   "budget": 1000,
+   "known_missing": [
+    "zale:44"
+   ],
+   "note": "budget-scaling runs (Appendix F), relabelled, not rerun (RUN_RULES 3)"
+  },
+  "chembed_geowalk": {
+   "label": "chembed geowalk",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/chembed/geowalk",
+   "pattern": "ours_chembed_geowalk_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "chembed codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/chembed (sha256 manifest)"
+  },
+  "chembed_cma_es_subspace": {
+   "label": "chembed cma_es_subspace",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/chembed/cma_es_subspace",
+   "pattern": "ours_chembed_cma_es_subspace_{task}_s{seed}_128d.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "chembed codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/chembed (sha256 manifest)"
+  },
+  "chembed_hvarfner_scaled_gp": {
+   "label": "chembed hvarfner_scaled_gp",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/chembed/hvarfner_scaled_gp",
+   "pattern": "ours_chembed_hvarfner_scaled_gp_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "chembed codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/chembed (sha256 manifest)"
+  },
+  "chembed_hvarfner_scaled_gp_box_faithful": {
+   "label": "chembed hvarfner_scaled_gp_box_faithful",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/chembed/hvarfner_scaled_gp_box_faithful",
+   "pattern": "ours_chembed_hvarfner_scaled_gp_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "chembed codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/chembed (sha256 manifest)"
+  },
+  "chembed_random_search": {
+   "label": "chembed random_search",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/chembed/random_search",
+   "pattern": "ours_chembed_random_search_{task}_s{seed}_128d.json",
+   "solver_field": "random_search",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "chembed codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/chembed (sha256 manifest)"
+  },
+  "power_spherical_geowalk": {
+   "label": "power_spherical geowalk",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/power_spherical/geowalk",
+   "pattern": "ours_power_spherical_geowalk_{task}_s{seed}_128d.json",
+   "solver_field": "geowalk",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "power_spherical codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/power_spherical (sha256 manifest)"
+  },
+  "power_spherical_cma_es_subspace": {
+   "label": "power_spherical cma_es_subspace",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/power_spherical/cma_es_subspace",
+   "pattern": "ours_power_spherical_cma_es_subspace_{task}_s{seed}_128d.json",
+   "solver_field": "cma_es_subspace",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "power_spherical codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/power_spherical (sha256 manifest)"
+  },
+  "power_spherical_hvarfner_scaled_gp": {
+   "label": "power_spherical hvarfner_scaled_gp",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/power_spherical/hvarfner_scaled_gp",
+   "pattern": "ours_power_spherical_hvarfner_scaled_gp_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "power_spherical codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/power_spherical (sha256 manifest)"
+  },
+  "power_spherical_hvarfner_scaled_gp_box_faithful": {
+   "label": "power_spherical hvarfner_scaled_gp_box_faithful",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/power_spherical/hvarfner_scaled_gp_box_faithful",
+   "pattern": "ours_power_spherical_hvarfner_scaled_gp_box_faithful_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box_faithful",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "power_spherical codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/power_spherical (sha256 manifest)"
+  },
+  "power_spherical_hvarfner_scaled_gp_box": {
+   "label": "power_spherical hvarfner_scaled_gp_box",
+   "kind": "stored",
+   "format": "ours",
+   "dir": "${INPUTS}/power_spherical/hvarfner_scaled_gp_box",
+   "pattern": "ours_power_spherical_hvarfner_scaled_gp_box_{task}_s{seed}_128d.json",
+   "solver_field": "hvarfner_scaled_gp_box",
+   "status_rule": "require_field",
+   "provenance": "record",
+   "note": "power_spherical codec runs (tulen, Apr/May 2026); no environment loads the codec (RUN_RULES 3); copy in /data/prusek/cr_inputs/power_spherical (sha256 manifest)"
+  }
+ }
+}

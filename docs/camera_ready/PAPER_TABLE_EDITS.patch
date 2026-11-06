@@ -1,0 +1,548 @@
+--- gen/tab_baselines_overview.tex
++++ paper/tab_baselines_overview.tex
+@@ -1,45 +1,45 @@
+-% tab_baselines_overview: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_baselines_overview: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{longtable,booktabs}.
+ {\scriptsize\setlength{\tabcolsep}{2pt}
+-\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{1.2cm}@{}}
+-\caption{\textbf{Overview of every printed method, one row per method and its variants.} Implementation: where the code comes from. Surrogate: model and fit. Acquisition, maximizer: how a proposal is chosen. Support, trust region: where the candidates are drawn ($\bar r$: mean norm of the run's five cold-start latents). Repr. gives the result of the verification in Table~\ref{tab:verification}. The entry ``yes'' means that a published result was reproduced. The entry ``yes, with allowance'' means that it was reproduced only with the allowances of the protocol. The entry ``no'' means not verified. Either the verification runs were not complete when the verification ended, or the row is a variant whose settings were not verified. The entry n/a means not applicable (methods of this paper and adapted recipes). A dash marks a stored run, not checked. Abbreviations: ARD = one lengthscale per input dimension. MAP = maximum a posteriori fit of the hyperparameters. RAASP = random axis-aligned subspace perturbations. qLogNEI = Monte Carlo log noisy expected improvement. UCB = upper confidence bound. NUTS = the No-U-Turn sampler. PPGPR = parametric predictive GP regression. PCA sphere = the sphere of radius $\bar r$ in the span of the top 64 principal components of 3,000 encoded ZINC latents. Our adapted GP uses the DSP prior with location $\sqrt{2}+0.5\ln D$, as in the paper of Hvarfner et al. Their released configuration, which the published recipe follows, uses 1.4 in place of $\sqrt{2}$. The sphere Gaussian-kernel GP fell back to a uniform draw in \crBaselinesGaboFallbackSteps{} proposals, in \crBaselinesGaboFallbackCells{} of its \crBaselinesGaboCells{} runs. The full card of every method and its run status are released with the code (\texttt{docs/baselines/}).}\label{tab:baselines}\\
++\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
++\caption{\textbf{Overview of every printed method, one row per method and its variants.} Implementation: where the code comes from. Surrogate: model and fit. Acquisition, maximizer: how a proposal is chosen. Support, trust region: where the candidates are drawn ($\bar r$: mean norm of the run's five cold-start latents). Abbreviations: ARD = one lengthscale per input dimension. MAP = maximum a posteriori fit of the hyperparameters. RAASP = random axis-aligned subspace perturbations. qLogNEI = Monte Carlo log noisy expected improvement. UCB = upper confidence bound. PCA sphere = the sphere of radius $\bar r$ in the span of the top 64 principal components of 3,000 encoded ZINC latents. The two BAxUS rows run the BoTorch tutorial, not the authors' code, so Table~\ref{tab:main} counts that method as an adapted one. Our adapted Mat\'ern-5/2 GP uses the DSP prior with location $\sqrt{2}+0.5\ln D$, as in the paper of Hvarfner et al. Their released configuration, which the published recipe follows, uses 1.4 in place of $\sqrt{2}$. GaBO fell back to a uniform draw in \crBaselinesGaboFallbackSteps{} proposals, in \crBaselinesGaboFallbackCells{} of its \crBaselinesGaboCells{} runs. The full card of every method and its run status are released with the code (\texttt{docs/baselines/}).}\label{tab:baselines}\\
+ \toprule
+-Method & Implementation & Surrogate & Acquisition, maximizer & Support, trust region & Repr. \\
++Method & Implementation & Surrogate & Acquisition, maximizer & Support, trust region \\
+ \midrule
+ \endfirsthead
+ \toprule
+-Method & Implementation & Surrogate & Acquisition, maximizer & Support, trust region & Repr. \\
++Method & Implementation & Surrogate & Acquisition, maximizer & Support, trust region \\
+ \midrule
+ \endhead
+ \bottomrule
+ \endfoot
+-\multicolumn{6}{@{}l}{\textit{Methods of this paper (GuacaMol, LassoBench and NAS-Bench-101)}} \\
+-\geowalk{} and its variants & this paper & none & 16 uniform draws, then geodesic steps, angle 0.60 to 0.15 rad & shell of radius $\bar r$ (NAS: mean embedding norm; LassoBench: clipped) & n/a \\
+-\geocma{} and its variants & this paper; CMA-ES from pycma & none (CMA-ES) & 16-dim. subspace, population 5, step 0.5 (NAS: sd of cold starts) & shell of radius $\bar r$ (NAS: whole space, mean norm; LassoBench: box) & n/a \\
+-Random search, on the shell and on other supports & this paper & none & uniform draws; Gaussian fit: $N(\hat\mu,\hat\Sigma)$ draws; NAS: 30 table entries & shell, PCA sphere, convex combinations of latents, Gaussian; LassoBench: $[-1,1]^D$ & n/a \\
+-\multicolumn{6}{@{}l}{\textit{GP recipes adapted in this repository}} \\
+-Mat\'ern-5/2 GP (DSP prior) & own BoTorch GP; adapts Hvarfner et al. 2024 & Mat\'ern-5/2, ARD, DSP lengthscale prior, MAP fit & qLogEI; argmax of 2,048 draws or L-BFGS-B & shell, box $[p_{01},p_{99}]$, or cube directions at $\bar r$ & n/a \\
+-Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$) & own BoTorch GP; adapts Papenmeier et al. 2025 & Mat\'ern-5/2, ARD, start $0.1\sqrt{D}$, no lengthscale prior & qLogEI, argmax or L-BFGS-B; one row LogEI with RAASP & shell or box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ & n/a \\
+-Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$) & own BoTorch GP; adapts Xu et al. 2025 & Mat\'ern-5/2, ARD, start $\sqrt{D}$; no lengthscale/\allowbreak{}outputscale prior & qLogEI; argmax over 2,048 candidates or L-BFGS-B & shell or box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ & n/a \\
+-spherical linear-kernel GP, LogEI, L-BFGS-B with sample-around-best & kernel copied from Doumont et al. & spherical linear kernel, LogNormal($\sqrt{2}$, $\sqrt{3}$) prior & LogEI; L-BFGS-B, 4 restarts, sample-around-best & box $[p_{01},p_{99}]$ (rescaled); LassoBench: $[-1,1]^D$ & n/a \\
+-spherical linear-kernel GP (calibrated bounds), qLogEI, candidate-set argmax & kernel copied from Doumont et al. & as the box port; kernel bounds calibrated to the shell & qLogEI; argmax over 2,048 candidates on the shell & shell; the kernel-bound rule was set after a first run on the shell & n/a \\
+-RBF GP (DSP prior), qLogNEI, L-BFGS-B & own BoTorch GP; adapts Hvarfner et al. 2024 & RBF, ARD, LogNormal(1.4 + 0.5 $\ln D$, $\sqrt{3}$), MAP & qLogNEI; L-BFGS-B, 4 restarts, sample-around-best & $[-1,1]^D$ (LassoBench only) & n/a \\
+-\multicolumn{6}{@{}l}{\textit{Published recipes: the authors' released code (BAxUS: the BoTorch tutorial)}} \\
+-Vanilla BO (Hvarfner et al.) & authors' code (Ax 0.3.7) rebuilt on BoTorch & RBF, ARD, LogNormal(1.4 + 0.5 $\ln D$, $\sqrt{3}$), MAP & qLogNEI (in-box baseline); BoTorch, 4 restarts & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ & yes, with allowance \\
+-RBF GP (DSP prior), qLogNEI (all observations), L-BFGS-B with sample-around-best (the other run of the same recipe) & as the row above & as the row above & qLogNEI, all observations as baseline; BoTorch & box $[p_{01},p_{99}]$ & no \\
+-MSR (Papenmeier et al.) & authors' released code, rebuilt & Mat\'ern-5/2, ARD, start $\sqrt{D}/10$, learned noise & LogEI; 5 restarts, RAASP (sigma 0.001) & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$; no trust region & yes \\
+-MLE (scaled) (Papenmeier et al.) & authors' released code, rebuilt & Mat\'ern-5/2, ARD, start $\sqrt{D}/10$, learned noise & LogEI; 5 restarts, no sampling around the best & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ & yes \\
+-Standard GP (Xu et al.) & authors' released code, rebuilt & Mat\'ern-5/2, ARD, Uniform(1e-10, 30) prior, start $\sqrt{D}$ & UCB (beta 1.5); 10 restarts, 1,000 raw samples & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$, not applicable (n.a.) on the two largest tasks & yes \\
+-Linear BO (Doumont et al.) & authors' released code; kernel copied & spherical linear kernel, LogNormal($\sqrt{2}$, $\sqrt{3}$) prior & LogEI; L-BFGS-B, 4 restarts, sample-around-best & authors' box $[-8,8]^{256}$; LassoBench: $[-1,1]^D$ & yes \\
+-Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region & authors' turbo\_1.py and gp.py, ported & Mat\'ern-5/2, ARD, ExactGP trained by Adam (50 steps) & Thompson sampling of the predictive over Sobol candidates & TuRBO-1 trust region in $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ & no \\
+-GP in nested count-sketch subspaces, Thompson sampling in a trust region & BAxUS tutorial of BoTorch (tutorials/baxus) & BoTorch default RBF GP on the embedding & Thompson sampling; argmax of one posterior sample & nested count-sketch embeddings, BAxUS trust region & no \\
+-GP in nested count-sketch subspaces, Thompson sampling in a trust region & BAxUS tutorial of BoTorch (tutorials/baxus) & BoTorch default RBF GP on the embedding & Thompson sampling; argmax of one posterior sample & GuacaMol: nested count-sketch embeddings of the box $[p_{01},p_{99}]$, BAxUS trust region & no \\
+-CMA-ES, popsize 20, $\sigma_0=0.1$, $x_0=0$ & LassoBench's CMA-ES example & none (pycma 4.4.4) & CMA-ES, population 20, step size 0.1, $x_0=0$ & $[-1,1]^D$ (LassoBench only) & no \\
+-\multicolumn{6}{@{}l}{\textit{Other baselines implemented in this repository}} \\
+-GP in a random linear or hashed embedding, Thompson sampling & re-implements REMBO (Wang et al.), HeSBO (Nayebi et al.) & BoTorch default RBF GP on the 16-dim. embedding & Thompson sampling; argmax over 100 points of the box & 16-dim. embedding lifted to the shell & n/a \\
+-sphere Gaussian-kernel GP, EI, Riemannian trust-region maximizer & vendored GaBOtorch (Jaquier et al.) at 884f64a & sphere Gaussian kernel, Gamma(2, 0.15) outputscale prior & EI; Riemannian trust regions; uniform draw on failure & unit sphere $S^{255}$, proposals scaled to $\bar r$ & n/a \\
+-Riemannian Mat\'ern GP, EI, Riemannian trust-region maximizer & vendored MaternGaBO (Jaquier et al.) at 84bffda & Riemannian Mat\'ern kernel on the sphere, nu = 2.5 & EI; robust Riemannian trust regions, 5 restarts & unit sphere $S^{255}$, proposals scaled to $\bar r$ & n/a \\
+-CMA-ES in $\mathbb{R}^D$, $\sigma_0=0.5$, population 5 or 20 & this repository; CMA-ES from pycma & none (CMA-ES) & CMA-ES in $\mathbb{R}^{256}$, step size 0.5, population 5 or 20 & $\mathbb{R}^{256}$, no bounds & n/a \\
+-\multicolumn{6}{@{}l}{\textit{GuacaMol stored runs}} \\
+-$N=1000$ run: Mat\'ern-5/2 GP, Thompson sampling, cold-start bounding box & this repository; not the recipe of Hvarfner et al. & Mat\'ern-5/2, ARD, gpytorch defaults, no explicit priors & Thompson sampling; argmax over 2,560 Sobol points & bounding box of the five cold-start encodings & -- \\
++\multicolumn{5}{@{}l}{\textit{Methods of this paper (GuacaMol, LassoBench and NAS-Bench-101)}} \\
++\geowalk{} and its variants & this paper & none & 16 uniform draws, then geodesic steps, angle 0.60 to 0.15 rad & shell of radius $\bar r$ (NAS: mean embedding norm; LassoBench: clipped) \\
++\geocma{} and its variants & this paper; CMA-ES from pycma & none (CMA-ES) & 16-dim. subspace, population 5, step 0.5 (NAS: sd of cold starts) & shell of radius $\bar r$ (NAS: whole space, mean norm; LassoBench: box) \\
++Random search, on the shell and on other supports & this paper & none & uniform draws; Gaussian fit: $N(\hat\mu,\hat\Sigma)$ draws; NAS: 30 table entries & shell, PCA sphere, convex combinations of latents, Gaussian; LassoBench: $[-1,1]^D$ \\
++\multicolumn{5}{@{}l}{\textit{GP recipes adapted in this repository}} \\
++Mat\'ern-5/2 GP (DSP prior) & own BoTorch GP; adapts Hvarfner et al. 2024 & Mat\'ern-5/2, ARD, DSP lengthscale prior, MAP fit & qLogEI; argmax of 2,048 draws or L-BFGS-B & shell, box $[p_{01},p_{99}]$, or cube directions at $\bar r$ \\
++Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$) & own BoTorch GP; adapts Papenmeier et al. 2025 & Mat\'ern-5/2, ARD, start $0.1\sqrt{D}$, no lengthscale prior & qLogEI, argmax or L-BFGS-B; one row LogEI with RAASP & shell or box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ \\
++Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$) & own BoTorch GP; adapts Xu et al. 2025 & Mat\'ern-5/2, ARD, start $\sqrt{D}$; no lengthscale/\allowbreak{}outputscale prior & qLogEI; argmax over 2,048 candidates or L-BFGS-B & shell or box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ \\
++Linear BO port, box & kernel copied from Doumont et al. & spherical linear kernel, LogNormal($\sqrt{2}$, $\sqrt{3}$) prior & LogEI; L-BFGS-B, 4 restarts, sample-around-best & box $[p_{01},p_{99}]$ (rescaled); LassoBench: $[-1,1]^D$ \\
++Linear BO port to the shell (calibrated bounds) & kernel copied from Doumont et al. & as the box port; kernel bounds calibrated to the shell & qLogEI; argmax over 2,048 candidates on the shell & shell; the kernel-bound rule was set after a first run on the shell \\
++RBF GP (DSP prior) & own BoTorch GP; adapts Hvarfner et al. 2024 & RBF, ARD, LogNormal(1.4 + 0.5 $\ln D$, $\sqrt{3}$), MAP & qLogNEI; L-BFGS-B, 4 restarts, sample-around-best & $[-1,1]^D$ (LassoBench only) \\
++\multicolumn{5}{@{}l}{\textit{Published recipes}} \\
++Vanilla BO & authors' code (Ax 0.3.7) rebuilt on BoTorch & RBF, ARD, LogNormal(1.4 + 0.5 $\ln D$, $\sqrt{3}$), MAP & qLogNEI (in-box baseline); BoTorch, 4 restarts & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ \\
++Vanilla BO, all observations as baseline (the other run of the same recipe) & as the row above & as the row above & qLogNEI, all observations as baseline; BoTorch & box $[p_{01},p_{99}]$ \\
++Papenmeier MSR & authors' released code, rebuilt & Mat\'ern-5/2, ARD, start $\sqrt{D}/10$, learned noise & LogEI; 5 restarts, RAASP (sigma 0.001) & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$; no trust region \\
++Papenmeier MLE (scaled) & authors' released code, rebuilt & Mat\'ern-5/2, ARD, start $\sqrt{D}/10$, learned noise & LogEI; 5 restarts, no sampling around the best & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ \\
++Xu Standard GP & authors' released code, rebuilt & Mat\'ern-5/2, ARD, Uniform(1e-10, 30) prior, start $\sqrt{D}$ & UCB (beta 1.5); 10 restarts, 1,000 raw samples & box $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$, not applicable (n.a.) on the two largest tasks \\
++Linear BO & authors' released code; kernel copied & spherical linear kernel, LogNormal($\sqrt{2}$, $\sqrt{3}$) prior & LogEI; L-BFGS-B, 4 restarts, sample-around-best & authors' box $[-8,8]^{256}$; LassoBench: $[-1,1]^D$ \\
++TuRBO & authors' turbo\_1.py and gp.py, ported & Mat\'ern-5/2, ARD, ExactGP trained by Adam (50 steps) & Thompson sampling of the predictive over Sobol candidates & TuRBO-1 trust region in $[p_{01},p_{99}]$; LassoBench: $[-1,1]^D$ \\
++BAxUS (LassoBench) & BAxUS tutorial of BoTorch (tutorials/baxus) & BoTorch default RBF GP on the embedding & Thompson sampling; argmax of one posterior sample & nested count-sketch embeddings, BAxUS trust region \\
++BAxUS (GuacaMol) & BAxUS tutorial of BoTorch (tutorials/baxus) & BoTorch default RBF GP on the embedding & Thompson sampling; argmax of one posterior sample & GuacaMol: nested count-sketch embeddings of the box $[p_{01},p_{99}]$, BAxUS trust region \\
++CMA-ES (LassoBench recipe) & LassoBench's CMA-ES example & none (pycma 4.4.4) & CMA-ES, population 20, step size 0.1, $x_0=0$ & $[-1,1]^D$ (LassoBench only) \\
++\multicolumn{5}{@{}l}{\textit{Other baselines implemented in this repository}} \\
++REMBO and HeSBO & re-implements REMBO (Wang et al.), HeSBO (Nayebi et al.) & BoTorch default RBF GP on the 16-dim. embedding & Thompson sampling; argmax over 100 points of the box & 16-dim. embedding lifted to the shell \\
++GaBO & vendored GaBOtorch (Jaquier et al.) at 884f64a & sphere Gaussian kernel, Gamma(2, 0.15) outputscale prior & EI; Riemannian trust regions; uniform draw on failure & unit sphere $S^{255}$, proposals scaled to $\bar r$ \\
++Riemannian Mat\'ern GP & vendored MaternGaBO (Jaquier et al.) at 84bffda & Riemannian Mat\'ern kernel on the sphere, nu = 2.5 & EI; robust Riemannian trust regions, 5 restarts & unit sphere $S^{255}$, proposals scaled to $\bar r$ \\
++CMA-ES (population 5 or 20) & this repository; CMA-ES from pycma & none (CMA-ES) & CMA-ES in $\mathbb{R}^{256}$, step size 0.5, population 5 or 20 & $\mathbb{R}^{256}$, no bounds \\
++\multicolumn{5}{@{}l}{\textit{GuacaMol stored runs}} \\
++GP in the cold-start box ($N=1000$ runs) & this repository; not the recipe of Hvarfner et al. & Mat\'ern-5/2, ARD, gpytorch defaults, no explicit priors & Thompson sampling; argmax over 2,560 Sobol points & bounding box of the five cold-start encodings \\
+ \end{longtable}}
+--- gen/tab_boxsphere.tex
++++ paper/tab_boxsphere.tex
+@@ -1,9 +1,16 @@
+-% tab_boxsphere: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_boxsphere: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
++% 2026-11-05 (authors' decision after the supervisors' review): hand-edited printed view, recorded in PAPER_TABLE_EDITS.patch
++% until the generator follows. The recipe rows only, with a short caption (the caption details are in Section 4.3). The 2x2
++% cell means are printed as tab_factorial.tex (Table 3) and the five factorial contrasts as tab_factorial_contrasts.tex
++% (Appendix K; authors' correction of 13:00: the cells stay in the main text, the contrasts leave it). Every printed value
++% is unchanged; the full table with the cell-level statistics is docs/baselines/tab_boxsphere_full.tex.
++% 2026-11-06 (external review): the caption no longer says what bold marks, because no printed value is bold here
++% (no corrected p is below 0.05; the generator's rule still applies to the contrasts of Table 19).
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Box versus empirical shell within each GP recipe, and the support $\times$ acquisition-maximization factorial.} Top: each GP on the empirical shell (qLogEI, candidate-set argmax) and in the box $[p_{01},p_{99}]$ (L-BFGS-B), on one matched set of $n=440$ cells. Both versions of a recipe fit the GP in the same way, but box inputs are rescaled per coordinate to $[0,1]^D$ and shell inputs are raw. The two versions differ in support \emph{and} in the acquisition maximizer. For $\ell_0=0.1\sqrt{D}$, the box version uses analytic LogEI with sample-around-best, the acquisition call of MSR. This row therefore also differs in the acquisition. Tasks = tasks, of the 11, on which the shell version has the higher mean. Bottom: the 2$\times$2 factorial. Continuous maximization is L-BFGS-B on both supports (on the shell over a direction mapped to the shell). The matched set of the four cells has $n=440$. Tasks = tasks with a positive contrast. In both blocks, $p_{\mathrm{task}}^{\mathrm{BH}}$ is the exact two-sided Wilcoxon test on the 11 per-task mean differences, Benjamini--Hochberg corrected within the 3 rows or within the five contrasts. Means are means of per-task means over completed cells, as in Table~\ref{tab:main}. Bold, in both blocks: $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$ within the block's family. The cell-level statistics are in the full table in the repository (\texttt{docs/baselines/tab\_boxsphere\_full.tex}).}
++\caption{\textbf{Box versus empirical shell within each GP recipe.} Each GP on the empirical shell (candidate-set argmax) and in the box $[p_{01},p_{99}]$ (L-BFGS-B), on one matched set of $n=440$ cells; cross-means as in Table~\ref{tab:main}. Tasks counts the tasks, of the 11, on which the shell version has the higher mean. $p_{\mathrm{task}}^{\mathrm{BH}}$ is the task-level test of the shell version against the box version, corrected within the three recipes. The two DSP rows are the GP on the shell and the GP in the box of Sections~\ref{sec:main_results} and~\ref{sec:boxsphere}.}
+ \label{tab:boxsphere}
+ \small
+ \begin{lrbox}{\crtabbox}
+@@ -22,34 +29,5 @@
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+-\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+-\par\medskip
+-{\footnotesize\textit{Support $\times$ acquisition maximization, $n=440$ matched cells}}\par\smallskip
+-\begin{lrbox}{\crtabbox}
+-\begin{tabular}{lrr}
+-\toprule
+-Support & Candidate-set argmax & Continuous (L-BFGS-B) \\
+-\midrule
+-Empirical shell & $0.4228$ & $0.3999$ \\
+-Box $[p_{01},p_{99}]$ & $0.3925$ & $0.3989$ \\
+-\bottomrule
+-\end{tabular}
+-\end{lrbox}
+-\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+-\par\medskip
+-{\footnotesize\textit{The five factorial contrasts}}\par\smallskip
+-\begin{lrbox}{\crtabbox}
+-\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrr}
+-\toprule
+-Contrast & $\Delta$ & \begin{tabular}[b]{@{}c@{}}Tasks\\$\Delta>0$\end{tabular} & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
+-\midrule
+-support under candidate-set argmax (shell $-$ box) & $+0.0303$ & 9/11 & $\mathbf{0.017}$ \\
+-support under continuous maximization (shell $-$ box) & $+0.0010$ & 6/11 & $0.90$ \\
+-maximizer on the shell (argmax $-$ L-BFGS-B) & $+0.0229$ & 9/11 & $\mathbf{0.017}$ \\
+-maximizer in the box (argmax $-$ L-BFGS-B) & $-0.0064$ & 1/11 & $\mathbf{0.012}$ \\
+-support $\times$ maximizer interaction $(SA-BA)-(SC-BC)$ & $+0.0294$ & 9/11 & $\mathbf{0.012}$ \\
+-\bottomrule
+-\end{tabularx}
+-\end{lrbox}
+ \ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+ \end{table}
+--- gen/tab_budget.tex
++++ paper/tab_budget.tex
+@@ -1,9 +1,9 @@
+-% tab_budget: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_budget: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Best-so-far of the stored $N=1000$ runs at intermediate budgets (seeds 42--51).} One matched set of $n=109$ of the 110 (task, seed) cells. Each column is the best value after $N$ evaluations of the same runs. The $N=30$ column is therefore a prefix of these runs, not the $N=30$ results of Table~\ref{tab:main}. GP on the shell = Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax. GP in the cold-start box = a Mat\'ern-5/2 GP (one lengthscale per dimension) with Thompson sampling inside the bounding box of the five cold-start latents. It is not the box version of Table~\ref{tab:boxsphere}. Bold: the highest mean in the column. The $\Delta$ rows are paired differences on the matched cells.}
++\caption{\textbf{Best-so-far of the stored $N=1000$ runs at intermediate budgets (seeds 42--51).} One matched set of $n=109$ of the 110 (task, seed) cells. Each column is the best value after $N$ evaluations of the same runs. The $N=30$ column is therefore a prefix of these runs, not the $N=30$ results of Table~\ref{tab:main}. GP in the cold-start box: a Thompson-sampling GP in the bounding box of the five cold-start latents, not the box version of Table~\ref{tab:boxsphere}. Bold: the highest mean in the column. The $\Delta$ rows are paired differences on the matched cells.}
+ \label{tab:budget}
+ \small
+ \setlength{\tabcolsep}{4pt}
+--- gen/tab_convex.tex
++++ paper/tab_convex.tex
+@@ -1,9 +1,9 @@
+-% tab_convex: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_convex: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Samplers inside the latent cloud, and direction controls.} First block: surrogate-free samplers against random search, which samples uniformly on the shell. The samplers draw convex combinations of $k$ latents with Dirichlet(1) weights, or draw from a Gaussian fitted to the latents. The latents are a cached sample of 3,000 encoded ZINC-250k molecules. $\overline{\|z\|}$ is the mean norm of the candidates. For random search it is $\bar r$, the radius of each run. The Monte Carlo standard error of $\overline{\|z\|}$ is at most $4.9\times10^{-5}$, so every printed digit is certain. The full table released with the code describes the estimation. Second block: two direction controls. Random search on the sphere in the span of the top 64 principal components is compared with random search on the full shell. The GP (DSP prior) with qLogEI argmax over cube directions rescaled to $\bar r$ is compared with the same GP on the uniform shell. All rows use the same $n=440$ completed cells, as in Table~\ref{tab:main}. Means are means of per-task means. Bold marks the highest mean of the first block. The difference $\Delta$ is the row minus its reference on the same cells. The effect size $d$ is Cohen's $d$ of the cell differences. The column $p_{\mathrm{BH}}$ is the two-sided Wilcoxon signed-rank test over the cells. It is Benjamini--Hochberg corrected within each block, over 8 rows and 2 comparisons. Tasks counts the tasks on which the row has the higher mean, of the 11. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the 11 per-task mean differences, not corrected.}
++\caption{\textbf{Samplers inside the latent cloud, and direction controls.} First block: surrogate-free samplers against random search, which samples uniformly on the shell. The samplers draw convex combinations of $k$ latents with Dirichlet(1) weights, or draw from a Gaussian fitted to the latents, a sample of 3,000 encoded ZINC-250k molecules. $\overline{\|z\|}$ is the mean norm of the candidates. For random search it is $\bar r$, the radius of each run. Second block: two direction controls. Random search on the sphere in the span of the top 64 principal components is compared with random search on the full shell. The GP (DSP prior) with qLogEI argmax over cube directions rescaled to $\bar r$ is compared with the same GP on the uniform shell. All rows use the same $n=440$ completed cells, as in Table~\ref{tab:main}. Means are means of per-task means. Bold marks the highest mean of the first block. The difference $\Delta$ is the row minus its reference on the same cells. The effect size $d$ is Cohen's $d$ of the cell differences. The column $p_{\mathrm{BH}}$ is the two-sided Wilcoxon signed-rank test over the cells. It is Benjamini--Hochberg corrected within each block, over 8 rows and 2 comparisons. Tasks counts the tasks on which the row has the higher mean, of the 11. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the 11 per-task mean differences, not corrected.}
+ \label{tab:convex}
+ \small
+ \setlength{\tabcolsep}{4pt}
+@@ -34,7 +34,7 @@
+ Comparison & $n$ & Variant & Shell & $\Delta$ & $d$ & $p_{\mathrm{BH}}$ & \begin{tabular}[b]{@{}c@{}}Tasks\\variant\\higher\end{tabular} & $p_{\mathrm{task}}$ \\
+ \midrule
+ Random search: top-64 PCA sphere vs full sphere & 440 & $0.4069$ & $0.4118$ & $-0.0049$ & $-0.08$ & $0.046$ & 3/11 & $0.17$ \\
+-GP (DSP prior), qLogEI argmax: cube directions rescaled to $\bar r$ vs uniform shell & 440 & $0.4220$ & $0.4228$ & $-0.0008$ & $-0.01$ & $0.91$ & 6/11 & $0.90$ \\
++GP on the shell: cube directions rescaled to $\bar r$ vs uniform directions & 440 & $0.4220$ & $0.4228$ & $-0.0008$ & $-0.01$ & $0.91$ & 6/11 & $0.90$ \\
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+--- gen/tab_crosscodec.tex
++++ paper/tab_crosscodec.tex
+@@ -1,16 +1,16 @@
+-% tab_crosscodec: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_crosscodec: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Scope of the codec comparison (Appendix~\ref{app:crosscodec}).} GP = Mat\'ern-5/2 GP (DSP prior) with qLogEI. It uses candidate-set argmax on the shell and L-BFGS-B in the box, so shell versus box also changes the maximizer. Chembed and Power-Spherical: stored runs. Each codec has its own box $[p_{01},p_{99}]$, computed for its own latent space. Power-Spherical normalizes $z$ inside its decoder and decodes stochastically, so it cannot test the radial support. Chembed is a second VAE with an empirical shell and gives a null result. Each codec row uses the matched cells of its four methods (completed cells, as in Table~\ref{tab:main}). Means are means of per-task means. $\Delta_{\mathrm{shell-box}}$ = GP (shell) minus GP (box). $d$ = Cohen's $d$ of the cell differences. $p$ = two-sided Wilcoxon signed-rank test over the cells, not corrected. The task-level test is given in the text.}
++\caption{\textbf{Scope of the codec comparison (Appendix~\ref{app:crosscodec}).} The GP on the shell uses candidate-set argmax and the GP in the box L-BFGS-B, so shell versus box also changes the maximizer. Each codec has its own box $[p_{01},p_{99}]$ in its own latent space. Each codec row uses the matched cells of its four methods (completed cells, as in Table~\ref{tab:main}). Means are means of per-task means. $\Delta_{\mathrm{shell-box}}$ = the GP on the shell minus the GP in the box. $d$ = Cohen's $d$ of the cell differences. $p$ = two-sided Wilcoxon signed-rank test over the cells, not corrected. The task-level test is given in the text.}
+ \label{tab:crosscodec_means}
+ \footnotesize
+ \setlength{\tabcolsep}{3pt}
+ \begin{lrbox}{\crtabbox}
+ \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.5cm}rrrrrrrr}
+ \toprule
+-Codec & $z$ normalized in decoder; decoding & $n$ & \geowalk{} & \geocma{} & \begin{tabular}[b]{@{}c@{}}GP\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP\\(box)\end{tabular} & $\Delta_{\mathrm{shell-box}}$ & $d$ & $p$ \\
++Codec & $z$ normalized in decoder; decoding & $n$ & \geowalk{} & \geocma{} & \begin{tabular}[b]{@{}c@{}}GP on\\the shell\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP in\\the box\end{tabular} & $\Delta_{\mathrm{shell-box}}$ & $d$ & $p$ \\
+ \midrule
+ SELFIES VAE & no, deterministic & 440 & $0.4226$ & $0.4158$ & $0.4228$ & $0.3989$ & $+0.0239$ & $0.30$ & $<0.001$ \\
+ Chembed (Transformer VAE) & no, deterministic & 440 & $0.3765$ & $0.3734$ & $0.3860$ & $0.3810$ & $+0.0050$ & $0.06$ & $0.26$ \\
+--- gen/tab_crossdomain.tex
++++ paper/tab_crossdomain.tex
+@@ -1,9 +1,12 @@
+-% tab_crossdomain: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_crossdomain: scripts/cr/analysis/make_tables.py, commit 82e2bcae031a, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
++% 2026-11-05 (authors' decision after the supervisors' review): hand-shortened caption, recorded in PAPER_TABLE_EDITS.patch
++% until the generator follows. The candidates of the "Best other method" column per benchmark, the test definition and the
++% pointer to the full table moved to Section 4.4 and Section 3.1. Every printed value is unchanged.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{\geowalk{} and \geocma{} across benchmark regimes.} $N=30$. Arrows indicate optimization direction, and bold marks the better mean. GuacaMol: mean of per-task means on the matched cells. NAS-Bench-101: stored runs, seeds 42--51. LassoBench aggregates six dimensions by normalizing each method's loss by the random-search mean loss of the task. The LassoBench runs ran in one environment, with one CPU thread and at most one hour per run. Best other method: the best mean among the other methods that cover the row's matched set, named as in Tables~\ref{tab:main} and~\ref{tab:lassobench} (NAS-Bench-101: random search, TuRBO, a GP and full-dimensional CMA-ES). The difference $\Delta$ is paired and favors the better method, and $|d|$ is Cohen's $d$ of the paired cells. The test $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences, over 11 tasks on GuacaMol and 6 on LassoBench, not corrected across the rows. The mark $^a$ denotes the paired Wilcoxon test over the matched seeds, because NAS-Bench-101 has a single task. The full table in the repository (\texttt{docs/baselines/tab\_crossdomain\_full.tex}) adds the cell-level $p$ and the task counts.}
++\caption{\textbf{\geowalk{} and \geocma{} across benchmark regimes.} $N=30$. Arrows give the optimization direction, and bold marks the better of the two means. GuacaMol: mean of per-task means on the matched cells. LassoBench: each method's loss divided by the random-search mean loss of the task, averaged over the six tasks. $n$ is the number of paired cells, or of paired seeds on NAS-Bench-101. Best other method: the best mean among the other methods that cover the row's matched set. $\Delta$ is paired and favors the better method, $|d|$ is Cohen's $d$ of the paired cells, and $p_{\mathrm{task}}$ is the task-level test of Section~\ref{sec:setup}, uncorrected across the rows; $^a$ marks the paired test over seeds, because NAS-Bench-101 has a single task.}
+ \label{tab:crossdomain}
+ \small
+ \setlength{\tabcolsep}{3pt}
+--- gen/tab_factorial.tex
++++ paper/tab_factorial.tex
+@@ -0,0 +1,24 @@
++% tab_factorial: the 2x2 cell means of tab_boxsphere (scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean)
++% 2026-11-05 (authors' decision after the supervisors' review; corrected 13:00): hand-split from the printed tab_boxsphere.tex,
++% recorded in PAPER_TABLE_EDITS.patch until the generator follows. The values are those of its 2x2 block, unchanged. The five
++% contrasts are tab_factorial_contrasts.tex (Appendix K).
++% 2026-11-06 16:30 (authors' decision, RUN_RULES 2026-11-06 16:30): the values of generator run 20261106_l1 (commit 548eaa6):
++% the shell x continuous cell is L-BFGS-B on the shell (control C4 of the run rules) in place of projected Adam.
++\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
++\begin{table}[t]
++\centering
++\caption{\textbf{The support $\times$ acquisition-maximization factorial: cross-mean of each cell.} One Mat\'ern-5/2 GP (DSP prior) on $n=440$ matched cells; continuous maximization is L-BFGS-B on both supports. Cross-means as in Table~\ref{tab:main}. The five contrasts of these cells, with their task counts and corrected $p$ values, are in Table~\ref{tab:factorial_contrasts} (Appendix~\ref{app:contrasts}).}
++\label{tab:factorial}
++\small
++\begin{lrbox}{\crtabbox}
++\begin{tabular}{lrr}
++\toprule
++Support & Candidate-set argmax & Continuous (L-BFGS-B) \\
++\midrule
++Empirical shell & $0.4228$ & $0.3999$ \\
++Box $[p_{01},p_{99}]$ & $0.3925$ & $0.3989$ \\
++\bottomrule
++\end{tabular}
++\end{lrbox}
++\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
++\end{table}
+--- gen/tab_factorial_contrasts.tex
++++ paper/tab_factorial_contrasts.tex
+@@ -0,0 +1,27 @@
++% tab_factorial_contrasts: the five factorial contrasts of tab_boxsphere (scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean)
++% 2026-11-05 (authors' decision after the supervisors' review; corrected 13:00): hand-split from the printed tab_boxsphere.tex,
++% recorded in PAPER_TABLE_EDITS.patch until the generator follows. The values are those of its contrast block, unchanged.
++% Printed in Appendix K; the 2x2 cell means are tab_factorial.tex (Table 3).
++% 2026-11-06 16:30 (authors' decision, RUN_RULES 2026-11-06 16:30): the values of generator run 20261106_l1 (commit 548eaa6):
++% the shell x continuous cell is L-BFGS-B on the shell (control C4 of the run rules) in place of projected Adam.
++\ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
++\begin{table}[t]
++\centering
++\caption{\textbf{The five contrasts of the factorial experiment of Section~\ref{sec:boxsphere}.} Differences of the cross-means of Table~\ref{tab:factorial} on the same $n=440$ matched cells. $\Delta$ is the mean of per-task means, Tasks counts the tasks with a positive contrast, and $p_{\mathrm{task}}^{\mathrm{BH}}$ is the task-level test, corrected within the five contrasts; bold marks $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$. The cell-level statistics and the bootstrap intervals are in the full table in the repository.}
++\label{tab:factorial_contrasts}
++\small
++\begin{lrbox}{\crtabbox}
++\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrr}
++\toprule
++Contrast & $\Delta$ & \begin{tabular}[b]{@{}c@{}}Tasks\\$\Delta>0$\end{tabular} & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
++\midrule
++shell minus box, with candidate-set argmax & $+0.0303$ & 9/11 & $\mathbf{0.017}$ \\
++shell minus box, with L-BFGS-B & $+0.0010$ & 6/11 & $0.90$ \\
++candidate-set argmax minus L-BFGS-B, on the shell & $+0.0229$ & 9/11 & $\mathbf{0.017}$ \\
++candidate-set argmax minus L-BFGS-B, in the box & $-0.0064$ & 1/11 & $\mathbf{0.012}$ \\
++interaction: the first row minus the second & $+0.0294$ & 9/11 & $\mathbf{0.012}$ \\
++\bottomrule
++\end{tabularx}
++\end{lrbox}
++\ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
++\end{table}
+--- gen/tab_hyper.tex
++++ paper/tab_hyper.tex
+@@ -1,9 +1,9 @@
+-% tab_hyper: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_hyper: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Settings of \geowalk{} and \geocma{} on GuacaMol.} These settings hold for every task and seed. Every value is read from the released code that ran the two methods (the pycma version from the result files), and a test checks the table against the code. The settings that differ on LassoBench and NAS-Bench-101 are given in Section~\ref{sec:structured}.}
++\caption{\textbf{Settings of \geowalk{} and \geocma{} on GuacaMol.} These settings hold for every task and seed. The settings that differ on LassoBench and NAS-Bench-101 are given in Section~\ref{sec:structured} and Appendix~\ref{app:radius}.}
+ \label{tab:hyper}
+ \footnotesize
+ \setlength{\tabcolsep}{4pt}
+@@ -31,7 +31,7 @@
+ Initial mean & $Q^\top x$ of the best cold start \\
+ Pre-conditioning & the $N_0=5$ cold starts, projected by $Q^\top$, told as the first generation \\
+ Update & deferred: one evaluation per step; a generation is told once $\lambda$ evaluations have accumulated \\
+-Lift & normalize in the subspace, map by $Q$, renormalize, scale to $\bar r$ \\
++Lift & normalize in the subspace, map by $Q$, scale to $\bar r$ \\
+ CMA-ES library and options & pycma 4.4.4; population $\lambda$, verbosity $-9$, seed drawn from NumPy's global stream (seeded by the run seed) \\
+ \multicolumn{2}{@{}l}{\textit{Shared protocol (GuacaMol)}} \\
+ Tasks & 11 GuacaMol tasks \\
+--- gen/tab_lassobench.tex
++++ paper/tab_lassobench.tex
+@@ -1,9 +1,9 @@
+-% tab_lassobench: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_lassobench: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{LassoBench: final loss divided by the task's random-search mean loss, per dimension.} Each value is the mean over seeds of this ratio after 30 evaluations. A value of 1 equals random search, and a value above 1 is worse than random search. Lower is better. The tasks are $D=60$ synthetic simple, $D=100$ synthetic medium, $D=180$ DNA, $D=300$ synthetic high, $D=1000$ synthetic hard, $D=7129$ leukemia. In parentheses: the seeds with a finite loss ($n/40$ where fewer than the 40 seeds 42--81 have one). n.c.: no seed finished with a finite loss. n.a.: not applicable at this dimension, so not run. All rows ran in one environment, with one CPU thread and at most one hour per run. $^{\circ}$~Not verified against a published result (Table~\ref{tab:verification}). The coverage and time-outs of each method, and each method minus \geocma{}, are in the full table released with the code (\texttt{docs/baselines/tab\_lassobench\_full.tex}).}
++\caption{\textbf{LassoBench: final loss divided by the task's random-search mean loss, per dimension.} Each value is the mean over seeds of this ratio after 30 evaluations. A value of 1 equals random search, and a value above 1 is worse than random search. Lower is better. The tasks are $D=60$ synthetic simple, $D=100$ synthetic medium, $D=180$ DNA, $D=300$ synthetic high, $D=1000$ synthetic hard, $D=7129$ leukemia. In parentheses: the seeds with a finite loss ($n/40$ where fewer than the 40 seeds 42--81 have one). n.c.: no seed finished with a finite loss. n.a.: not applicable at this dimension, so not run. The coverage and time-outs of each method, and each method minus \geocma{}, are in the full table in the repository.}
+ \label{tab:lassobench}
+ \scriptsize
+ \setlength{\tabcolsep}{3pt}
+@@ -15,19 +15,19 @@
+ \geocma{} & $0.805$\,(40) & $0.351$\,(40) & $0.891$\,(40) & $0.126$\,(40) & $0.127$\,(40) & $0.672$\,(40) \\
+ \geowalk{} & $0.566$\,(40) & $0.687$\,(40) & $0.974$\,(40) & $0.748$\,(40) & $0.868$\,(40) & $0.931$\,(40) \\
+ Random search & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) & $1.000$\,(40) \\
+-RBF GP (DSP prior), qLogNEI, L-BFGS-B & $2.160$\,(40) & $1.246$\,(40) & $0.968$\,(40) & $0.687$\,(40) & $0.676$\,(40) & $0.869$\,(40) \\
+-Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, L-BFGS-B & $1.141$\,(40) & $0.793$\,(40) & $0.994$\,(40) & $0.890$\,(38/40) & $0.865$\,(40) & $0.916$\,(36/40) \\
+-Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B & $0.758$\,(40) & $0.492$\,(40) & $1.004$\,(39/40) & $0.730$\,(25/40) & $0.711$\,(38/40) & n.c. \\
+-spherical linear-kernel GP, LogEI, L-BFGS-B & $0.879$\,(40) & $0.243$\,(40) & $0.896$\,(40) & $0.138$\,(40) & $0.133$\,(40) & n.c. \\
+-\multicolumn{7}{@{}l}{\textit{Published methods (the authors' released code)}} \\
+-Vanilla BO (Hvarfner et al.) & $1.710$\,(40) & $0.856$\,(40) & $0.954$\,(40) & $0.754$\,(40) & $0.685$\,(40) & $0.899$\,(40) \\
+-MSR (Papenmeier et al.) & $0.692$\,(40) & $1.011$\,(40) & $0.994$\,(40) & $0.819$\,(40) & $0.717$\,(17/40) & n.c. \\
+-MLE (scaled) (Papenmeier et al.) & $0.616$\,(40) & $0.519$\,(40) & $0.998$\,(40) & $0.834$\,(40) & $0.946$\,(29/40) & n.c. \\
+-Standard GP (Xu et al.) & $0.400$\,(40) & $0.356$\,(40) & $1.016$\,(40) & $0.806$\,(40) & n.a. & n.a. \\
+-Linear BO (Doumont et al.) & $0.759$\,(40) & $0.271$\,(40) & $0.898$\,(40) & $0.125$\,(40) & $0.131$\,(40) & n.c. \\
+-Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region$^{\circ}$ & $1.298$\,(40) & $0.789$\,(40) & $0.962$\,(40) & $0.759$\,(40) & $0.963$\,(40) & $1.148$\,(40) \\
+-GP in nested count-sketch subspaces, Thompson sampling in a trust region$^{\circ}$ & $0.997$\,(40) & $0.399$\,(40) & $0.873$\,(40) & $0.115$\,(40) & $0.124$\,(40) & $0.709$\,(40) \\
+-CMA-ES, popsize 20, $\sigma_0=0.1$, $x_0=0$$^{\circ}$ & $0.478$\,(40) & $0.287$\,(40) & $0.874$\,(40) & $0.109$\,(40) & $0.125$\,(40) & $0.692$\,(40) \\
++RBF GP (DSP prior) & $2.160$\,(40) & $1.246$\,(40) & $0.968$\,(40) & $0.687$\,(40) & $0.676$\,(40) & $0.869$\,(40) \\
++Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$) & $1.141$\,(40) & $0.793$\,(40) & $0.994$\,(40) & $0.890$\,(38/40) & $0.865$\,(40) & $0.916$\,(36/40) \\
++Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$) & $0.758$\,(40) & $0.492$\,(40) & $1.004$\,(39/40) & $0.730$\,(25/40) & $0.711$\,(38/40) & n.c. \\
++Linear BO port & $0.879$\,(40) & $0.243$\,(40) & $0.896$\,(40) & $0.138$\,(40) & $0.133$\,(40) & n.c. \\
++\multicolumn{7}{@{}l}{\textit{Published methods}} \\
++Vanilla BO & $1.710$\,(40) & $0.856$\,(40) & $0.954$\,(40) & $0.754$\,(40) & $0.685$\,(40) & $0.899$\,(40) \\
++Papenmeier MSR & $0.692$\,(40) & $1.011$\,(40) & $0.994$\,(40) & $0.819$\,(40) & $0.717$\,(17/40) & n.c. \\
++Papenmeier MLE (scaled) & $0.616$\,(40) & $0.519$\,(40) & $0.998$\,(40) & $0.834$\,(40) & $0.946$\,(29/40) & n.c. \\
++Xu Standard GP & $0.400$\,(40) & $0.356$\,(40) & $1.016$\,(40) & $0.806$\,(40) & n.a. & n.a. \\
++Linear BO & $0.759$\,(40) & $0.271$\,(40) & $0.898$\,(40) & $0.125$\,(40) & $0.131$\,(40) & n.c. \\
++TuRBO & $1.298$\,(40) & $0.789$\,(40) & $0.962$\,(40) & $0.759$\,(40) & $0.963$\,(40) & $1.148$\,(40) \\
++BAxUS & $0.997$\,(40) & $0.399$\,(40) & $0.873$\,(40) & $0.115$\,(40) & $0.124$\,(40) & $0.709$\,(40) \\
++CMA-ES (LassoBench recipe) & $0.478$\,(40) & $0.287$\,(40) & $0.874$\,(40) & $0.109$\,(40) & $0.125$\,(40) & $0.692$\,(40) \\
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+@@ -35,7 +35,7 @@
+ \end{table}
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{LassoBench, continued from Table~\ref{tab:lassobench}: \geowalk{} against each published method.} Same runs and normalization as Table~\ref{tab:lassobench}. These methods form the baseline family of LassoBench. Here a task is a dimension. The difference $\Delta$ is \geowalk{} minus the method, a mean over tasks of the per-task mean normalized losses. A positive $\Delta$ means that \geowalk{} has the higher, worse loss. Tasks counts the tasks on which \geowalk{} has the lower mean loss, of those where both have runs. The column $n$ gives the (task, seed) pairs that both completed. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences. The column $p_{\mathrm{task}}^{\mathrm{BH}}$ is $p_{\mathrm{task}}$ corrected by Benjamini--Hochberg over the 8 methods. Bold marks values below 0.05. With $k$ tasks the exact two-sided test cannot go below $2/2^k$. This floor is 0.031 for 6 tasks and 0.063 for 5 tasks. A method with fewer than 6 tasks therefore cannot reach 0.05. The mark $^{\S}$ denotes the LassoBench-only methods, which have no GuacaMol run. This family therefore has 8 methods, and the family of Table~\ref{tab:published} has 6 recipes.}
++\caption{\textbf{LassoBench, continued from Table~\ref{tab:lassobench}: \geowalk{} against each published method.} Same runs and normalization as Table~\ref{tab:lassobench}. These methods form the baseline family of LassoBench. Here a task is a dimension. The difference $\Delta$ is \geowalk{} minus the method, a mean over tasks of the per-task mean normalized losses. A positive $\Delta$ means that \geowalk{} has the higher, worse loss. Tasks counts the tasks on which \geowalk{} has the lower mean loss, of those where both have runs. The column $n$ gives the (task, seed) pairs that both completed. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences. The column $p_{\mathrm{task}}^{\mathrm{BH}}$ is $p_{\mathrm{task}}$ corrected by Benjamini--Hochberg over the 8 methods. Bold marks values below 0.05. With $k$ tasks the exact two-sided test cannot go below $2/2^k$, so a method with fewer than 6 tasks cannot reach 0.05. The mark $^{\|}$ denotes the two arms that ran only on LassoBench; Table~\ref{tab:main} prints the same method names under other settings. This family has 8 methods, and the family of Table~\ref{tab:published} has 6 recipes.}
+ \label{tab:lassobench_family}
+ \scriptsize
+ \setlength{\tabcolsep}{3pt}
+@@ -45,14 +45,14 @@
+ \toprule
+ Method & \begin{tabular}[b]{@{}c@{}}$\Delta$\\(\geowalk{} $-$ method)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Tasks\\\geowalk{} lower\end{tabular} & $n$ & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
+ \midrule
+-Vanilla BO (Hvarfner et al.) & $-0.181$ & 3/6 & 240 & $1.00$ & $1.00$ \\
+-MSR (Papenmeier et al.) & $-0.077$ & 4/5 & 177 & $0.44$ & $0.70$ \\
+-MLE (scaled) (Papenmeier et al.) & $-0.012$ & 4/5 & 189 & $0.62$ & $0.71$ \\
+-Standard GP (Xu et al.) & $+0.099$ & 2/4 & 160 & $0.62$ & $0.71$ \\
+-Linear BO (Doumont et al.) & $+0.332$ & 1/5 & 200 & $0.19$ & $0.44$ \\
+-Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region$^{\circ}$ & $-0.191$ & 5/6 & 240 & $0.094$ & $0.38$ \\
+-GP in nested count-sketch subspaces, Thompson sampling in a trust region$^{\circ}$$^{\S}$ & $+0.259$ & 1/6 & 240 & $0.22$ & $0.44$ \\
+-CMA-ES, popsize 20, $\sigma_0=0.1$, $x_0=0$$^{\circ}$$^{\S}$ & $+0.368$ & 0/6 & 240 & $0.031$ & $0.25$ \\
++Vanilla BO & $-0.181$ & 3/6 & 240 & $1.00$ & $1.00$ \\
++Papenmeier MSR & $-0.077$ & 4/5 & 177 & $0.44$ & $0.70$ \\
++Papenmeier MLE (scaled) & $-0.012$ & 4/5 & 189 & $0.62$ & $0.71$ \\
++Xu Standard GP & $+0.099$ & 2/4 & 160 & $0.62$ & $0.71$ \\
++Linear BO & $+0.332$ & 1/5 & 200 & $0.19$ & $0.44$ \\
++TuRBO & $-0.191$ & 5/6 & 240 & $0.094$ & $0.38$ \\
++BAxUS$^{\|}$ & $+0.259$ & 1/6 & 240 & $0.22$ & $0.44$ \\
++CMA-ES (LassoBench recipe)$^{\|}$ & $+0.368$ & 0/6 & 240 & $0.031$ & $0.25$ \\
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+--- gen/tab_main.tex
++++ paper/tab_main.tex
+@@ -1,9 +1,9 @@
+-% tab_main: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_main: scripts/cr/analysis/make_tables.py, commit 46e40b84f703, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[!t]
+ \centering
+-\caption{\textbf{Cross-task means and paired statistics for \geowalk{} versus all comparators at $N=30$} on one matched set of $n=440$ (task, seed) cells of the 11 GuacaMol tasks. Rows marked $^\S$ run the authors' released code. The other rows adapt the cited method to this benchmark, and Appendix~\ref{app:baselines} lists their deviations. Candidates lie on the empirical shell for REMBO and HeSBO (embeddings lifted to the shell radius). GaBO and Riemannian Mat\'ern GP propose on the sphere manifold. All other comparators propose off the shell. $\Delta$ is the improvement of \geowalk{} over the comparator. W/L counts the matched cells where \geowalk{} wins or loses, excluding ties. $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the 11 per-task mean differences, not corrected. $d$ is Cohen's $d$ of the paired cell differences. Bold marks the highest mean. Notes are in Appendix~\ref{app:baselines}.}
++\caption{\textbf{Cross-task means and paired statistics for \geowalk{} versus all comparators at $N=30$} on one matched set of $n=440$ (task, seed) cells of the 11 GuacaMol tasks. REMBO and HeSBO propose on the empirical shell; GaBO and Riemannian Mat\'ern GP propose on the sphere manifold; all other comparators propose off the shell. $\Delta$ is the improvement of \geowalk{} over the comparator. W/L counts the matched cells where \geowalk{} wins or loses, excluding ties. $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the 11 per-task mean differences, not corrected. $d$ is Cohen's $d$ of the paired cell differences. Bold marks the highest mean. Notes are in Appendix~\ref{app:baselines}.}
+ \label{tab:main}
+ \small
+ \begin{lrbox}{\crtabbox}
+@@ -12,14 +12,14 @@
+ Method & Cross-mean & $\Delta$ & W/L & $p_{\mathrm{task}}$ & $d$ \\
+ \midrule
+ CMA-ES~\citep{hansen2001cmaes,hansen2019pycma} & $0.4026$ & $+0.0200$ & 253/148 & $0.12$ & $0.25$ \\
+-TuRBO$^{\S}$~\citep{eriksson2019turbo} & $0.3790$ & $+0.0437$ & 270/123 & $0.032$ & $0.43$ \\
++TuRBO~\citep{eriksson2019turbo} & $0.3790$ & $+0.0437$ & 270/123 & $0.032$ & $0.43$ \\
+ BAxUS$^{\ddagger}$~\citep{papenmeier2022baxus} & $0.3907$ & $+0.0320$ & 283/101 & $0.024$ & $0.34$ \\
+ REMBO~\citep{wang2016rembo} & $0.4092$ & $+0.0135$ & 238/144 & $0.002$ & $0.23$ \\
+ HeSBO~\citep{nayebi2019hesbo} & $0.4120$ & $+0.0106$ & 225/158 & $0.032$ & $0.17$ \\
+-Vanilla BO$^{\S}$~\citep{hvarfner2024vanilla} & $0.4008$ & $+0.0218$ & 238/159 & $0.083$ & $0.26$ \\
+-Papenmeier MSR$^{\S}$~\citep{papenmeier2025understanding} & $0.3899$ & $+0.0327$ & 281/109 & $0.019$ & $0.40$ \\
+-Xu Standard GP$^{\S}$~\citep{xu2025standardgp} & $0.3951$ & $+0.0275$ & 270/120 & $0.042$ & $0.37$ \\
+-Linear BO$^{\S}$~\citep{doumont2026still} & $0.4101$ & $+0.0125$ & 226/172 & $0.032$ & $0.17$ \\
++Vanilla BO~\citep{hvarfner2024vanilla} & $0.4008$ & $+0.0218$ & 238/159 & $0.083$ & $0.26$ \\
++Papenmeier MSR~\citep{papenmeier2025understanding} & $0.3899$ & $+0.0327$ & 281/109 & $0.019$ & $0.40$ \\
++Xu Standard GP~\citep{xu2025standardgp} & $0.3951$ & $+0.0275$ & 270/120 & $0.042$ & $0.37$ \\
++Linear BO~\citep{doumont2026still} & $0.4101$ & $+0.0125$ & 226/172 & $0.032$ & $0.17$ \\
+ GaBO~\citep{jaquier2020gabo} & $0.4153$ & $+0.0074$ & 231/165 & $0.17$ & $0.13$ \\
+ Riemannian Mat\'ern GP~\citep{jaquier2022geometry} & $0.4059$ & $+0.0167$ & 230/152 & $0.014$ & $0.26$ \\
+ \midrule
+--- gen/tab_main_notes.tex
++++ paper/tab_main_notes.tex
+@@ -1,3 +1,3 @@
+-% tab_main: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_main: scripts/cr/analysis/make_tables.py, commit 46e40b84f703, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand.
+-\paragraph{Notes to Table~\ref{tab:main}.} All rows are evaluated on one matched set of $n=440$ (task, seed) cells. It is the intersection of the completed cells of the rows of the full version of the table, except the rows that cover only part of it. A completed cell is a run that made all 25 proposals after the 5 cold starts. In every row printed here, such a run reached all 30 evaluations. Runs in which a surrogate fit failed and a step fell back to a uniform proposal are included. The row marked $^\ddagger$ covers only part of that set and uses the part it covers (BAxUS: $n=439$, one run crashed). Cross-mean = mean of per-task means, and bold marks the highest. The difference $\Delta$ is \geowalk{} minus the row on the same cells, as a mean of per-task means of the paired differences. W/L counts the cells won and lost by \geowalk{}. A cell with $|\mathrm{diff}|\le10^{-6}$ is a tie and is excluded from W/L. The effect size $d$ is the mean of the cell differences divided by their standard deviation. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences. It is the primary test of the paper and is printed here without correction. The full version of this table is released with the code (\texttt{docs/baselines/TABLE1\_FULL.md} and \texttt{docs/baselines/tab\_main\_full.tex}). It has all 31 comparator rows under the names of their implementation, and the cell-level Wilcoxon test, Benjamini--Hochberg corrected over the 31 rows. The 18 rows not printed here are latent trust-region BO with VAE updates (stored run); CMA-ES in $\mathbb{R}^D$, $\sigma_0=0.5$ (stored run); CMA-ES in $\mathbb{R}^D$, $\sigma_0=0.5$, population 20; latent trust-region BO with latent inversion (stored run); Mat\'ern-5/2 GP, Thompson sampling in a trust region (stored run); Mat\'ern-5/2 GP, Thompson sampling in a trust region; GP in nested random subspaces, Thompson sampling (stored run); SAAS fully Bayesian GP, qLogEI, L-BFGS-B (stored run); Mat\'ern-5/2 GP (DSP prior), qLogEI, L-BFGS-B; Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), LogEI, L-BFGS-B with sample-around-best; Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, L-BFGS-B; Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, L-BFGS-B; spherical linear-kernel GP, LogEI, L-BFGS-B with sample-around-best; MLE (scaled) (Papenmeier et al.); Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax; Mat\'ern-5/2 GP ($\ell_0=0.1\sqrt{D}$), qLogEI, candidate-set argmax; Mat\'ern-5/2 GP ($\ell_0=\sqrt{D}$), qLogEI, candidate-set argmax; spherical linear-kernel GP (calibrated bounds), qLogEI, candidate-set argmax. Table~\ref{tab:boxsphere} compares the GP recipes on the box and on the shell. The mark $^\S$ denotes a published recipe. Published recipes follow the authors' released code. Their comparison with \geowalk{} and the GP on the shell is Table~\ref{tab:published}. The other rows adapt the cited method to this benchmark. Their deviations from the published methods are summarized in Table~\ref{tab:baselines} and listed in full in the method cards released with the code (\texttt{docs/baselines/}). These tables name each row by its implementation: CMA-ES is ``CMA-ES in $\mathbb{R}^D$, $\sigma_0=0.5$, population 5''; BAxUS is ``GP in nested count-sketch subspaces, Thompson sampling in a trust region''; REMBO is ``GP in a random linear embedding, Thompson sampling''; HeSBO is ``GP in a hashed embedding, Thompson sampling''; GaBO is ``sphere Gaussian-kernel GP, EI, Riemannian trust-region maximizer''; Riemannian Mat\'ern GP is ``Riemannian Mat\'ern GP, EI, Riemannian trust-region maximizer''. The GP on the shell of Section~\ref{sec:main_results}, which Table~\ref{tab:boxsphere} prints with its box version, is ``Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax''. Box rows use the $[p_{01},p_{99}]$ box, except Linear BO, which runs in $[-8,8]^D$. Table~\ref{tab:baselines} gives the support of every row. Abbreviations: DSP prior is the dimension-scaled lengthscale prior $\mathrm{LogNormal}(\sqrt{2}+0.5\ln D,\sqrt{3})$ of Hvarfner et al. The value $\ell_0$ is the initial lengthscale before the maximum-likelihood fit. EI, LogEI and qLogEI are expected improvement, its logarithm (analytic) and its Monte Carlo batch version. Candidate-set argmax: the acquisition is maximized over a finite set of random candidates on the support. Sample-around-best: L-BFGS-B restarts include points sampled around the best observations. SAAS is the sparse axis-aligned subspace prior. MSR and MLE (scaled) are the two recipes of Papenmeier et al., with maximum-likelihood lengthscales initialized at $0.1\sqrt{D}$. MSR adds RAASP perturbations (random axis-aligned subspace perturbations) in the acquisition maximizer, and MLE (scaled) does not. The $[p_{01},p_{99}]$ box spans the per-coordinate 1st to 99th percentile of encoded ZINC latents. The radius $\bar r$ of the shell is the mean norm of the run's five cold-start latents. The set $S^{D-1}$ is the unit sphere.
++\paragraph{Notes to Table~\ref{tab:main}.} All rows are evaluated on one matched set of $n=440$ (task, seed) cells. It is the intersection of the completed cells of the rows of the full version of the table, except the rows that cover only part of it. A completed cell is a run that made all 25 proposals after the 5 cold starts. In every row printed here, such a run reached all 30 evaluations. Runs in which a surrogate fit failed and a step fell back to a uniform proposal are included. The row marked $^\ddagger$ covers only part of that set and uses the part it covers (BAxUS: $n=439$, one run did not complete). Cross-mean = mean of per-task means, and bold marks the highest. The difference $\Delta$ is \geowalk{} minus the row on the same cells, as a mean of per-task means of the paired differences. W/L counts the cells won and lost by \geowalk{}. A cell with $|\mathrm{diff}|\le10^{-6}$ is a tie and is excluded from W/L. The effect size $d$ is the mean of the cell differences divided by their standard deviation. The column $p_{\mathrm{task}}$ is the exact two-sided Wilcoxon test on the per-task mean differences. It is the primary test of the paper and is printed here without correction. The full version of this table is released with the code (\texttt{docs/baselines/TABLE1\_FULL.md} and \texttt{docs/baselines/tab\_main\_full.tex}). It has all 31 comparator rows under the names of their implementation, and the cell-level Wilcoxon test, Benjamini--Hochberg corrected over the 31 rows. The rows not printed here are in the full version. Table~\ref{tab:boxsphere} compares the GP recipes on the box and on the shell. TuRBO, Vanilla BO, Papenmeier MSR, Xu Standard GP and Linear BO are the published recipes, rebuilt from the authors' released code; Table~\ref{tab:published} compares them with \geowalk{} and the GP on the shell. The other rows adapt the cited method to this benchmark. Their deviations from the published methods are summarized in Table~\ref{tab:baselines} and listed in full in the method cards released with the code (\texttt{docs/baselines/}). The full version names each row by its implementation: CMA-ES is ``CMA-ES in $\mathbb{R}^D$, $\sigma_0=0.5$, population 5''; BAxUS is ``GP in nested count-sketch subspaces, Thompson sampling in a trust region''; REMBO is ``GP in a random linear embedding, Thompson sampling''; HeSBO is ``GP in a hashed embedding, Thompson sampling''; GaBO is ``sphere Gaussian-kernel GP, EI, Riemannian trust-region maximizer''; Riemannian Mat\'ern GP is ``Riemannian Mat\'ern GP, EI, Riemannian trust-region maximizer''. The GP on the shell of Section~\ref{sec:main_results}, which Table~\ref{tab:boxsphere} prints with its box version, is ``Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax''. Box rows use the $[p_{01},p_{99}]$ box, except Linear BO, which runs in $[-8,8]^D$. Table~\ref{tab:baselines} gives the support of every row. Abbreviations: DSP prior is the dimension-scaled lengthscale prior $\mathrm{LogNormal}(\sqrt{2}+0.5\ln D,\sqrt{3})$ of Hvarfner et al. The value $\ell_0$ is the initial lengthscale before the maximum-likelihood fit. EI, LogEI and qLogEI are expected improvement, its logarithm (analytic) and its Monte Carlo batch version. Candidate-set argmax: the acquisition is maximized over a finite set of random candidates on the support. Sample-around-best: L-BFGS-B restarts include points sampled around the best observations. MSR and MLE (scaled) are the two recipes of Papenmeier et al., with maximum-likelihood lengthscales initialized at $0.1\sqrt{D}$. MSR adds RAASP perturbations (random axis-aligned subspace perturbations) in the acquisition maximizer, and MLE (scaled) does not. The $[p_{01},p_{99}]$ box spans the per-coordinate 1st to 99th percentile of encoded ZINC latents. The radius $\bar r$ of the shell is the mean norm of the run's five cold-start latents. The set $S^{D-1}$ is the unit sphere.
+--- gen/tab_pertask.tex
++++ paper/tab_pertask.tex
+@@ -1,15 +1,15 @@
+-% tab_pertask: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_pertask: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{\geowalk{} versus the GP on the shell, per task.} GP (shell) = Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax. $\Delta$ = \geowalk{} minus GP (shell). Per task, $\Delta$, Cohen's $d$ and the two-sided Wilcoxon $p$ are paired over the seeds of the task's completed cells, as in Table~\ref{tab:main}. $p_{\mathrm{Holm}}$ is Holm-corrected over the 11 tasks. Last row: all matched cells, as a mean of per-task means. The $p$ of the last row is the cell-level test over all cells. That test is not one of the per-task tests, so it has no $p_{\mathrm{Holm}}$ (--). Task codes: adip = Amlodipine MPO, dhop = Deco Hop, fexo = Fexofenadine MPO, med1 = Median molecules 1, med2 = Median molecules 2, osmb = Osimertinib MPO. Further codes: pdop = Perindopril MPO, rano = Ranolazine MPO, shop = Scaffold Hop, siga = Sitagliptin MPO, zale = Zaleplon MPO. MPO = multi-property objective.}
++\caption{\textbf{\geowalk{} versus the GP on the shell, per task.} $\Delta$ = \geowalk{} minus the GP on the shell (Table~\ref{tab:boxsphere}). Per task, $\Delta$, Cohen's $d$ and the two-sided Wilcoxon $p$ are paired over the seeds of the task's completed cells, as in Table~\ref{tab:main}. $p_{\mathrm{Holm}}$ is Holm-corrected over the 11 tasks. Last row: all matched cells, as a mean of per-task means. The $p$ of the last row is the cell-level test over all cells. That test is not one of the per-task tests, so it has no $p_{\mathrm{Holm}}$ (--). Task codes: adip = Amlodipine MPO, dhop = Deco Hop, fexo = Fexofenadine MPO, med1 = Median molecules 1, med2 = Median molecules 2, osmb = Osimertinib MPO. Further codes: pdop = Perindopril MPO, rano = Ranolazine MPO, shop = Scaffold Hop, siga = Sitagliptin MPO, zale = Zaleplon MPO. MPO = multi-property objective.}
+ \label{tab:pertask}
+ \small
+ \begin{lrbox}{\crtabbox}
+ \begin{tabular}{lrrrrrrr}
+ \toprule
+-Task & $n$ & \geowalk{} & GP (shell) & $\Delta$ & $d$ & $p$ & $p_{\mathrm{Holm}}$ \\
++Task & $n$ & \geowalk{} & GP on the shell & $\Delta$ & $d$ & $p$ & $p_{\mathrm{Holm}}$ \\
+ \midrule
+ adip & 40 & $0.5013$ & $0.5037$ & $-0.0024$ & $-0.08$ & $0.92$ & $1.00$ \\
+ dhop & 40 & $0.5706$ & $0.5713$ & $-0.0007$ & $-0.05$ & $0.82$ & $1.00$ \\
+--- gen/tab_pertask_full.tex
++++ paper/tab_pertask_full.tex
+@@ -1,16 +1,16 @@
+-% tab_pertask_full: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_pertask_full: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Per-task means at $N=30$.} All columns use one matched set of $n=440$ completed cells, as in Table~\ref{tab:main}. Task codes as in Table~\ref{tab:pertask}. Last row: mean of per-task means. Bold: best per task. RS = random search. Box = $[p_{01},p_{99}]$. GP = Mat\'ern-5/2 GP (DSP prior) with qLogEI (candidate-set argmax on the shell, L-BFGS-B in the box). lin.\ GP = spherical linear-kernel GP (calibrated bounds and candidate-set argmax on the shell, LogEI with L-BFGS-B in the box).}
++\caption{\textbf{Per-task means at $N=30$.} All columns use one matched set of $n=440$ completed cells, as in Table~\ref{tab:main}. Task codes as in Table~\ref{tab:pertask}. Last row: mean of per-task means. Bold: best per task. Box = $[p_{01},p_{99}]$. The GP on the shell and the GP in the box are the two DSP rows of Table~\ref{tab:boxsphere}; the Linear BO ports are those of Table~\ref{tab:trajectories}.}
+ \label{tab:pertask_full}
+ \footnotesize
+ \setlength{\tabcolsep}{4pt}
+ \begin{lrbox}{\crtabbox}
+ \begin{tabular}{lrrrrrrrr}
+ \toprule
+-Task & $n$ & \geowalk{} & \geocma{} & \begin{tabular}[b]{@{}c@{}}RS\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP\\(box)\end{tabular} & \begin{tabular}[b]{@{}c@{}}lin.\ GP\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}lin.\ GP\\(box)\end{tabular} \\
++Task & $n$ & \geowalk{} & \geocma{} & \begin{tabular}[b]{@{}c@{}}Random Search\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP on\\the shell\end{tabular} & \begin{tabular}[b]{@{}c@{}}GP in\\the box\end{tabular} & \begin{tabular}[b]{@{}c@{}}Linear BO port\\(shell)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Linear BO port\\(box)\end{tabular} \\
+ \midrule
+ adip & 40 & $0.501$ & $0.499$ & $0.498$ & $\mathbf{0.504}$ & $0.459$ & $0.500$ & $0.474$ \\
+ dhop & 40 & $0.571$ & $0.569$ & $0.568$ & $\mathbf{0.571}$ & $0.561$ & $0.570$ & $0.560$ \\
+--- gen/tab_published.tex
++++ paper/tab_published.tex
+@@ -1,27 +1,27 @@
+-% tab_published: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
++% tab_published: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
+ % Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Published recipes against \geowalk{} and the GP on the shell at $N=30$ (baseline family).} Each recipe follows the authors' released code in every tabulated setting. In this table, a recipe carries the authors' name only if it reproduced a published result (Table~\ref{tab:verification}). Otherwise it is named by kernel, acquisition and maximizer and marked as not verified. ``Yes, with allowance'' means that the recipe passed only with the allowances of the protocol. All rows use one matched set of $n=440$ cells. Mean and $\Delta$ are means of per-task means of best@30, and $\Delta$ = the reference minus the recipe. The reference is \geowalk{} in the left group of columns and the GP on the shell in the right group. Tasks = tasks, of the 11, on which the reference has the higher mean. $p_{\mathrm{task}}$ = exact two-sided Wilcoxon test on the 11 per-task differences, the primary test. It is corrected by Benjamini--Hochberg within the 12 tests of this table. Bold marks $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$. The Hvarfner recipe has two runs. They differ in the points that qLogNEI uses as its baseline. The Hvarfner row uses points inside the box, as Ax does, and it has the higher mean of the two. The other run uses all observations. It is the last row, outside the corrected family, and Table~\ref{tab:baselines} describes it.}
++\caption{\textbf{Published recipes against \geowalk{} and the GP on the shell at $N=30$ (baseline family).} All rows use one matched set of $n=440$ cells. Mean and $\Delta$ are means of per-task means of best@30, and $\Delta$ = the reference minus the recipe. The reference is \geowalk{} in the left group of columns and the GP on the shell in the right group. Tasks = tasks, of the 11, on which the reference has the higher mean. $p_{\mathrm{task}}$ = exact two-sided Wilcoxon test on the 11 per-task differences, the primary test. It is corrected by Benjamini--Hochberg within the 12 tests of this table. Bold marks $p_{\mathrm{task}}^{\mathrm{BH}}<0.05$. The last row is the other run of the Hvarfner recipe, outside the corrected family; Table~\ref{tab:baselines} describes both runs.}
+ \label{tab:published}
+ \footnotesize
+ \setlength{\tabcolsep}{3pt}
+ \begin{lrbox}{\crtabbox}
+-\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{1.3cm}rrrrrrrrr}
++\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrrrrrrrr}
+ \toprule
+-\multicolumn{3}{c}{} & \multicolumn{4}{c}{Reference: \geowalk{}} & \multicolumn{4}{c}{Reference: GP on the shell} \\
+-\cmidrule(lr){4-7}\cmidrule(lr){8-11}
+-Recipe & Verified & Mean & $\Delta$ & Tasks & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ & $\Delta$ & Tasks & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
++\multicolumn{2}{c}{} & \multicolumn{4}{c}{Reference: \geowalk{}} & \multicolumn{4}{c}{Reference: GP on the shell} \\
++\cmidrule(lr){3-6}\cmidrule(lr){7-10}
++Recipe & Mean & $\Delta$ & Tasks & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ & $\Delta$ & Tasks & $p_{\mathrm{task}}$ & $p_{\mathrm{task}}^{\mathrm{BH}}$ \\
+ \midrule
+-Vanilla BO (Hvarfner et al.) & yes, with allowance & $0.4008$ & $+0.0218$ & 9/11 & $0.083$ & $0.091$ & $+0.0220$ & 7/11 & $0.15$ & $0.15$ \\
+-MSR (Papenmeier et al.) & yes & $0.3899$ & $+0.0327$ & 9/11 & $0.019$ & $0.056$ & $+0.0329$ & 10/11 & $0.0098$ & $\mathbf{0.039}$ \\
+-MLE (scaled) (Papenmeier et al.) & yes & $0.3892$ & $+0.0334$ & 9/11 & $0.0098$ & $\mathbf{0.039}$ & $+0.0335$ & 10/11 & $0.0098$ & $\mathbf{0.039}$ \\
+-Standard GP (Xu et al.) & yes & $0.3951$ & $+0.0275$ & 9/11 & $0.042$ & $0.063$ & $+0.0277$ & 9/11 & $0.054$ & $0.064$ \\
+-Linear BO (Doumont et al.) & yes & $0.4101$ & $+0.0125$ & 10/11 & $0.032$ & $0.063$ & $+0.0127$ & 9/11 & $0.054$ & $0.064$ \\
+-Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region (not verified) & no & $0.3790$ & $+0.0437$ & 9/11 & $0.032$ & $0.063$ & $+0.0438$ & 8/11 & $0.042$ & $0.063$ \\
++Vanilla BO & $0.4008$ & $+0.0218$ & 9/11 & $0.083$ & $0.091$ & $+0.0220$ & 7/11 & $0.15$ & $0.15$ \\
++Papenmeier MSR & $0.3899$ & $+0.0327$ & 9/11 & $0.019$ & $0.056$ & $+0.0329$ & 10/11 & $0.0098$ & $\mathbf{0.039}$ \\
++Papenmeier MLE (scaled) & $0.3892$ & $+0.0334$ & 9/11 & $0.0098$ & $\mathbf{0.039}$ & $+0.0335$ & 10/11 & $0.0098$ & $\mathbf{0.039}$ \\
++Xu Standard GP & $0.3951$ & $+0.0275$ & 9/11 & $0.042$ & $0.063$ & $+0.0277$ & 9/11 & $0.054$ & $0.064$ \\
++Linear BO & $0.4101$ & $+0.0125$ & 10/11 & $0.032$ & $0.063$ & $+0.0127$ & 9/11 & $0.054$ & $0.064$ \\
++TuRBO & $0.3790$ & $+0.0437$ & 9/11 & $0.032$ & $0.063$ & $+0.0438$ & 8/11 & $0.042$ & $0.063$ \\
+ \midrule
+-RBF GP (DSP prior), qLogNEI (all observations), L-BFGS-B with sample-around-best (the other run of the same recipe) & no & $0.3993$ & $+0.0233$ & 8/11 & $0.12$ & -- & $+0.0234$ & 8/11 & $0.10$ & -- \\
++Vanilla BO, all observations as baseline (the other run of the same recipe) & $0.3993$ & $+0.0233$ & 8/11 & $0.12$ & -- & $+0.0234$ & 8/11 & $0.10$ & -- \\
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+--- gen/tab_trajectories.tex
++++ paper/tab_trajectories.tex
+@@ -1,9 +1,11 @@
+-% tab_trajectories: scripts/cr/analysis/make_tables.py, commit 05b3521b15ba, mode cr, variant default, cell filter completed, levels taskmean
+-% Generated file, do not edit by hand. Requires \usepackage{booktabs,graphicx,array,tabularx}.
++% tab_trajectories: scripts/cr/analysis/make_tables.py, commit 358cbe903ac0, mode cr, variant default, cell filter completed, levels taskmean
++% Generated file, do not edit by hand.
++% 2026-11-06 21:30 (authors' decision, RUN_RULES 2026-11-06 21:30): hand-edited view, wording only: the rows carry the names of
++% Table 1; the TuRBO-1 re-implementation is no longer a row (run 20261106_f4). Recorded in PAPER_TABLE_EDITS.patch. Requires \usepackage{booktabs,graphicx,array,tabularx}.
+ \ifdefined\crtabbox\else\newsavebox{\crtabbox}\fi
+ \begin{table}[t]
+ \centering
+-\caption{\textbf{Best-so-far after $N=10$, $20$ and $30$ evaluations on one matched set.} All rows except the one marked $^\ddagger$ use the same $n=440$ completed cells, as in Table~\ref{tab:main}. The row marked $^\ddagger$ covers $n=439$ of them (one run crashed). Values are means of per-task means of the best score after $N$ evaluations: 5 shared cold-start molecules and $N-5$ proposals. Bold marks the highest mean in the column. Linear BO (Doumont et al.) is the published recipe of Table~\ref{tab:published}, in the box $[-8,8]^D$ of the authors' released code. Bottom block: \geowalk{} minus the GP on the shell, paired on the same cells. The effect size $d$ is Cohen's $d$ of the cell differences. The column $p_{\mathrm{BH}}$ is the two-sided Wilcoxon signed-rank test over the cells. It is Benjamini--Hochberg corrected over the 3 budgets $N=10$, $20$ and $30$.}
++\caption{\textbf{Best-so-far after $N=10$, $20$ and $30$ evaluations on one matched set.} All rows except the one marked $^\ddagger$ use the same $n=440$ completed cells, as in Table~\ref{tab:main}. The row marked $^\ddagger$ covers $n=439$ of them (one run did not complete). Values are means of per-task means of the best score after $N$ evaluations: 5 shared cold-start molecules and $N-5$ proposals. Bold marks the highest mean in the column. Linear BO is the published recipe of Table~\ref{tab:published}; the two ports are ours (Appendix~\ref{app:baselines}). Bottom block: \geowalk{} minus the GP on the shell, paired on the same cells. The effect size $d$ is Cohen's $d$ of the cell differences. The column $p_{\mathrm{BH}}$ is the two-sided Wilcoxon signed-rank test over the cells. It is Benjamini--Hochberg corrected over the 3 budgets $N=10$, $20$ and $30$.}
+ \label{tab:trajectories}
+ \footnotesize
+ \setlength{\tabcolsep}{4pt}
+@@ -13,20 +15,20 @@
+ Method & Support & $N=10$ & $N=20$ & $N=30$ \\
+ \midrule
+ \geowalk{} & shell & $0.3612$ & $0.3978$ & $0.4226$ \\
+-Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax & shell & $0.3673$ & $\mathbf{0.4067}$ & $\mathbf{0.4228}$ \\
+-spherical linear-kernel GP (calibrated bounds), qLogEI, candidate-set argmax & shell & $\mathbf{0.3681}$ & $0.4066$ & $0.4192$ \\
+-Random Search & shell & $0.3612$ & $0.3978$ & $0.4118$ \\
+-spherical linear-kernel GP, LogEI, L-BFGS-B with sample-around-best & $[p_{01},p_{99}]$ & $0.3499$ & $0.3887$ & $0.4079$ \\
+-Linear BO (Doumont et al.) & box $[-8,8]^D$ & $0.3479$ & $0.3907$ & $0.4101$ \\
+-Mat\'ern-5/2 GP (DSP prior), qLogEI, L-BFGS-B & $[p_{01},p_{99}]$ & $0.3435$ & $0.3784$ & $0.3989$ \\
+-Mat\'ern-5/2 GP, Thompson sampling of the predictive in a trust region & trust region in $[p_{01},p_{99}]$ & $0.3350$ & $0.3607$ & $0.3790$ \\
+-GP in nested count-sketch subspaces, Thompson sampling in a trust region$^\ddagger$ & nested subspaces of $[p_{01},p_{99}]$ & $0.3336$ & $0.3662$ & $0.3907$ \\
++GP on the shell & shell & $0.3673$ & $\mathbf{0.4067}$ & $\mathbf{0.4228}$ \\
++Linear BO port to the shell (calibrated bounds) & shell & $\mathbf{0.3681}$ & $0.4066$ & $0.4192$ \\
++Random Search (shell) & shell & $0.3612$ & $0.3978$ & $0.4118$ \\
++Linear BO port, box & $[p_{01},p_{99}]$ & $0.3499$ & $0.3887$ & $0.4079$ \\
++Linear BO & box $[-8,8]^D$ & $0.3479$ & $0.3907$ & $0.4101$ \\
++GP in the box & $[p_{01},p_{99}]$ & $0.3435$ & $0.3784$ & $0.3989$ \\
++TuRBO & trust region in $[p_{01},p_{99}]$ & $0.3350$ & $0.3607$ & $0.3790$ \\
++BAxUS$^\ddagger$ & nested subspaces of $[p_{01},p_{99}]$ & $0.3336$ & $0.3662$ & $0.3907$ \\
+ \bottomrule
+ \end{tabularx}
+ \end{lrbox}
+ \ifdim\wd\crtabbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\crtabbox}}\else\usebox{\crtabbox}\fi
+ \par\medskip
+-{\footnotesize\textit{\textup{\geowalk{}} $-$ the GP on the shell (Mat\'ern-5/2 GP (DSP prior), qLogEI, candidate-set argmax), paired on the same cells}}\par\smallskip
++{\footnotesize\textit{\textup{\geowalk{}} $-$ the GP on the shell, paired on the same cells}}\par\smallskip
+ \begin{lrbox}{\crtabbox}
+ \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}Xrrr}
+ \toprule
